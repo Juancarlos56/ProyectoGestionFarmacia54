@@ -19,6 +19,9 @@ public class Principal {
         System.out.println("Hola mundo Prueba Pullshing      ");
         VentanaLogin v = new VentanaLogin();
         v.setVisible(true);
+        
+        System.out.println("Aqui comprobando la conexion -test1");
+        
              
     }
     
