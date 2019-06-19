@@ -20,7 +20,6 @@ public class Principal {
         VentanaLogin v = new VentanaLogin();
         v.setVisible(true);
 
-        System.out.println("Ultima prueba en Master      ");
              
     }
     
