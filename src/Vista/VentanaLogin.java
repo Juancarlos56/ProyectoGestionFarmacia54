@@ -74,7 +74,12 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -123,7 +128,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         iniciarSeccion.setForeground(new java.awt.Color(255, 255, 255));
         iniciarSeccion.setText("Sign up");
         iniciarSeccion.setBorder(null);
-        iniciarSeccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iniciarSeccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         iniciarSeccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarSeccionActionPerformed(evt);
@@ -135,7 +140,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         inicioAdmi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inicioAdmi.setText("¿Desea ingresar como Administrador? Click aqui.");
         inicioAdmi.setBorder(null);
-        inicioAdmi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inicioAdmi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         inicioAdmi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inicioAdmiMouseClicked(evt);
@@ -248,6 +253,11 @@ public class VentanaLogin extends javax.swing.JFrame {
         val.setVisible(true);
         dispose();
     }//GEN-LAST:event_inicioAdmiMouseClicked
+
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+
+    dispose();        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
