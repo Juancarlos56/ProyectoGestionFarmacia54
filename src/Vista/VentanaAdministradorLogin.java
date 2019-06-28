@@ -209,7 +209,6 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
-        System.out.println("Esto pasa "+tipoCargo.getText());
         VentanaPrincipalAdministrador vpa= new VentanaPrincipalAdministrador();
         vpa.setVisible(true);
         dispose();

@@ -566,6 +566,11 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Envio", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14), new java.awt.Color(51, 51, 51))); // NOI18N
 
         jRadioButton1.setText("Si");
+        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton1ActionPerformed(evt);
+            }
+        });
 
         jRadioButton2.setText("No");
 
@@ -820,6 +825,10 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         VentanaEmergenteRecetas ver = new VentanaEmergenteRecetas();
         ver.setVisible(true);
     }//GEN-LAST:event_btnRecetaMedicaActionPerformed
+
+    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

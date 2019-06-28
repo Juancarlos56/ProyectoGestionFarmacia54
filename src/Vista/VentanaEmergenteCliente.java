@@ -18,6 +18,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
      */
     public VentanaEmergenteCliente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -23,6 +23,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     public VentanaEmpleado() {
         
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**

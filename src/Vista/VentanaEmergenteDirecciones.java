@@ -16,6 +16,7 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
      */
     public VentanaEmergenteDirecciones() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
