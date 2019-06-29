@@ -19,6 +19,7 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
     /**
      * Creates new form VentanaPrincipalAdministrador
      */
+    
     public VentanaPrincipalAdministrador() {
         initComponents();
 //        //METODO PARA AJUSTAR LAS IMAGENES AL LABEL
@@ -31,7 +32,7 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
 //        
 //        
 //        
-        
+        System.out.println("hola soy katy"); 
     }
 
     /**
