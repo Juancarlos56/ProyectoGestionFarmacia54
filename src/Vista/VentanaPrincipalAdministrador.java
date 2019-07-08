@@ -49,13 +49,17 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         COMPRAR_PRODUCTOS = new javax.swing.JButton();
-        LISTAR_FACTURAS = new javax.swing.JButton();
-        MODIFICAR_sTOCK = new javax.swing.JButton();
-        GestionarVendedores = new javax.swing.JButton();
         LISTAR_PRODUCTO = new javax.swing.JButton();
+        GestionarVendedores = new javax.swing.JButton();
+        MODIFICAR_sTOCK = new javax.swing.JButton();
+        MODIFICAR_sTOCK1 = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jDesktopPane1 = new javax.swing.JDesktopPane(){
+        jLabel2 = new javax.swing.JLabel();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel5 = new javax.swing.JLabel();
+        escritorioAdmi = new javax.swing.JDesktopPane(){
             public void paintComponent(Graphics g) {
                 ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/wel_1.jpg"));
                 Image fondo = icon.getImage();
@@ -79,12 +83,14 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Administrador");
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
 
         jPanel5.setBackground(new java.awt.Color(0, 102, 204));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel1.setFocusable(false);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -102,35 +108,13 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Administrador");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 54, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)))
-        );
+        jPanel2.setBackground(new java.awt.Color(255, 212, 0));
+        jPanel2.setLayout(new java.awt.GridLayout(5, 0));
 
         COMPRAR_PRODUCTOS.setBackground(new java.awt.Color(0, 102, 204));
         COMPRAR_PRODUCTOS.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         COMPRAR_PRODUCTOS.setForeground(new java.awt.Color(255, 255, 255));
-        COMPRAR_PRODUCTOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cobro.png"))); // NOI18N
+        COMPRAR_PRODUCTOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/factura.png"))); // NOI18N
         COMPRAR_PRODUCTOS.setText("Gestión Facturas");
         COMPRAR_PRODUCTOS.setAlignmentY(0.0F);
         COMPRAR_PRODUCTOS.setBorder(null);
@@ -139,37 +123,21 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
                 COMPRAR_PRODUCTOSActionPerformed(evt);
             }
         });
+        jPanel2.add(COMPRAR_PRODUCTOS);
 
-        LISTAR_FACTURAS.setBackground(new java.awt.Color(0, 102, 204));
-        LISTAR_FACTURAS.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        LISTAR_FACTURAS.setForeground(new java.awt.Color(255, 255, 255));
-        LISTAR_FACTURAS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/caja_documento.png"))); // NOI18N
-        LISTAR_FACTURAS.setText("Gestion Inventario");
-        LISTAR_FACTURAS.setAlignmentY(0.0F);
-        LISTAR_FACTURAS.setBorder(null);
-        LISTAR_FACTURAS.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LISTAR_FACTURASActionPerformed(evt);
-            }
-        });
-
-        MODIFICAR_sTOCK.setBackground(new java.awt.Color(0, 102, 204));
-        MODIFICAR_sTOCK.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        MODIFICAR_sTOCK.setForeground(new java.awt.Color(255, 255, 255));
-        MODIFICAR_sTOCK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/facturaP.png"))); // NOI18N
-        MODIFICAR_sTOCK.setText("Gestion de Usuarios");
-        MODIFICAR_sTOCK.setAlignmentY(0.0F);
-        MODIFICAR_sTOCK.setBorder(null);
-        MODIFICAR_sTOCK.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MODIFICAR_sTOCKActionPerformed(evt);
-            }
-        });
+        LISTAR_PRODUCTO.setBackground(new java.awt.Color(0, 102, 204));
+        LISTAR_PRODUCTO.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        LISTAR_PRODUCTO.setForeground(new java.awt.Color(255, 255, 255));
+        LISTAR_PRODUCTO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prodP.png"))); // NOI18N
+        LISTAR_PRODUCTO.setText("Gestión Productos");
+        LISTAR_PRODUCTO.setAlignmentY(0.0F);
+        LISTAR_PRODUCTO.setBorder(null);
+        jPanel2.add(LISTAR_PRODUCTO);
 
         GestionarVendedores.setBackground(new java.awt.Color(0, 102, 204));
         GestionarVendedores.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         GestionarVendedores.setForeground(new java.awt.Color(255, 255, 255));
-        GestionarVendedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarioP.png"))); // NOI18N
+        GestionarVendedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/VendedorP.png"))); // NOI18N
         GestionarVendedores.setText("Gestión Vendedores");
         GestionarVendedores.setAlignmentY(0.0F);
         GestionarVendedores.setBorder(null);
@@ -178,39 +146,88 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
                 GestionarVendedoresActionPerformed(evt);
             }
         });
+        jPanel2.add(GestionarVendedores);
 
-        LISTAR_PRODUCTO.setBackground(new java.awt.Color(0, 102, 204));
-        LISTAR_PRODUCTO.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        LISTAR_PRODUCTO.setForeground(new java.awt.Color(255, 255, 255));
-        LISTAR_PRODUCTO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/listaProducto.png"))); // NOI18N
-        LISTAR_PRODUCTO.setText("Gestión Productos");
-        LISTAR_PRODUCTO.setAlignmentY(0.0F);
-        LISTAR_PRODUCTO.setBorder(null);
+        MODIFICAR_sTOCK.setBackground(new java.awt.Color(0, 102, 204));
+        MODIFICAR_sTOCK.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        MODIFICAR_sTOCK.setForeground(new java.awt.Color(255, 255, 255));
+        MODIFICAR_sTOCK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/listaProducto.png"))); // NOI18N
+        MODIFICAR_sTOCK.setText("Listado de Productos");
+        MODIFICAR_sTOCK.setAlignmentY(0.0F);
+        MODIFICAR_sTOCK.setBorder(null);
+        MODIFICAR_sTOCK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MODIFICAR_sTOCKActionPerformed(evt);
+            }
+        });
+        jPanel2.add(MODIFICAR_sTOCK);
+
+        MODIFICAR_sTOCK1.setBackground(new java.awt.Color(0, 102, 204));
+        MODIFICAR_sTOCK1.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        MODIFICAR_sTOCK1.setForeground(new java.awt.Color(255, 255, 255));
+        MODIFICAR_sTOCK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/compraP.png"))); // NOI18N
+        MODIFICAR_sTOCK1.setText("Compra de Productos");
+        MODIFICAR_sTOCK1.setAlignmentY(0.0F);
+        MODIFICAR_sTOCK1.setBorder(null);
+        MODIFICAR_sTOCK1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MODIFICAR_sTOCK1ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(MODIFICAR_sTOCK1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        jLabel2.setFont(new java.awt.Font("Calibri", 0, 10)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Todos los derechos reservados");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/farmaciaPe.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel5Layout.createSequentialGroup()
-                                .addGap(22, 22, 22)
-                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(LISTAR_FACTURAS, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(COMPRAR_PRODUCTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MODIFICAR_sTOCK, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(GestionarVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LISTAR_PRODUCTO, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1)))
-                .addContainerGap())
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator2)
+                    .addComponent(jSeparator1)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(36, 36, 36)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,27 +236,25 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(COMPRAR_PRODUCTOS, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LISTAR_FACTURAS, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(MODIFICAR_sTOCK, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(GestionarVendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LISTAR_PRODUCTO, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(145, Short.MAX_VALUE))
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
-        jDesktopPane1.setLayout(jDesktopPane1Layout);
-        jDesktopPane1Layout.setHorizontalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1294, Short.MAX_VALUE)
+        escritorioAdmi.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 153, 255)));
+
+        javax.swing.GroupLayout escritorioAdmiLayout = new javax.swing.GroupLayout(escritorioAdmi);
+        escritorioAdmi.setLayout(escritorioAdmiLayout);
+        escritorioAdmiLayout.setHorizontalGroup(
+            escritorioAdmiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1271, Short.MAX_VALUE)
         );
-        jDesktopPane1Layout.setVerticalGroup(
-            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        escritorioAdmiLayout.setVerticalGroup(
+            escritorioAdmiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -248,14 +263,16 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jDesktopPane1))
+                .addComponent(escritorioAdmi)
+                .addGap(3, 3, 3))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jDesktopPane1)
+            .addComponent(escritorioAdmi)
         );
 
         pack();
@@ -266,16 +283,18 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_GestionarVendedoresActionPerformed
 
     private void COMPRAR_PRODUCTOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_COMPRAR_PRODUCTOSActionPerformed
-        // TODO add your handling code here:
+        GestionFacturasAdministrador gfa = new GestionFacturasAdministrador();
+        escritorioAdmi.add(gfa);
+        gfa.show();
     }//GEN-LAST:event_COMPRAR_PRODUCTOSActionPerformed
 
     private void MODIFICAR_sTOCKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MODIFICAR_sTOCKActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MODIFICAR_sTOCKActionPerformed
 
-    private void LISTAR_FACTURASActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LISTAR_FACTURASActionPerformed
+    private void MODIFICAR_sTOCK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MODIFICAR_sTOCK1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_LISTAR_FACTURASActionPerformed
+    }//GEN-LAST:event_MODIFICAR_sTOCK1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,16 +335,20 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton COMPRAR_PRODUCTOS;
     private javax.swing.JButton GestionarVendedores;
-    private javax.swing.JButton LISTAR_FACTURAS;
     private javax.swing.JButton LISTAR_PRODUCTO;
     private javax.swing.JButton MODIFICAR_sTOCK;
-    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JButton MODIFICAR_sTOCK1;
+    private javax.swing.JDesktopPane escritorioAdmi;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
