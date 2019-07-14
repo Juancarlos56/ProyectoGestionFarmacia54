@@ -20,18 +20,8 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
      * Creates new form VentanaPrincipalAdministrador
      */
     public VentanaPrincipalAdministrador() {
-        initComponents();
-//        //METODO PARA AJUSTAR LAS IMAGENES AL LABEL
-//        ImageIcon imagen = new ImageIcon(getClass().getResource("/imagenes/kitPastilla (2).jpg"));
-//        Icon icono = new ImageIcon(imagen.getImage().getScaledInstance(fondoAjustado.getWidth(),fondoAjustado.getHeight(),Image.SCALE_DEFAULT));
-//        fondoAjustado.setIcon(icono);
-//        this.repaint();
-//        System.out.println("pintar fondo");
-//        // HASTA AQUI 
-//        
-//        
-//        
-        
+        initComponents();    
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -86,6 +76,7 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         setTitle("Administrador");
         setBackground(new java.awt.Color(255, 255, 255));
         setLocationByPlatform(true);
+        setPreferredSize(new java.awt.Dimension(1920, 1025));
 
         jPanel5.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -132,6 +123,11 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         LISTAR_PRODUCTO.setText("Gestión Productos");
         LISTAR_PRODUCTO.setAlignmentY(0.0F);
         LISTAR_PRODUCTO.setBorder(null);
+        LISTAR_PRODUCTO.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LISTAR_PRODUCTOActionPerformed(evt);
+            }
+        });
         jPanel2.add(LISTAR_PRODUCTO);
 
         GestionarVendedores.setBackground(new java.awt.Color(0, 102, 204));
@@ -281,7 +277,9 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GestionarVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarVendedoresActionPerformed
-        // TODO add your handling code here:
+        GestionEmpleados ge = new GestionEmpleados();
+        escritorioAdmi.add(ge);
+        ge.show();
     }//GEN-LAST:event_GestionarVendedoresActionPerformed
 
     private void COMPRAR_PRODUCTOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_COMPRAR_PRODUCTOSActionPerformed
@@ -297,6 +295,12 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
     private void MODIFICAR_sTOCK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MODIFICAR_sTOCK1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_MODIFICAR_sTOCK1ActionPerformed
+
+    private void LISTAR_PRODUCTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LISTAR_PRODUCTOActionPerformed
+        GestionProductos gp = new GestionProductos();
+        escritorioAdmi.add(gp);
+        gp.show();
+    }//GEN-LAST:event_LISTAR_PRODUCTOActionPerformed
 
     /**
      * @param args the command line arguments
