@@ -5,6 +5,12 @@
  */
 package Vista;
 
+
+import Controlador.DireccionesTemp;
+import Modelo.Direccion;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
@@ -13,10 +19,27 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaEmergenteDirecciones
+     * @param tipo
      */
-    public VentanaEmergenteDirecciones() {
+    
+    int DireccionSelec;
+    String dTipo;
+    DefaultTableModel tabla;
+    
+    public VentanaEmergenteDirecciones( String tipo) {
         initComponents();
         setLocationRelativeTo(null);
+        
+        tabla = (DefaultTableModel) jTable1.getModel();
+        dTipo = tipo;
+        DireccionesTemp.borrarDirec();
+        
+        
+        //cargar datos
+        
+        
+        
+        
     }
 
     /**
@@ -146,17 +169,18 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         });
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
 
         jTable1.setBackground(new java.awt.Color(0, 102, 204));
         jTable1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Ciudad", "Calle Principal", "Calle Secundaria"
@@ -228,12 +252,57 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-
+        
+        switch (dTipo){
+            case "nuevo":
+                String callep = nombre.getText();
+                String calles = cedula.getText();
+                String ciudad = telefono.getText();
+                
+                if ((nombre.getText().equals("")) || (cedula.getText().equals(""))|| (telefono.getText().equals(""))) {
+                    JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
+                    
+                }else {
+                    
+                    DireccionesTemp.addDirec(callep,calles,ciudad);
+                    
+                    tabla.addRow(new Object[]{ciudad,callep,calles}); 
+                    
+                }
+        
+                
+                
+                
+                
+                
+            break;
+    
+        }   
+        
+        
+        
+        
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     private void agregarCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCliente2ActionPerformed
-        // TODO add your handling code here:
+
+        int row= jTable1.getSelectedRow();
+        
+        Direccion pers=new Direccion();
+        
+        pers.setCiudadNombre((String) jTable1.getValueAt(row, 0));
+        pers.setCallePrincipal((String)jTable1.getValueAt(row, 1));
+        pers.setCalleSecundaria((String) jTable1.getValueAt(row, 2));
+        
+        DireccionesTemp.guardDir(pers);
+        
+        
+
     }//GEN-LAST:event_agregarCliente2ActionPerformed
+
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -266,7 +335,7 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmergenteDirecciones().setVisible(true);
+                new VentanaEmergenteDirecciones(null).setVisible(true);
             }
         });
     }

@@ -5,6 +5,21 @@
  */
 package Vista;
 
+import Controlador.CProducto;
+import Controlador.CSistema;
+import Controlador.ClasedeAlmacenamientoTemporal;
+import Controlador.ControlCliente;
+import Modelo.Cliente;
+import Modelo.Direccion;
+import Modelo.Producto;
+import javax.swing.JOptionPane;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
@@ -14,8 +29,64 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
     /**
      * Creates new form InternalVentanaFacturaVen
      */
+    public static Producto productoA;
+    public static Cliente cliente;
+    public static Direccion direccion;
+    public static String numeroF;
+    public static String fechaV;
+    DefaultTableModel tablaP;
+    
+    public static ArrayList<Producto> ProductosComps= new ArrayList();
+    public static ArrayList<Integer> ProductosCants= new ArrayList();
+    
+    
+    public static void setDatos() {
+        nombre2.setText(cliente.getNombre());
+        cedula.setText(cliente.getCedula());
+        telefono.setText(cliente.getTlfConvencional());
+        
+        //Apellido        
+        celular.setText(cliente.getApellido());
+        celular1.setText(cliente.getTlfCelular());
+                
+    }
+    
+    public static void setDatosP() {
+        
+        //cedula1.setText(productoA.getCategoria????);
+        //cedula2.setText(productoA.getSubcategoria???);
+        cedula3.setText(productoA.getNombre());
+        cedula4.setText(Double.toString(productoA.getPrecioUnitario()));
+        cedula5.setText(productoA.getIva()+"");
+        cedula6.setText(Integer.toString(productoA.getStock()));
+        cedula7.setText(productoA.getCodigoBarras());
+        cedula8.setText(Double.toString(productoA.getPctDescuento()*100)+"%");
+        
+                
+    }
+    
+    
+    
+    
     public InternalVentanaFacturaVen() {
         initComponents();
+        
+        tablaP = (DefaultTableModel) jTable3.getModel();
+        
+        numeroF =Integer.toString(ClasedeAlmacenamientoTemporal.numFacAct);
+        
+        jTextField2.setText(numeroF); 
+        
+        
+        
+        Date now = CSistema.getHora();
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        //SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+        fechaV = date.format(now);
+        
+        nombre1.setText(fechaV);
+        
+        
         setLocation(400, 0);
     }
 
@@ -127,6 +198,16 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         buscar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         buscar1.setText("Buscar");
         buscar1.setBorder(null);
+        buscar1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar1MouseClicked(evt);
+            }
+        });
+        buscar1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                buscar1KeyPressed(evt);
+            }
+        });
 
         jComboBox2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jComboBox2.setForeground(new java.awt.Color(0, 102, 204));
@@ -145,11 +226,16 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/compra.png"))); // NOI18N
         jButton1.setText("Añadir");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jTextField9.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jTextField9.setForeground(new java.awt.Color(0, 102, 204));
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setText("55");
+        jTextField9.setText("0");
         jTextField9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
         jTextField9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -462,13 +548,18 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         buscar.setText("Buscar");
         buscar.setBorder(null);
+        buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarMouseClicked(evt);
+            }
+        });
 
         newCliente.setBackground(new java.awt.Color(255, 255, 255));
         newCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         newCliente.setForeground(new java.awt.Color(0, 102, 204));
         newCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         newCliente.setText("¿Desea almacenar un nuevo cliente? click aqui");
-        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         newCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newClienteMouseClicked(evt);
@@ -593,6 +684,18 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
                     .addComponent(newCliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        jTextField3.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -616,14 +719,7 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         jTable3.setForeground(new java.awt.Color(255, 255, 255));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "Cantidad", "Producto", "Precio Unitario", "Subtotal", "Descuento por Producto"
@@ -663,12 +759,12 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
 
         jTextField4.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField4.setText("66");
+        jTextField4.setText("0");
         jTextField4.setEnabled(false);
 
         jTextField5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextField5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField5.setText("66");
+        jTextField5.setText("0");
         jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField5ActionPerformed(evt);
@@ -678,7 +774,7 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         jTextField6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(0, 102, 204));
         jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("656");
+        jTextField6.setText("0");
         jTextField6.setEnabled(false);
         jTextField6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -737,7 +833,7 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         jTextField8.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jTextField8.setForeground(new java.awt.Color(0, 102, 204));
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("656");
+        jTextField8.setText("0");
         jTextField8.setEnabled(false);
         jTextField8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -965,7 +1061,7 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jTextField9ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones();
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones("cliente");
         ved.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -977,23 +1073,163 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cedula8ActionPerformed
 
+    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+    
+    String itemSeleecionado = (String)jComboBox1.getSelectedItem();
+
+    switch (itemSeleecionado){
+        case "Cedula":
+            
+            cliente = ControlCliente.buscarCporC(jTextField3.getText());  
+            
+            if ((jTextField3.getText().equals(""))) {
+                
+                JOptionPane.showMessageDialog(null,"Campo de busqueda Vacio");
+                
+            } else if(cliente == null){
+                
+                JOptionPane.showMessageDialog(null,"No se a encontrado la cedula");
+                jTextField3.setText("");
+                
+            }else {
+                    
+   
+            
+            
+                ControlCliente.cargarCenFactura();
+            }; 
+                
+                
+                
+                
+            break;
+            
+            case "ID":
+                
+                
+            cliente = ControlCliente.buscarCporID(jTextField3.getText());  
+            
+            if ((jTextField3.getText().equals(""))) {
+                
+                JOptionPane.showMessageDialog(null,"Campo de busqueda Vacio");
+                
+            } else if(cliente == null){
+                
+                JOptionPane.showMessageDialog(null,"No se a encontrado el ID");
+                jTextField3.setText("");
+                
+            }else {
+                
+                ControlCliente.cargarCenFactura();
+            }; 
+                
+            break;
+        }       
+      
+        
+        
+       
+        
+        
+        
+    }//GEN-LAST:event_buscarMouseClicked
+
+    private void buscar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_buscar1KeyPressed
+        
+   
+        
+    }//GEN-LAST:event_buscar1KeyPressed
+
+    private void buscar1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar1MouseClicked
+         String itemSeleecionado = (String)jComboBox2.getSelectedItem();
+    
+    switch (itemSeleecionado){
+        case "Codigo de Barras":
+            
+            productoA = CProducto.buscarPporDB(jTextField1.getText());  
+            
+            if ((jTextField1.getText().equals(""))) {
+                
+                JOptionPane.showMessageDialog(null,"Campo de busqueda Vacio");
+                
+            } else if(productoA == null){
+                
+                JOptionPane.showMessageDialog(null,"No se a encontrado el Codigo de Barras");
+                jTextField1.setText("");
+                
+            }else {
+                    
+                CProducto.cargarPenFactura();
+            }; 
+                
+                
+                
+                
+            break;
+            
+            case "Nombre":
+                
+                
+            productoA =  CProducto.buscarPporN(jTextField1.getText());  
+            
+            if ((jTextField1.getText().equals(""))) {
+                
+                JOptionPane.showMessageDialog(null,"Campo de busqueda Vacio");
+                
+            } else if(productoA == null){
+                
+                JOptionPane.showMessageDialog(null,"No se a encontrado el Nombre");
+                jTextField1.setText("");
+                
+            }else {
+                
+                CProducto.cargarPenFactura();
+            }; 
+                
+            break;
+        }       
+        
+    }//GEN-LAST:event_buscar1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+        if ( Integer.parseInt(cedula6.getText()) < Integer.parseInt(jTextField9.getText())) {
+            JOptionPane.showMessageDialog(null,"No existen las suficientes existencias del producto a agregar");
+        } else {
+            
+            ProductosComps.add(productoA);
+            ProductosCants.add(Integer.parseInt(jTextField9.getText()));
+            
+            
+            tablaP.addRow(new Object[] { Integer.parseInt(jTextField9.getText()) ,productoA.getNombre() ,productoA.getPrecioUnitario(),productoA.getPrecioUnitario()*Double.parseDouble(jTextField9.getText()) , productoA.getPctDescuento()*100 }); 
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellido;
     private javax.swing.JButton btnRecetaMedica;
     private javax.swing.JButton buscar;
     private javax.swing.JButton buscar1;
-    private javax.swing.JTextField cedula;
-    private javax.swing.JTextField cedula1;
-    private javax.swing.JTextField cedula2;
-    private javax.swing.JTextField cedula3;
-    private javax.swing.JTextField cedula4;
-    private javax.swing.JTextField cedula5;
-    private javax.swing.JTextField cedula6;
-    private javax.swing.JTextField cedula7;
-    private javax.swing.JTextField cedula8;
-    private javax.swing.JTextField celular;
-    private javax.swing.JTextField celular1;
+    private static javax.swing.JTextField cedula;
+    private static javax.swing.JTextField cedula1;
+    private static javax.swing.JTextField cedula2;
+    private static javax.swing.JTextField cedula3;
+    private static javax.swing.JTextField cedula4;
+    private static javax.swing.JTextField cedula5;
+    private static javax.swing.JTextField cedula6;
+    private static javax.swing.JTextField cedula7;
+    private static javax.swing.JTextField cedula8;
+    private static javax.swing.JTextField celular;
+    private static javax.swing.JTextField celular1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
@@ -1050,7 +1286,7 @@ public class InternalVentanaFacturaVen extends javax.swing.JInternalFrame {
     private javax.swing.JLabel newCliente;
     private javax.swing.JTextField nombre;
     private javax.swing.JTextField nombre1;
-    private javax.swing.JTextField nombre2;
-    private javax.swing.JTextField telefono;
+    private static javax.swing.JTextField nombre2;
+    private static javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }
