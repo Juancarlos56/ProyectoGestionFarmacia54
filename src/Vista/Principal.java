@@ -7,8 +7,6 @@ package Vista;
 
 import Controlador.ClasedeAlmacenamientoTemporal;
 
-
-
 /**
  *
  * @author Carlos
@@ -19,15 +17,13 @@ public class Principal {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
+        System.out.println("Hola mundo Juan rama");
         VentanaLogin v = new VentanaLogin();
         v.setVisible(true);
-
         
-        
-        //Carga datos de prueba
         ClasedeAlmacenamientoTemporal.CCP();
         ClasedeAlmacenamientoTemporal.CLP();
-
              
     }
     
