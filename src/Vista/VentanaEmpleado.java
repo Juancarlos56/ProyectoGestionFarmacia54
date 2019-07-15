@@ -50,25 +50,27 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        factura = new javax.swing.JLabel();
-        clientes = new javax.swing.JLabel();
-        productos = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        productos = new javax.swing.JLabel();
+        factura = new javax.swing.JLabel();
+        anularFactura = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Factura");
         setBackground(new java.awt.Color(102, 102, 255));
+        setPreferredSize(new java.awt.Dimension(1920, 1080));
         setSize(new java.awt.Dimension(1466, 657));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 960, Short.MAX_VALUE)
+            .addGap(0, 1019, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 610, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
 
         jPanel4.setBackground(new java.awt.Color(0, 102, 204));
@@ -79,41 +81,6 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Bienvenido");
-
-        factura.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        factura.setForeground(new java.awt.Color(255, 255, 255));
-        factura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        factura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/facturaD.png"))); // NOI18N
-        factura.setText("Facturación");
-        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        factura.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                facturaMouseClicked(evt);
-            }
-        });
-
-        clientes.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        clientes.setForeground(new java.awt.Color(255, 255, 255));
-        clientes.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        clientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/usuarioP.png"))); // NOI18N
-        clientes.setText("Clientes");
-        clientes.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clientesMouseClicked(evt);
-            }
-        });
-
-        productos.setForeground(new java.awt.Color(255, 255, 255));
-        productos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prod.png"))); // NOI18N
-        productos.setText("Lista de Productos");
-        productos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        productos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                productosMouseClicked(evt);
-            }
-        });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -127,6 +94,47 @@ public class VentanaEmpleado extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setBackground(new java.awt.Color(0, 102, 204));
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
+
+        productos.setForeground(new java.awt.Color(255, 255, 255));
+        productos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prod.png"))); // NOI18N
+        productos.setText("Lista de Productos");
+        productos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productosMouseClicked(evt);
+            }
+        });
+        jPanel1.add(productos);
+
+        factura.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        factura.setForeground(new java.awt.Color(255, 255, 255));
+        factura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        factura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/facturaD.png"))); // NOI18N
+        factura.setText("Facturación");
+        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        factura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                facturaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(factura);
+
+        anularFactura.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        anularFactura.setForeground(new java.awt.Color(255, 255, 255));
+        anularFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        anularFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/anularP.png"))); // NOI18N
+        anularFactura.setText("Anular Facturas");
+        anularFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anularFactura.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                anularFacturaMouseClicked(evt);
+            }
+        });
+        jPanel1.add(anularFactura);
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -135,44 +143,35 @@ public class VentanaEmpleado extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(clientes, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(factura, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addComponent(productos, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(208, 208, 208))
+                .addGap(24, 24, 24))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(factura, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(productos))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addGap(0, 13, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 960, Short.MAX_VALUE)
+            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(escritorio)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(escritorio))
         );
@@ -180,14 +179,8 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void clientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientesMouseClicked
-        InternalVentanaCliVen ivcv= new InternalVentanaCliVen();
-        escritorio.add(ivcv);
-        ivcv.show();
-    }//GEN-LAST:event_clientesMouseClicked
-
     private void facturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaMouseClicked
-        InternalVentanaFacturaVen ivfv = new InternalVentanaFacturaVen();
+        InternalVentanaFacturar ivfv = new InternalVentanaFacturar();
         escritorio.add(ivfv);
         ivfv.show();
     }//GEN-LAST:event_facturaMouseClicked
@@ -203,6 +196,12 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         vl.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void anularFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anularFacturaMouseClicked
+        InternalVentanaAnularFactura ivaf = new InternalVentanaAnularFactura();
+        escritorio.add(ivaf);
+        ivaf.show();
+    }//GEN-LAST:event_anularFacturaMouseClicked
 
     /**
      * @param args the command line arguments
@@ -241,12 +240,13 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel clientes;
+    private javax.swing.JLabel anularFactura;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JLabel factura;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel productos;
     // End of variables declaration//GEN-END:variables

@@ -74,7 +74,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -255,8 +255,12 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inicioAdmiMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+//<<<<<<< HEAD
 
-    dispose();        // TODO add your handling code here:
+  //  dispose();        // TODO add your handling code here:
+//=======
+        System.exit(0);
+//>>>>>>> JBarrera
     }//GEN-LAST:event_jLabel1MouseClicked
 
 
