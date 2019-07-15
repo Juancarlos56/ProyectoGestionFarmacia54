@@ -5,7 +5,12 @@
  */
 package Vista;
 
+import Controlador.ControlCliente;
+import Controlador.ValidarCedula;
 import Modelo.Cliente;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,8 +21,12 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     /**
      * Creates new form VentanaEmergenteCliente
      */
+    
+    
+    
     public VentanaEmergenteCliente() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -82,6 +91,22 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
 
         nombre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        //Limitar Cantidad de caracteres en la celda.
+        /*nombre.addKeyListener(new KeyListener(){
+
+            public void keyTyped(KeyEvent e)
+
+            {if (b3.getText().length()== 30)
+
+                e.consume();
+            }
+
+            public void keyPressed(KeyEvent arg0) {
+            }
+
+            public void keyReleased(KeyEvent arg0) {
+            }
+        });*/
         nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,6 +226,40 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
                 .addGap(55, 55, 55))
         );
 
+        cedula.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+        telefono.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+        celular.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -233,6 +292,27 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
 
+        //Validacion de cedula
+        Boolean Pol = ValidarCedula.validarDocumento(cedula.getText());
+        
+        if ((nombre.getText().equals("")) || (apellido.getText().equals("")) || (cedula.getText().equals("")) || (telefono.getText().equals("")) || (celular.getText().equals(""))) {
+            JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
+        } else if(Pol==false){
+            JOptionPane.showMessageDialog(null,"La cedula ingresada no es valida");
+        }else {
+                    
+            ControlCliente.newC(nombre.getText(),apellido.getText(),cedula.getText(),telefono.getText(),celular.getText());
+            
+            
+            ControlCliente.cargarNenFactura();
+            
+            dispose();
+        };
+        
+        
+        
+        
+        
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
@@ -240,13 +320,19 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones();
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones("nuevo");
         ved.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    
+    
+    
+    
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -278,6 +364,12 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
                 new VentanaEmergenteCliente().setVisible(true);
             }
         });
+        
+  
+
+
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

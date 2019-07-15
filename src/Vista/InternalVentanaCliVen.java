@@ -49,7 +49,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
         apellido = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         celular = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
+        btnDir = new javax.swing.JLabel();
         agregarCliente = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -137,16 +137,16 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
         celular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         celular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-        jLabel8.setBackground(new java.awt.Color(0, 102, 204));
-        jLabel8.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 102, 204));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Ingresar Direccion");
-        jLabel8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jLabel8.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jLabel8.addMouseListener(new java.awt.event.MouseAdapter() {
+        btnDir.setBackground(new java.awt.Color(0, 102, 204));
+        btnDir.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnDir.setForeground(new java.awt.Color(0, 102, 204));
+        btnDir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnDir.setText("Ingresar Direccion");
+        btnDir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btnDir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel8MouseClicked(evt);
+                btnDirMouseClicked(evt);
             }
         });
 
@@ -188,7 +188,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
                             .addComponent(celular, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(232, 232, 232)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDir, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(50, 50, 50)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(147, Short.MAX_VALUE))
@@ -213,7 +213,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnDir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26))
             .addGroup(jPanel5Layout.createSequentialGroup()
@@ -302,8 +302,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -349,10 +348,11 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
         listarPersonas();
 
     }//GEN-LAST:event_agregarClienteActionPerformed
-
-    private void jLabel8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel8MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jLabel8MouseClicked
+//HEYASD ASDJASJDAS JLDJLASDJASLDASD AQUI ARREGLAR
+    private void btnDirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDirMouseClicked
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(null);
+        ved.setVisible(true);
+    }//GEN-LAST:event_btnDirMouseClicked
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
@@ -384,6 +384,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JTextField apellido;
+    private javax.swing.JLabel btnDir;
     private javax.swing.JTextField cedula;
     private javax.swing.JTextField celular;
     private javax.swing.JLabel jLabel1;
@@ -393,7 +394,6 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
