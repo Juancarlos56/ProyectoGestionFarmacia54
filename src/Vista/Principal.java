@@ -21,11 +21,13 @@ public class Principal {
     public static void main(String[] args) {
         VentanaLogin v = new VentanaLogin();
         v.setVisible(true);
+
         
         
         //Carga datos de prueba
         ClasedeAlmacenamientoTemporal.CCP();
         ClasedeAlmacenamientoTemporal.CLP();
+
              
     }
     
