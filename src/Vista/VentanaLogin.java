@@ -255,12 +255,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inicioAdmiMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-//<<<<<<< HEAD
-
-  //  dispose();        // TODO add your handling code here:
-//=======
         System.exit(0);
-//>>>>>>> JBarrera
     }//GEN-LAST:event_jLabel1MouseClicked
 
 
