@@ -15,14 +15,18 @@ public class Producto {
     private String codigoBarras;
     private String nombre;
     private String unidadCompra;
-    private ArrayList<String> unidadVenta; 
+    private String unidadVenta; 
+    private ArrayList<FacturaCompra> compras;
     private char iva;
     private int stock;
     private double pctDescuento; 
     private double precioUnitario;
+    private char[] origen;
+    private char estado;
 
     public Producto() {
-        unidadVenta = new ArrayList<>();
+        compras = new ArrayList<>();
+        origen = new char[2];
     }
 
     public String getCodigoBarras() {
@@ -47,14 +51,6 @@ public class Producto {
 
     public void setUnidadCompra(String unidadCompra) {
         this.unidadCompra = unidadCompra;
-    }
-
-    public ArrayList<String> getUnidadVenta() {
-        return unidadVenta;
-    }
-
-    public void addUnidadVenta(String unidadVenta) {
-        this.unidadVenta.add(unidadVenta);
     }
 
     public char getIva() {
@@ -88,7 +84,38 @@ public class Producto {
     public void setPrecioUnitario(double precioUnitario) {
         this.precioUnitario = precioUnitario;
     }
+
     
-    
+    public String getUnidadVenta() {
+        return unidadVenta;
+    }
+
+    public void setUnidadVenta(String unidadVenta) {
+        this.unidadVenta = unidadVenta;
+    }
+
+    public ArrayList<FacturaCompra> getCompras() {
+        return compras;
+    }
+
+    public void setCompras(ArrayList<FacturaCompra> compras) {
+        this.compras = compras;
+    }
+
+    public char[] getOrigen() {
+        return origen;
+    }
+
+    public void setOrigen(char[] origen) {
+        this.origen = origen;
+    }
+
+    public char getEstado() {
+        return estado;
+    }
+
+    public void setEstado(char estado) {
+        this.estado = estado;
+    }
     
 }

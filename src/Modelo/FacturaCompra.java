@@ -15,13 +15,10 @@ public class FacturaCompra {
     
     private int id;
     private String razonAdquisicion;
-    private int cantidadCompra;
     private Proveedor proveedor;
-    private ArrayList<Producto> productos;
-
+    
     public FacturaCompra() {
         proveedor = new Proveedor();
-        productos = new ArrayList<>();
     }
     
     public boolean actualizarStock(){
@@ -44,14 +41,6 @@ public class FacturaCompra {
         this.razonAdquisicion = razonAdquisicion;
     }
 
-    public int getCantidadCompra() {
-        return cantidadCompra;
-    }
-
-    public void setCantidadCompra(int cantidadCompra) {
-        this.cantidadCompra = cantidadCompra;
-    }
-
     public Proveedor getProveedor() {
         return proveedor;
     }
@@ -60,12 +49,4 @@ public class FacturaCompra {
         this.proveedor = proveedor;
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
-    }
-
-    public void addProductos(Producto productos) {
-        this.productos.add(productos);
-    }
-    
 }
