@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.ControladorEmpleados;
 import Controlador.ControladorValidaciones;
+import Modelo.Empleado;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,11 +17,13 @@ import javax.swing.JOptionPane;
 public class VentanaLogin extends javax.swing.JFrame {
 
     private ControladorValidaciones validaciones;
+    private ControladorEmpleados empleados;
     /**
      * Creates new form VentanaLogin
      */
     public VentanaLogin() {
         validaciones = new ControladorValidaciones();
+        empleados = new ControladorEmpleados();
         initComponents();
     }
 
@@ -231,11 +234,16 @@ public class VentanaLogin extends javax.swing.JFrame {
         String passwords = String.copyValueOf(password.getPassword()).trim();
         Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
         if (!validacion) {
-            JOptionPane.showMessageDialog(null, "", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            loginID.setText("");
+            password.setText("");
+            
+        }else{
+            Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
+            VentanaEmpleado ve = new VentanaEmpleado(empleado);
+            ve.setVisible(true);
+            dispose();
         }
-        VentanaEmpleado ve = new VentanaEmpleado();
-        ve.setVisible(true);
-        dispose();
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 
     private void loginIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginIDActionPerformed
@@ -257,9 +265,6 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inicioAdmiActionPerformed
 
     private void inicioAdmiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioAdmiMouseClicked
-       
-        System.out.println("evento joderrrrr macho ");
-        
         VentanaAdministradorLogin val = new VentanaAdministradorLogin();
         val.setVisible(true);
         dispose();

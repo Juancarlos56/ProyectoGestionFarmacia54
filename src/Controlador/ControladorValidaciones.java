@@ -23,17 +23,21 @@ public class ControladorValidaciones {
 
     public boolean validarExistenciaEmpleado(String username, String cedula){
         //Floro aqui metodo para validad si existe de dicho empleado;
-        Empleado empleado = empleados.buscarEmpleadoPorCedula(cedula);
-        
-        if (true) {
-            
-        }
-        
+       
         //Metodo para la validacion de cedula
         if (!validarDocumento(cedula)) {
             return false;
         }
-        return true;
+        
+        //Aqui se verifica el username y contraseña
+        Empleado empleado = empleados.buscarEmpleadoLogin(username,cedula);
+        
+        //Verificacion si los datos son correctos
+        if (empleado != null) {
+            return true;
+        }else{
+            return false;
+        }
     }
     
     public boolean validarDocumento(String documentoIDE) {
