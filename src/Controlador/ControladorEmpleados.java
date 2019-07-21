@@ -5,10 +5,17 @@
  */
 package Controlador;
 
+import Modelo.Empleado;
+
 /**
  *
  * @author Carlos
  */
 public class ControladorEmpleados {
     
+    
+    //Este metodo retorna el Empleado
+    public Empleado buscarEmpleadoPorCedula(String cedula){
+        return null;
+    }
 }

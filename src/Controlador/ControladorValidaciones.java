@@ -5,11 +5,36 @@
  */
 package Controlador;
 
+import Modelo.Empleado;
+
 /**
  *
  * @author Carlos
  */
 public class ControladorValidaciones {
+    
+    private ControladorClientes clientes; 
+    private ControladorEmpleados empleados;
+
+    public ControladorValidaciones() {
+        clientes = new ControladorClientes();
+        empleados = new ControladorEmpleados();
+    }
+
+    public boolean validarExistenciaEmpleado(String username, String cedula){
+        //Floro aqui metodo para validad si existe de dicho empleado;
+        Empleado empleado = empleados.buscarEmpleadoPorCedula(cedula);
+        
+        if (true) {
+            
+        }
+        
+        //Metodo para la validacion de cedula
+        if (!validarDocumento(cedula)) {
+            return false;
+        }
+        return true;
+    }
     
     public boolean validarDocumento(String documentoIDE) {
         boolean documentoIDECorrecto;

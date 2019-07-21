@@ -5,16 +5,22 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleados;
+import Controlador.ControladorValidaciones;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
+    private ControladorValidaciones validaciones;
     /**
      * Creates new form VentanaLogin
      */
     public VentanaLogin() {
+        validaciones = new ControladorValidaciones();
         initComponents();
     }
 
@@ -221,10 +227,12 @@ public class VentanaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
-        System.out.println("Esto pasa "+loginID.getText());
-        
-        
-        
+        String username = loginID.getText().trim();
+        String passwords = String.copyValueOf(password.getPassword()).trim();
+        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
+        if (!validacion) {
+            JOptionPane.showMessageDialog(null, "", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+        }
         VentanaEmpleado ve = new VentanaEmpleado();
         ve.setVisible(true);
         dispose();
