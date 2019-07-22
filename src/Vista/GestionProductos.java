@@ -5,9 +5,14 @@
  */
 package Vista;
 
+import Modelo.Categoria;
+import Modelo.Producto;
+import Modelo.SubCategoria;
+import static Vista.Principal.Categorias;
 import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,8 +23,30 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionProductos
      */
+    Categoria categoriaSelec;
+    SubCategoria subCategoriaSelec;
+    Producto productoSelec;
+    
+    
+    DefaultTableModel tabla;
+    DefaultTableModel tabla2;
+    DefaultTableModel tabla3;
+    
     public GestionProductos() {
         initComponents();
+        
+        tabla = (DefaultTableModel) jTable1.getModel();
+        tabla2 = (DefaultTableModel) jTable5.getModel();
+        tabla3 = (DefaultTableModel) jTable2.getModel();
+        
+        for (Categoria Categoria : Categorias) {
+            
+            tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreSubCategoria()});
+            
+        }
+        
+        
+        
     }
 
     /**
@@ -100,6 +127,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jButton2.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Buscar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -372,11 +404,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Categoria"
@@ -399,6 +427,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         });
         jTable1.setToolTipText("");
         jTable1.setRowHeight(25);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -428,11 +461,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable5.setForeground(new java.awt.Color(255, 255, 255));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "SubCategoria"
@@ -455,6 +484,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         });
         jTable5.setToolTipText("");
         jTable5.setRowHeight(25);
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable5MouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTable5);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
@@ -484,15 +518,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable2.setForeground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo de Barras", "Categoria", "SubCategoria", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
@@ -515,6 +541,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         });
         jTable2.setToolTipText("");
         jTable2.setRowHeight(25);
+        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable2MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -598,7 +629,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, 600, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
@@ -617,13 +648,178 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto();
+        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
         veap.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        tabla2.setRowCount(0);
+        int row= jTable1.getSelectedRow();
+        
+        
+
+        
+        for (Categoria Categoria : Categorias) {
+            
+            if (Categoria.getId() == (Integer) jTable1.getValueAt(row, 0)){
+                
+                
+                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                    
+                    tabla2.addRow(new Object[]{subcategoria.getId(),subcategoria.getNombreSubCategoria()});
+                }
+                
+                
+            }            
+        }
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+
+        tabla3.setRowCount(0);
+        int row= jTable5.getSelectedRow();
+        
+
+        
+        for (Categoria Categoria : Categorias) {
+            
+            for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                
+                if (subcategoria.getId() == (Integer) jTable5.getValueAt(row, 0)){
+                
+                    for (Producto producto : subcategoria.getProductos()) {
+                        
+                        tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
+                            producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
+                            producto.getUnidadVenta()});
+                        
+                    }
+                
+                
+                }   
+                
+                
+            }
+            
+            
+        }
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable5MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        tabla3.setRowCount(0);
+        
+        String sta  = jComboBox1.getSelectedItem().toString();
+        
+        String busqueda = jTextField2.getText();
+        
+        
+        switch (sta){
+            case "Código de Barras" :
+                    
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getCodigoBarras().equals(busqueda)){
+                                
+                                tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
+                                    producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
+                                    producto.getUnidadVenta()});
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                break;
+            case "Nombre" :
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getNombre().equals(busqueda)){
+                                
+                                tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
+                                    producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
+                                    producto.getUnidadVenta()});
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+    }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
+        
+        
+        int row= jTable2.getSelectedRow();
+        
+        
+        
+         for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            
+                                                       
+                            if(producto.getCodigoBarras().equals(jTable2.getValueAt(row, 0))){
+                                
+                                jTextField3.setText(producto.getCodigoBarras());
+                                jTextField4.setText(producto.getNombre());
+                                jTextField5.setText(Double.toString( producto.getPrecioUnitario()));
+                                jTextField6.setText(producto.getUnidadVenta());
+                                jTextField7.setText(producto.getUnidadCompra());
+                                
+                                jTextField8.setText(subcategoria.getNombreSubCategoria());
+                                jTextField9.setText(Categoria.getNombreSubCategoria());
+                                
+                                jTextField10.setText(Integer.toString( producto.getStock()));
+                                
+                                
+                                jTextField11.setText(producto.getIva()+"");
+                                
+                                
+                                jTextField12.setText(Double.toString( producto.getPctDescuento()));
+                                
+                                categoriaSelec = Categoria;
+                                subCategoriaSelec = subcategoria;
+                                productoSelec = producto;
+                                
+                            }
+                        }
+                    }   
+                }
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jTable2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

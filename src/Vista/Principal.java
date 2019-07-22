@@ -8,6 +8,9 @@ package Vista;
 //import Controlador.ClasedeAlmacenamientoTemporal;
 import Controlador.ControladorBaseDeDatos;
 import Modelo.Categoria;
+import Modelo.Cliente;
+import Modelo.Empleado;
+import Modelo.FacturaCabecera;
 import java.util.ArrayList;
 
 /**
@@ -23,7 +26,9 @@ public class Principal {
     //Hay
     public static ArrayList<Categoria> Categorias= new ArrayList();
     
+    public static ArrayList<Empleado> Empleados= new ArrayList();
     
+    public static ArrayList<Cliente> Clientes= new ArrayList();
     
     
     
@@ -47,8 +52,8 @@ public class Principal {
         VentanaLogin v = new VentanaLogin();
         v.setVisible(true);
         
-        System.out.println(
-        Categorias.get(0).getSubcategorias().get(0).getProductos().get(0).getNombre());
+        //System.out.println(
+        //Categorias.get(0).getSubcategorias().get(0).getProductos().get(0).getNombre());
         
         
         //ClasedeAlmacenamientoTemporal.CCP();

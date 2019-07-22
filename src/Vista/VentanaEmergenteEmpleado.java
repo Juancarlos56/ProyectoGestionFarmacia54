@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import Modelo.Empleado;
+
 /**
  *
  * @author Carlos
@@ -13,10 +15,24 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaEmergenteEmpleado
+     * @param EmpleadoSelecionado
      */
-    public VentanaEmergenteEmpleado() {
+    public VentanaEmergenteEmpleado(Empleado EmpleadoSelecionado) {
         initComponents();
         setLocationRelativeTo(null);
+        
+        nombre.setText(EmpleadoSelecionado.getNombre());
+        cedula.setText(EmpleadoSelecionado.getApellido());
+        telefono.setText(EmpleadoSelecionado.getCedula());
+        
+        if (EmpleadoSelecionado.getCargo() == 'V'){
+             apellido.setText("Vendedor");
+        }else{
+             apellido.setText("Despedido");
+        }
+        
+        
+        
     }
 
     /**
@@ -245,7 +261,7 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmergenteEmpleado().setVisible(true);
+                new VentanaEmergenteEmpleado(null).setVisible(true);
             }
         });
     }

@@ -5,6 +5,10 @@
  */
 package Vista;
 
+import Modelo.Empleado;
+import static Vista.Principal.Empleados;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
@@ -14,8 +18,28 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionEmpleados
      */
+    
+    Empleado EmpleadoSelecionado;
+    DefaultTableModel tabla;
     public GestionEmpleados() {
         initComponents();
+        tabla = (DefaultTableModel) jTable1.getModel();
+        //jTable1
+        for (Empleado Empleado : Empleados) {
+            
+            if (Empleado.getCargo() == 'V'){
+                tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+            }else{
+                tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
     }
 
     /**
@@ -303,12 +327,9 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -343,15 +364,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Apellido", "Cédula", "Cargo"
@@ -366,6 +379,11 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
             }
         });
         jTable1.setRowHeight(25);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -455,13 +473,42 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        VentanaEmergenteEmpleado vee = new VentanaEmergenteEmpleado();
+        
+        VentanaEmergenteEmpleado vee = new VentanaEmergenteEmpleado(EmpleadoSelecionado);
         vee.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        int row= jTable1.getSelectedRow();
+        
+
+        for (Empleado Empleado : Empleados) {
+        
+            if (Empleado.getCedula().equals((String) jTable1.getValueAt(row, 2))){
+                
+                jTextField3.setText(Empleado.getNombre());
+                jTextField4.setText(Empleado.getApellido());
+                jTextField5.setText(Empleado.getCedula());
+                
+                if (Empleado.getCargo() == 'V'){
+                    jTextField6.setText("Vendedor");
+                }else{
+                    jTextField6.setText("Despedido");
+                }
+                
+                EmpleadoSelecionado=Empleado;
+                
+                }   
+            
+        }
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

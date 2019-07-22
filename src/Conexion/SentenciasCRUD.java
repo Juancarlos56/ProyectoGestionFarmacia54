@@ -6,13 +6,19 @@
 package Conexion;
 
 import Modelo.Categoria;
+import Modelo.Cliente;
+import Modelo.Direccion;
+import Modelo.Empleado;
+import Modelo.FacturaCabecera;
 import Modelo.Producto;
 import Modelo.SubCategoria;
 import static Vista.Principal.Categorias;
+import static Vista.Principal.Clientes;
+import static Vista.Principal.Empleados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Scanner;
+
 
 
 /**
@@ -172,6 +178,195 @@ public class SentenciasCRUD {
         
         
     }
+
+
+    public void cargarEmpleados(Conexion con) {
+        
+        try{                                                    //aqui van las consultas
+            sentencia = con.getConexion().prepareStatement("select * from PFC_EMPLEADOS");
+            
+            
+            
+            resultado = sentencia.executeQuery();
+            
+            // Se Presenta el resultado
+            
+            while (resultado.next()){
+                
+                Empleado e = new Empleado();
+                
+                e.setId(resultado.getInt("EMP_ID"));
+                e.setCargo((resultado.getString("EMP_CARGO").charAt(0)));
+                
+                e.setNombre(resultado.getString("EMP_NOMBRE"));
+                e.setApellido(resultado.getString("EMP_APELLIDO"));
+                e.setCedula(resultado.getString("EMP_CEDULA"));
+                e.setEstadoEmpleado((resultado.getString("EMP_ESTADO").charAt(0)));
+                
+                
+                Empleados.add(e);
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }   
+        
+        
+    }
+    
+    
+    public void cargarClientes(Conexion con) {
+        
+        try{                                                    //aqui van las consultas
+            sentencia = con.getConexion().prepareStatement("select * from PFC_CLIENTES");
+            
+            
+            
+            resultado = sentencia.executeQuery();
+            
+            // Se Presenta el resultado
+            
+            while (resultado.next()){
+                
+                Cliente c = new Cliente();
+                
+                c.setId(resultado.getInt("CLI_ID"));
+                c.setCedula(resultado.getString("CLI_CEDULA"));
+                c.setNombre(resultado.getString("CLI_NOMBRE"));
+                c.setApellido(resultado.getString("CLI_APELLIDO"));
+                c.setTlfConvencional(resultado.getString("CLI_TELEFONO_CONVENCIONAL"));
+                c.setTlfCelular(resultado.getString("CLI_TELEFONO_CELULAR"));
+                
+                Clientes.add(c);    
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }   
+        
+    }    
+
+    /*public void cargarDireciones(Conexion con) {
+        
+        try{                                                    //aqui van las consultas
+            sentencia = con.getConexion().prepareStatement("select DIR_ID, DIR_CALLE_PRINCIPAL,DIR_CALLE_SECUNDARIA,CLI_ID,CUI_NOMBRE\n" +
+                                                                "from PFC_DIRECCIONES, PFC_CIUDADES\n" +
+                                                                "where PFC_CIUDADES.CUI_ID = PFC_DIRECCIONES.CUI_ID;");
+
+            resultado = sentencia.executeQuery();
+            
+            // Se Presenta el resultado
+            
+            while (resultado.next()){
+                
+                Direccion d = new Direccion();
+                
+                d.setId(resultado.getInt("DIR_ID"));
+                d.setCiudadNombre( resultado.getString("CUI_NOMBRE") );
+                d.setCallePrincipal( resultado.getString("DIR_CALLE_PRINCIPAL") );
+                d.setCalleSecundaria( resultado.getString("DIR_CALLE_SECUNDARIA") );
+                
+                for (Cliente Cliente : Clientes) {
+                    
+                    if (Cliente.getId() == resultado.getInt("CLI_ID")) {
+                     
+                        Cliente.addDirecciones(d);
+                        
+                    }
+                }
+                
+                
+            }
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }   
+        
+        
+    }*/
+    
+    public void cargarFacturas(Conexion con) {
+        
+        try{                                                    //aqui van las consultas
+            sentencia = con.getConexion().prepareStatement("select * from PFC_FACTURAS_CABECERA");
+            
+            
+            
+            resultado = sentencia.executeQuery();
+            
+            // Se Presenta el resultado
+            
+            while (resultado.next()){
+                
+                FacturaCabecera f = new FacturaCabecera();
+                f.setId(resultado.getInt("FCA_ID"));
+                f.setFechaVenta(resultado.getDate("FCA_FECHA_VENTA"));
+                f.setSubtotal(resultado.getDouble("FCA_SUBTOTAL"));
+                f.setDescuento(resultado.getDouble("FCA_DESCUENTO"));
+                f.setAdicionalEnvio(resultado.getDouble("FCA_ADICIONAL_ENVIO"));
+                f.setValorTotal(resultado.getDouble("FCA_VALOR_TOTAL"));
+                f.setEstado(resultado.getString("FCA_ESTADO").charAt(0));
+                //f.setAvisoEnvio(0);
+                //Sets de objetos 
+                //Cliente
+                
+                for (Cliente Cliente : Clientes) {
+                    if(Cliente.getId() == resultado.getInt("CLI_ID")){
+                        f.setCliente(Cliente);
+                        
+                        
+                        /*for (Direccion direccione : Cliente.getDirecciones()) {
+                            
+                            if(direccione.getId() == resultado.getInt("DIR_ID")){
+                                
+                                f.;
+                                
+                            }
+                            
+                            
+                        }*/  
+                    
+                    }
+                    
+                    
+                }
+                
+                for (Empleado Empleado : Empleados) {
+                    if(Empleado.getId() == resultado.getInt("EMP_ID")){
+                        f.setEmpleado(Empleado);
+                        
+                        
+                        Empleado.addFacturas(f);
+                    }
+                    
+                }
+                
+                
+                
+                
+               
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+        }catch(SQLException e){
+            e.printStackTrace();
+        }   
+        
+        
+    }
+    
     
     
     

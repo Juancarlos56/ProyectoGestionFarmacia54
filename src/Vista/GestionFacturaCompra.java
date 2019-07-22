@@ -601,7 +601,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto();
+        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(null,null,null);
         veap.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

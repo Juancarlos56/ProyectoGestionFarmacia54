@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import Modelo.Categoria;
+import Modelo.Producto;
+import Modelo.SubCategoria;
+import static Vista.Principal.Categorias;
+
 /**
  *
  * @author Carlos
@@ -13,11 +18,43 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaEmergenteActualizarProducto
+     * @param categoriaSelec
+     * @param subCategoriaSelec
+     * @param productoSelec
      */
-    public VentanaEmergenteActualizarProducto() {
+    public VentanaEmergenteActualizarProducto(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
         initComponents();
+        
+        jTextField4.setText(productoSelec.getNombre());
+        jTextField5.setText(Double.toString(productoSelec.getPrecioUnitario()));
+        jTextField6.setText(Double.toString(productoSelec.getPctDescuento()));
+        jTextField11.setText(productoSelec.getIva()+"");
+        jTextField12.setText(productoSelec.getUnidadCompra());
+        jTextField13.setText(productoSelec.getUnidadVenta());
+        
+        
+        
+        for (Categoria Categoria : Categorias) {
+            
+            jComboBox1.addItem(Categoria.getNombreSubCategoria());
+
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         setLocationRelativeTo(null);
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,9 +135,14 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         jTextField12.setToolTipText("");
         jTextField12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] {  }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
 
         jTextField13.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField13.setToolTipText("");
@@ -229,6 +271,28 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        jComboBox2.removeAllItems();
+        
+        jComboBox1.getSelectedItem().toString();
+        
+        for (Categoria Categoria : Categorias) {
+            
+            if (Categoria.getNombreSubCategoria().equals(jComboBox1.getSelectedItem().toString())) {
+                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                    
+                    jComboBox2.addItem(subcategoria.getNombreSubCategoria());
+                
+                } 
+                
+                
+            }
+
+        }
+        
+                  
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -259,7 +323,7 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmergenteActualizarProducto().setVisible(true);
+                new VentanaEmergenteActualizarProducto(null,null,null).setVisible(true);
             }
         });
     }

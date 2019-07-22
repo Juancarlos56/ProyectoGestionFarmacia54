@@ -130,6 +130,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.setBorder(null);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -448,6 +453,67 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jTable5MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        
+        tabla3.setRowCount(0);
+        
+        String sta  = jComboBox1.getSelectedItem().toString();
+        
+        String busqueda = jTextField1.getText();
+        
+        
+        switch (sta){
+            case "Codigo Barras" :
+                    
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getCodigoBarras().equals(busqueda)){
+                                
+                                tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
+                                    producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
+                                    producto.getUnidadVenta()});
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                break;
+            case "Nombre" :
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getNombre().equals(busqueda)){
+                                
+                                tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
+                                    producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
+                                    producto.getUnidadVenta()});
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
