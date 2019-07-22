@@ -5,10 +5,18 @@
  */
 package Controlador;
 
+import Modelo.Producto;
+import Modelo.SubCategoria;
+import java.util.ArrayList;
+
 /**
  *
  * @author Carlos
  */
 public class ControladorProductos {
+
+    public ArrayList<Producto> obtenerProductosDeSubCategorias(SubCategoria subCategoria) {
+        return subCategoria.getProductos();
+    }
     
 }
