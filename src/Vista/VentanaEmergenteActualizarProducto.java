@@ -5,10 +5,12 @@
  */
 package Vista;
 
+import Controlador.ControladorCategorias;
 import Modelo.Categoria;
 import Modelo.Producto;
 import Modelo.SubCategoria;
-import static Vista.Principal.Categorias;
+import java.util.ArrayList;
+//import static Vista.Principal.Categorias;
 
 /**
  *
@@ -22,6 +24,9 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
      * @param subCategoriaSelec
      * @param productoSelec
      */
+    
+    
+    ArrayList<Categoria> Categorias= new ArrayList();
     public VentanaEmergenteActualizarProducto(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
         initComponents();
         
@@ -32,6 +37,10 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         jTextField12.setText(productoSelec.getUnidadCompra());
         jTextField13.setText(productoSelec.getUnidadVenta());
         
+        
+        Controlador.ControladorCategorias c = new ControladorCategorias();
+        c.cargarCategorias();
+        Categorias = c.getCategorias();
         
         
         for (Categoria Categoria : Categorias) {

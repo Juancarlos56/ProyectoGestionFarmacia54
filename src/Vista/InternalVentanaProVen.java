@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package Vista;
+import Controlador.ControladorCategorias;
 import Modelo.Categoria;
 import Modelo.Producto;
 import Modelo.SubCategoria;
-import static Vista.Principal.Categorias;
+import java.util.ArrayList;
+//import static Vista.Principal.Categorias;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -19,7 +21,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
      * Creates new form InternalVentanaProAdmi
      */
     
-
+    ArrayList<Categoria> Categorias= new ArrayList();
     DefaultTableModel tabla;
     DefaultTableModel tabla2;
     DefaultTableModel tabla3;
@@ -29,6 +31,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         tabla = (DefaultTableModel) jTable1.getModel();
         tabla2 = (DefaultTableModel) jTable5.getModel();
         tabla3 = (DefaultTableModel) jTable2.getModel();
+        
+        Controlador.ControladorCategorias c = new ControladorCategorias();
+        c.cargarCategorias();
+        Categorias = c.getCategorias();
+        
         
         for (Categoria Categoria : Categorias) {
             

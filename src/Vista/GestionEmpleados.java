@@ -6,7 +6,7 @@
 package Vista;
 
 import Modelo.Empleado;
-import static Vista.Principal.Empleados;
+//import static Vista.Principal.Empleados;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,7 +21,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     
     Empleado EmpleadoSelecionado;
     DefaultTableModel tabla;
-    public GestionEmpleados() {
+   /* public GestionEmpleados() {
         initComponents();
         tabla = (DefaultTableModel) jTable1.getModel();
         //jTable1
@@ -40,7 +40,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         
         
         
-    }
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -484,7 +484,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         
-        int row= jTable1.getSelectedRow();
+        /*int row= jTable1.getSelectedRow();
         
 
         for (Empleado Empleado : Empleados) {
@@ -506,7 +506,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 }   
             
         }
-        
+        */
         
     }//GEN-LAST:event_jTable1MouseClicked
 

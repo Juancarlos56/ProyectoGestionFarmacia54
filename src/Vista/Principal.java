@@ -6,12 +6,12 @@
 package Vista;
 
 //import Controlador.ClasedeAlmacenamientoTemporal;
-import Controlador.ControladorBaseDeDatos;
-import Modelo.Categoria;
-import Modelo.Cliente;
-import Modelo.Empleado;
-import Modelo.FacturaCabecera;
-import java.util.ArrayList;
+//import Controlador.ControladorBaseDeDatos;
+//import Modelo.Categoria;
+//import Modelo.Cliente;
+//import Modelo.Empleado;
+//import Modelo.FacturaCabecera;
+//import java.util.ArrayList;
 
 /**
  *
@@ -24,11 +24,11 @@ public class Principal {
      */
     
     //Hay
-    public static ArrayList<Categoria> Categorias= new ArrayList();
+    //public static ArrayList<Categoria> Categorias= new ArrayList();
     
-    public static ArrayList<Empleado> Empleados= new ArrayList();
+    //public static ArrayList<Empleado> Empleados= new ArrayList();
     
-    public static ArrayList<Cliente> Clientes= new ArrayList();
+    //public static ArrayList<Cliente> Clientes= new ArrayList();
     
     
     
@@ -42,8 +42,8 @@ public class Principal {
         
         
         
-        ControladorBaseDeDatos  cb= new ControladorBaseDeDatos();
-        cb.iniciarConexion();
+        //ControladorBaseDeDatos  cb= new ControladorBaseDeDatos();
+        //cb.iniciarConexion();
         
         
         

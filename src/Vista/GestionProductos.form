@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JLabel" name="jLabel8">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Unidad de Compra"/>
+      </Properties>
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="maximizable" type="boolean" value="true"/>
@@ -216,7 +224,6 @@
                                           <Component id="jLabel12" max="32767" attributes="0"/>
                                           <Component id="jLabel11" max="32767" attributes="0"/>
                                           <Component id="jLabel10" max="32767" attributes="0"/>
-                                          <Component id="jLabel8" alignment="0" pref="142" max="32767" attributes="0"/>
                                           <Component id="jLabel7" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
                                           <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
@@ -275,10 +282,7 @@
                           <Component id="jTextField6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel8" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextField7" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jTextField7" min="-2" pref="25" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel12" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
@@ -311,7 +315,7 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton7" min="-2" pref="26" max="-2" attributes="0"/>
-                      <EmptySpace pref="84" max="32767" attributes="0"/>
+                      <EmptySpace pref="99" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -339,12 +343,6 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="text" type="java.lang.String" value="Unidad de Venta"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel8">
-              <Properties>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Unidad de Compra"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">

@@ -12,12 +12,13 @@ import Modelo.Empleado;
 import Modelo.FacturaCabecera;
 import Modelo.Producto;
 import Modelo.SubCategoria;
-import static Vista.Principal.Categorias;
-import static Vista.Principal.Clientes;
-import static Vista.Principal.Empleados;
+//import static Vista.Principal.Categorias;
+//import static Vista.Principal.Clientes;
+//import static Vista.Principal.Empleados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 
@@ -29,7 +30,11 @@ public class SentenciasCRUD {
     private ResultSet resultado = null;
     private PreparedStatement sentencia = null;
 
+    ArrayList<Categoria> Categorias= new ArrayList();
     
+    ArrayList<Empleado> Empleados= new ArrayList();
+    
+    ArrayList<Cliente> Clientes= new ArrayList();
     
     
     
@@ -108,7 +113,7 @@ public class SentenciasCRUD {
     
     
     
-    public void cargarCategorias(Conexion con) {
+    public ArrayList<Categoria> cargarCategorias(Conexion con) {
         
         
         
@@ -135,12 +140,16 @@ public class SentenciasCRUD {
                 
             }
             
+            cargarSubCategorias(con);
+            cargarProductos(con);
             
             
             
+            return Categorias; 
             
         }catch(SQLException e){
             e.printStackTrace();
+            return null; 
         }   
     }
     
