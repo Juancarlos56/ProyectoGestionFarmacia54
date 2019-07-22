@@ -5,23 +5,10 @@
  */
 package Controlador;
 
-
 /**
  *
- * @author sebas
+ * @author Carlos
  */
-public class CProducto {
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+public class ControladorSubcategorias {
     
 }

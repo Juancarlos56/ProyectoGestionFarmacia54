@@ -7,7 +7,7 @@ package Controlador;
 
 import Modelo.Cliente;
 import Modelo.Direccion;
-import Vista.InternalVentanaFacturaVen;
+
 import java.util.ArrayList;
 
 
@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author sebas
  */
 public class ControlCliente {
-
+/*
     static Cliente NuevoC;
     
     public static void newC(String nombre, String apellido, String cedula, String telefono, String celular) {
@@ -108,7 +108,7 @@ public class ControlCliente {
     
     
     
-    
+    */
     
     
     

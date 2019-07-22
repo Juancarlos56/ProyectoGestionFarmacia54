@@ -17,13 +17,10 @@ public class Cliente extends Persona{
     private String tlfConvencional;
     private String tlfCelular;
     private ArrayList<Direccion> direcciones;
-    private ArrayList<FacturaCabecera> facturas;
     
-
     public Cliente() {
         super();
         direcciones = new ArrayList<>();
-        facturas = new ArrayList<>();
     }
 
     public String getCedula() {
@@ -57,14 +54,5 @@ public class Cliente extends Persona{
     public void addDirecciones(Direccion direcciones) {
         this.direcciones.add(direcciones);
     }
-
-    public ArrayList<FacturaCabecera> getFacturas() {
-        return facturas;
-    }
-
-    public void addFacturas(FacturaCabecera facturas) {
-        this.facturas.add(facturas);
-    }
-   
   
 }

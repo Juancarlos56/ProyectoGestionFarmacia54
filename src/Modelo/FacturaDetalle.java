@@ -13,9 +13,10 @@ import java.util.ArrayList;
  */
 public class FacturaDetalle {
     private int id;
-    private String descripcion;
-    private int cantidad;
+    private int cantidad; 
+    private double precio;
     private double subtotal;
+    private double descuento;
     private ArrayList<Producto> productos;
 
     public FacturaDetalle() {
@@ -30,12 +31,20 @@ public class FacturaDetalle {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
     }
 
     public int getCantidad() {

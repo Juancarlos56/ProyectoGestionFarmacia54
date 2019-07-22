@@ -292,7 +292,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
 
-        //Validacion de cedula
+       /* //Validacion de cedula
         Boolean Pol = ValidarCedula.validarDocumento(cedula.getText());
         
         if ((nombre.getText().equals("")) || (apellido.getText().equals("")) || (cedula.getText().equals("")) || (telefono.getText().equals("")) || (celular.getText().equals(""))) {
@@ -308,7 +308,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
             
             dispose();
         };
-        
+        */
         
         
         

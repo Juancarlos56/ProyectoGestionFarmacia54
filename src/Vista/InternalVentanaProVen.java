@@ -4,7 +4,11 @@
  * and open the template in the editor.
  */
 package Vista;
-
+import Modelo.Categoria;
+import Modelo.Producto;
+import Modelo.SubCategoria;
+import static Vista.Principal.Categorias;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Carlos
@@ -14,8 +18,25 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     /**
      * Creates new form InternalVentanaProAdmi
      */
+    
+
+    DefaultTableModel tabla;
+    DefaultTableModel tabla2;
+    DefaultTableModel tabla3;
+    
     public InternalVentanaProVen() {
         initComponents();
+        tabla = (DefaultTableModel) jTable1.getModel();
+        tabla2 = (DefaultTableModel) jTable5.getModel();
+        tabla3 = (DefaultTableModel) jTable2.getModel();
+        
+        for (Categoria Categoria : Categorias) {
+            
+            tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreSubCategoria()});
+            
+        }
+        
+        
     }
 
     /**
@@ -151,11 +172,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Categoria"
@@ -178,6 +195,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         });
         jTable1.setToolTipText("");
         jTable1.setRowHeight(25);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -207,11 +229,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jTable5.setForeground(new java.awt.Color(255, 255, 255));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "SubCategoria"
@@ -234,6 +252,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         });
         jTable5.setToolTipText("");
         jTable5.setRowHeight(25);
+        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable5MouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTable5);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -266,12 +289,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jTable2.setForeground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo de Barras", "Categoria", "SubCategoria", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
@@ -334,7 +352,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -363,6 +381,73 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+
+        
+        tabla2.setRowCount(0);
+        int row= jTable1.getSelectedRow();
+        
+        
+
+        
+        for (Categoria Categoria : Categorias) {
+            
+            if (Categoria.getId() == (Integer) jTable1.getValueAt(row, 0)){
+                
+                
+                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                    
+                    tabla2.addRow(new Object[]{subcategoria.getId(),subcategoria.getNombreSubCategoria()});
+                }
+                
+                
+            }            
+        }
+        
+        
+
+
+         
+        
+
+
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
+        
+        tabla3.setRowCount(0);
+        int row= jTable5.getSelectedRow();
+        
+
+        
+        for (Categoria Categoria : Categorias) {
+            
+            for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                
+                if (subcategoria.getId() == (Integer) jTable5.getValueAt(row, 0)){
+                
+                    for (Producto producto : subcategoria.getProductos()) {
+                        
+                        tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
+                            producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
+                            producto.getUnidadVenta()});
+                        
+                    }
+                
+                
+                }   
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+    }//GEN-LAST:event_jTable5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
