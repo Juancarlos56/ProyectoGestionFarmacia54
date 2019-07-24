@@ -8,6 +8,7 @@ package Controlador;
 import Conexion.Conexion;
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
+import Modelo.Empleado;
 import java.util.ArrayList;
 
 /**
@@ -79,7 +80,7 @@ public class ControladorBaseDeDatos {
         
     }*/
 
-    ArrayList<Categoria> obtenerCategorias() {
+    public ArrayList<Categoria> obtenerCategorias() {
     
         ArrayList<Categoria> CategoriasC= new ArrayList();
         con.conectar();
@@ -91,6 +92,18 @@ public class ControladorBaseDeDatos {
         
     }
     
+    
+    public ArrayList<Empleado> obtenerEmpleados(){
+        
+        ArrayList<Empleado> Empleados= new ArrayList();
+        con.conectar();
+        if(con.getConexion() !=null){
+            Empleados=s.cargarEmpleados(con);
+            con.cerrarConexion();
+        }
+        return Empleados;
+        
+    }
     
     
     

@@ -189,7 +189,7 @@ public class SentenciasCRUD {
     }
 
 
-    public void cargarEmpleados(Conexion con) {
+    public  ArrayList<Empleado>cargarEmpleados(Conexion con) {
         
         try{                                                    //aqui van las consultas
             sentencia = con.getConexion().prepareStatement("select * from PFC_EMPLEADOS");
@@ -220,11 +220,10 @@ public class SentenciasCRUD {
             }
             
             
-            
-            
-            
+            return Empleados;
         }catch(SQLException e){
             e.printStackTrace();
+            return null;
         }   
         
         
