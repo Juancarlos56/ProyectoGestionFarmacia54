@@ -5,6 +5,12 @@
  */
 package Vista;
 
+import Controlador.ControladorCategorias;
+import Modelo.Categoria;
+import Modelo.Producto;
+import Modelo.SubCategoria;
+import java.util.ArrayList;
+
 /**
  *
  * @author Carlos
@@ -14,8 +20,24 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionFacturaCompra
      */
+    
+    Categoria categoriaSelec;
+    SubCategoria subCategoriaSelec;
+    Producto productoSelec;
+    
+    ArrayList<Categoria> Categorias= new ArrayList();
+    
+    
     public GestionFacturaCompra() {
         initComponents();
+        Controlador.ControladorCategorias c = new ControladorCategorias();
+        c.cargarCategorias();
+        
+        
+        Categorias = c.getCategorias();
+        
+        
+        
     }
 
     /**
@@ -98,12 +120,13 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(174, 174, 174))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(174, 174, 174))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +166,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         newCliente.setForeground(new java.awt.Color(0, 102, 204));
         newCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         newCliente.setText("¿Desea almacenar un nuevo proveedor? click aquí");
-        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         newCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newClienteMouseClicked(evt);
@@ -280,6 +303,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         buscar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         buscar4.setText("Buscar");
         buscar4.setBorder(null);
+        buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar4MouseClicked(evt);
+            }
+        });
 
         jComboBox5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jComboBox5.setForeground(new java.awt.Color(0, 102, 204));
@@ -376,7 +404,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jLabel19.setForeground(new java.awt.Color(0, 102, 204));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("¿Desea crear un Nuevo Producto? Click aquí");
-        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel19MouseClicked(evt);
@@ -575,7 +603,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -605,61 +633,86 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         veap.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void buscar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar4MouseClicked
+        
+        
+        String sta  = jComboBox5.getSelectedItem().toString();
+        
+        String busqueda = jTextField5.getText();
+        
+        
+        switch (sta){
+            case "Codigo de Barras" :
+                    
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getCodigoBarras().equals(busqueda)){
+                                
+                                cedula25.setText(Categoria.getNombreSubCategoria());
+                                cedula28.setText(subcategoria.getNombreSubCategoria());
+                                cedula27.setText(producto.getNombre());
+                                cedula31.setText(producto.getCodigoBarras());
+                                cedula30.setText(Integer.toString(producto.getStock()));
+                                cedula33.setText(Double.toString( producto.getPrecioUnitario()));
+                                cedula32.setText(producto.getUnidadCompra());
+                                cedula34.setText(producto.getUnidadVenta());
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                break;
+            case "Nombre" :
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getNombre().equals(busqueda)){
+                                
+                                
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+    }//GEN-LAST:event_buscar4MouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
-    private javax.swing.JButton buscar1;
-    private javax.swing.JButton buscar2;
-    private javax.swing.JButton buscar3;
     private javax.swing.JButton buscar4;
     private javax.swing.JTextField cedula;
-    private javax.swing.JTextField cedula1;
-    private javax.swing.JTextField cedula10;
-    private javax.swing.JTextField cedula11;
-    private javax.swing.JTextField cedula12;
-    private javax.swing.JTextField cedula13;
-    private javax.swing.JTextField cedula14;
-    private javax.swing.JTextField cedula15;
-    private javax.swing.JTextField cedula16;
-    private javax.swing.JTextField cedula17;
-    private javax.swing.JTextField cedula18;
-    private javax.swing.JTextField cedula19;
-    private javax.swing.JTextField cedula2;
-    private javax.swing.JTextField cedula20;
-    private javax.swing.JTextField cedula21;
-    private javax.swing.JTextField cedula22;
-    private javax.swing.JTextField cedula23;
-    private javax.swing.JTextField cedula24;
     private javax.swing.JTextField cedula25;
     private javax.swing.JTextField cedula27;
     private javax.swing.JTextField cedula28;
-    private javax.swing.JTextField cedula3;
     private javax.swing.JTextField cedula30;
     private javax.swing.JTextField cedula31;
     private javax.swing.JTextField cedula32;
     private javax.swing.JTextField cedula33;
     private javax.swing.JTextField cedula34;
-    private javax.swing.JTextField cedula4;
-    private javax.swing.JTextField cedula5;
-    private javax.swing.JTextField cedula6;
-    private javax.swing.JTextField cedula7;
-    private javax.swing.JTextField cedula8;
-    private javax.swing.JTextField cedula9;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -667,29 +720,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel46;
@@ -698,30 +729,17 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel newCliente;
     private javax.swing.JTextField nombre2;
     private javax.swing.JTextField telefono;
