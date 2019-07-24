@@ -121,7 +121,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable1">
+                <Component class="javax.swing.JTable" name="tablaFacturas">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="66" red="0" type="rgb"/>
@@ -133,7 +133,7 @@
                       <Table columnCount="5" rowCount="13">
                         <Column editable="true" title="# Factura" type="java.lang.Object"/>
                         <Column editable="true" title="C&#xf3;digo de Factura" type="java.lang.Object"/>
-                        <Column editable="true" title="Fecha de Env&#xed;o" type="java.lang.Object"/>
+                        <Column editable="true" title="Fecha de Venta" type="java.lang.Object"/>
                         <Column editable="true" title="Vendedor" type="java.lang.Object"/>
                         <Column editable="true" title="Estado de Factura" type="java.lang.Object"/>
                       </Table>
@@ -171,9 +171,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" pref="196" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" pref="160" max="-2" attributes="0"/>
+                      <Component id="txtCodigoFactura" min="-2" pref="160" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="110" max="-2" attributes="0"/>
+                      <Component id="btnBuscarFactura" min="-2" pref="110" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -184,8 +184,8 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextField1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jButton1" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                          <Component id="txtCodigoFactura" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="btnBuscarFactura" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="58" max="32767" attributes="0"/>
                   </Group>
@@ -199,7 +199,7 @@
                 <Property name="text" type="java.lang.String" value="Ingrese el C&#xf3;digo de la Factura: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="txtCodigoFactura">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="13" style="0"/>
@@ -214,7 +214,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="btnBuscarFactura">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="66" red="0" type="rgb"/>
@@ -227,6 +227,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarFacturaActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -260,12 +263,12 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel5" min="-2" pref="146" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" min="-2" pref="204" max="-2" attributes="0"/>
+                                      <Component id="txtNombreVendedor" min="-2" pref="204" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel6" min="-2" pref="146" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField5" min="-2" pref="204" max="-2" attributes="0"/>
+                                      <Component id="txtEstadoFactura" min="-2" pref="204" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -275,12 +278,12 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel3" min="-2" pref="146" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField2" min="-2" pref="204" max="-2" attributes="0"/>
+                                      <Component id="txtCodFactDatos" min="-2" pref="204" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabel4" min="-2" pref="146" max="-2" attributes="0"/>
                                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="jTextField3" min="-2" pref="204" max="-2" attributes="0"/>
+                                      <Component id="txtFechaVenta" min="-2" pref="204" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace pref="121" max="32767" attributes="0"/>
@@ -289,7 +292,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="209" max="-2" attributes="0"/>
+                      <Component id="btnAnular" min="-2" pref="209" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -300,25 +303,25 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextField2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtCodFactDatos" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextField3" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtFechaVenta" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextField4" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtNombreVendedor" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="jTextField5" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                          <Component id="txtEstadoFactura" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton3" min="-2" pref="67" max="-2" attributes="0"/>
+                      <Component id="btnAnular" min="-2" pref="67" max="-2" attributes="0"/>
                       <EmptySpace pref="40" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -331,7 +334,7 @@
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo de Factura"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
+            <Component class="javax.swing.JTextField" name="txtCodFactDatos">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="13" style="0"/>
@@ -352,7 +355,7 @@
                 <Property name="text" type="java.lang.String" value="Fecha de Venta"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
+            <Component class="javax.swing.JTextField" name="txtFechaVenta">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="13" style="0"/>
@@ -373,7 +376,7 @@
                 <Property name="text" type="java.lang.String" value="Nombre del Vendedor"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField4">
+            <Component class="javax.swing.JTextField" name="txtNombreVendedor">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="13" style="0"/>
@@ -394,7 +397,7 @@
                 <Property name="text" type="java.lang.String" value="Estado de la Factura"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField5">
+            <Component class="javax.swing.JTextField" name="txtEstadoFactura">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="13" style="0"/>
@@ -409,7 +412,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton3">
+            <Component class="javax.swing.JButton" name="btnAnular">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -426,7 +429,7 @@
                 <Property name="text" type="java.lang.String" value="Anular"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnularActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

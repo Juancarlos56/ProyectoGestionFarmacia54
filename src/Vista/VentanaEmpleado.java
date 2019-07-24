@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,11 +18,13 @@ import javax.swing.JDesktopPane;
  */
 public class VentanaEmpleado extends javax.swing.JFrame {
 
+    private Empleado empleado;
+    
     /**
      * Creates new form VentanaEmpleado
      */
-    public VentanaEmpleado() {
-        
+    public VentanaEmpleado(Empleado empleado) {
+        this.empleado = empleado;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -231,12 +234,6 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaEmpleado().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
