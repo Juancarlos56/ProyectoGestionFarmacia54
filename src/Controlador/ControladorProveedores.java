@@ -4,11 +4,37 @@
  * and open the template in the editor.
  */
 package Controlador;
+import Modelo.Proveedor;
+import java.util.ArrayList;
 
 /**
  *
  * @author Carlos
  */
 public class ControladorProveedores {
+
+     private ArrayList<Proveedor> proveedores;
+    
+    private ControladorBaseDeDatos cb;
+
+    public ControladorProveedores() {
+        cb= new ControladorBaseDeDatos();
+        
+    }
+
+    public ArrayList<Proveedor> getProveedores() {
+        return proveedores;
+    }
+
+    public void setProveedores(ArrayList<Proveedor> proveedores) {
+        this.proveedores = proveedores;
+    }
+    
+    
+    
+    
+    public void cargarProveedores() {
+        proveedores = cb.obtenerProveedores();
+    }
     
 }

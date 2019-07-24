@@ -11,6 +11,7 @@ package Modelo;
  */
 public class Proveedor extends Persona{
     private String ruc;
+    
     private String celular;
 
     public Proveedor() {

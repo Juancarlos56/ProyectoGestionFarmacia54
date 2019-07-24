@@ -6,8 +6,10 @@
 package Vista;
 
 import Controlador.ControladorCategorias;
+import Controlador.ControladorProveedores;
 import Modelo.Categoria;
 import Modelo.Producto;
+import Modelo.Proveedor;
 import Modelo.SubCategoria;
 import java.util.ArrayList;
 
@@ -25,6 +27,8 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     SubCategoria subCategoriaSelec;
     Producto productoSelec;
     
+    
+    ArrayList<Proveedor> Proveedores= new ArrayList();
     ArrayList<Categoria> Categorias= new ArrayList();
     
     
@@ -32,10 +36,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         initComponents();
         Controlador.ControladorCategorias c = new ControladorCategorias();
         c.cargarCategorias();
-        
-        
         Categorias = c.getCategorias();
         
+        Controlador.ControladorProveedores cp = new ControladorProveedores();
+        cp.cargarProveedores();
+        Proveedores = cp.getProveedores();
         
         
     }
@@ -147,7 +152,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jLabel5.setText("Buscar por: ");
 
         jComboBox1.setForeground(new java.awt.Color(0, 102, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "RUC", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "RUC"}));
         jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jTextField3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -160,6 +165,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         buscar.setText("Buscar");
         buscar.setBorder(null);
+        buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarMouseClicked(evt);
+            }
+        });
 
         newCliente.setBackground(new java.awt.Color(255, 255, 255));
         newCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -217,7 +227,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -694,6 +704,59 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_buscar4MouseClicked
+
+    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+        
+        String sta  = jComboBox1.getSelectedItem().toString();
+        
+        String busqueda = jTextField3.getText();
+        
+        
+        switch (sta){
+            
+            case "Nombre":
+                    
+                for (Proveedor Proveedor : Proveedores) {
+                    
+                    if (Proveedor.getNombre().equals(busqueda)) {
+                        
+                        nombre2.setText(Proveedor.getNombre());
+                        cedula.setText(Proveedor.getApellido());
+                        telefono.setText(Proveedor.getRuc());
+                        
+                        
+                    }
+            
+  
+                }
+                
+                
+                
+                
+                break;
+            case  "RUC"  :
+                for (Proveedor Proveedor : Proveedores) {
+                    
+                    if (Proveedor.getRuc() . equals(busqueda)) {
+                        
+                        nombre2.setText(Proveedor.getNombre());
+                        cedula.setText(Proveedor.getApellido());
+                        telefono.setText(Proveedor.getRuc());
+                        
+                        
+                        
+                    }
+  
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+    }//GEN-LAST:event_buscarMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -9,6 +9,7 @@ import Conexion.Conexion;
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
 import Modelo.Empleado;
+import Modelo.Proveedor;
 import java.util.ArrayList;
 
 /**
@@ -102,6 +103,18 @@ public class ControladorBaseDeDatos {
             con.cerrarConexion();
         }
         return Empleados;
+        
+    }
+
+    ArrayList<Proveedor> obtenerProveedores() {
+        
+        ArrayList<Proveedor> proveedores= new ArrayList();
+        con.conectar();
+        if(con.getConexion() !=null){
+            proveedores=s.cargarProveedores(con);
+            con.cerrarConexion();
+        }
+        return proveedores;
         
     }
     

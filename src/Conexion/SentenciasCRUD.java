@@ -11,6 +11,7 @@ import Modelo.Direccion;
 import Modelo.Empleado;
 import Modelo.FacturaCabecera;
 import Modelo.Producto;
+import Modelo.Proveedor;
 import Modelo.SubCategoria;
 //import static Vista.Principal.Categorias;
 //import static Vista.Principal.Clientes;
@@ -36,7 +37,7 @@ public class SentenciasCRUD {
     
     ArrayList<Cliente> Clientes= new ArrayList();
     
-    
+    ArrayList<Proveedor> proveedores= new ArrayList();
     
     
     
@@ -341,8 +342,6 @@ public class SentenciasCRUD {
                         }*/  
                     
                     }
-                    
-                    
                 }
                 
                 for (Empleado Empleado : Empleados) {
@@ -354,11 +353,43 @@ public class SentenciasCRUD {
                     }
                     
                 }
+ 
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }   
+        
+        
+    }
+
+    
+    
+    
+    public ArrayList<Proveedor> cargarProveedores(Conexion con) {
+        
+        
+        try{                                                    //aqui van las consultas
+            sentencia = con.getConexion().prepareStatement("select * from PFC_PROVEEDORES");
+
+            resultado = sentencia.executeQuery();
+            
+            // Se Presenta el resultado
+            
+            while (resultado.next()){
+                
+                Proveedor c = new Proveedor();
+                
+                String nombre = resultado.getString("PRV_NOMBRE");
+                
+                String[] nombreS = nombre.split(" ");
+                
+                c.setNombre(nombreS[0]);
+                c.setApellido(nombreS[1]);
+                
+                c.setRuc(resultado.getString("PRV_RUC"));
                 
                 
-                
-                
-               
+                proveedores.add(c);
                 
                 
                 
@@ -366,13 +397,17 @@ public class SentenciasCRUD {
             
             
             
-            
+            return proveedores; 
             
         }catch(SQLException e){
             e.printStackTrace();
+            return null; 
         }   
         
         
+    
+        
+
     }
     
     
