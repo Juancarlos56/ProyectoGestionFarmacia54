@@ -126,6 +126,11 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         jButton2.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Buscar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -524,6 +529,71 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        
+        tabla.setRowCount(0);
+        
+        String sta  = jComboBox1.getSelectedItem().toString();
+        
+        String busqueda = jTextField2.getText();
+        
+        
+        switch (sta){
+            case  "Cedula" :
+                    
+                for (Empleado Empleado : Empleados) {
+            
+
+                        
+                    if(Empleado.getCedula().equals(busqueda)){
+                                
+                        if (Empleado.getCargo() == 'V'){
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+                        }else{
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+                        }
+                            
+                    }
+ 
+                }
+                
+                
+                
+                
+                break;
+            case "Nombre" :
+                
+                for (Empleado Empleado : Empleados) {
+            
+
+                        
+                    if(Empleado.getNombre().equals(busqueda)){
+                                
+                        if (Empleado.getCargo() == 'V'){
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+                        }else{
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+                        }
+                            
+                    }
+ 
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
