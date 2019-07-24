@@ -22,7 +22,7 @@ public class ControladorValidaciones {
     }
 
     public boolean validarExistenciaEmpleado(String username, String cedula){
-        //Floro aqui metodo para validad si existe de dicho empleado;
+        //Floro aqui metodo para validad si existe dicho empleado;
        
         //Metodo para la validacion de cedula
         if (!validarDocumento(cedula)) {

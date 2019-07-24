@@ -93,7 +93,7 @@ public class ControladorCategorias {
         for (int i = 0; i < categorias.size(); i++) {
             if(id == categorias.get(i).getId()){
             return categorias.get(i);
-        }
+            }
         }
        
         return null;

@@ -28,7 +28,7 @@ public class ControladorEmpleados {
         //Esto es solo para prueba
         Empleado e = new Empleado();
         e.setCedula("0106113301");
-        e.setNombre("Juan Carlos");
+        e.setNombre("Carlos");
         return e;
     }
     

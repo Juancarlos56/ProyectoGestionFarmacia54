@@ -17,10 +17,10 @@ public class FacturaDetalle {
     private double precio;
     private double subtotal;
     private double descuento;
-    private ArrayList<Producto> productos;
+    private Producto producto;
 
     public FacturaDetalle() {
-        productos = new ArrayList<>();
+        producto = new Producto();
     }
 
     public int getId() {
@@ -63,14 +63,13 @@ public class FacturaDetalle {
         this.subtotal = subtotal;
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void addProductos(Producto productos) {
-        this.productos.add(productos);
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
-    
     
     public double calcularSubtotal(){
         return 0;

@@ -5,17 +5,61 @@
  */
 package Vista;
 
+import Controlador.ControladorFacturas;
+import Modelo.Categoria;
+import Modelo.FacturaCabecera;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
  */
 public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel modeloFacturas;
+    private ControladorFacturas facturas;
     /**
      * Creates new form InternalVentanaAnularFactura
      */
     public InternalVentanaAnularFactura() {
+        facturas = new ControladorFacturas();
+        modeloFacturas = new DefaultTableModel();
         initComponents();
+        cargarFacturasTabla();
+        
+        
+    }
+    
+    private void cargarFacturasTabla() {
+        
+        ArrayList<Object> columna = new ArrayList<>();
+        columna.add("# Factura");
+        columna.add("Codigo de Factura");
+        columna.add("Fecha de Venta");
+        columna.add("Vendedor");
+        columna.add("Estado de Factura");
+        for (Object columna1 : columna) {
+           modeloFacturas.addColumn(columna1);
+        }
+        tablaFacturas.setModel(modeloFacturas);
+        ArrayList<FacturaCabecera> listfacturas = facturas.obtenerListaFacturas();
+        ArrayList<Object[]>  facturaCab = new ArrayList<>();
+        for (int i = 0; i < listfacturas.size(); i++) {
+            Object[] factCab = new Object[]{i+1, listfacturas.get(i).getId(), listfacturas.get(i).getFechaVenta() , 
+                                                listfacturas.get(i).getEmpleado().getNombre(), listfacturas.get(i).getEstado()};
+            facturaCab.add(factCab);
+        }
+        
+        for (Object[] fac : facturaCab) {
+            modeloFacturas.addRow(fac);
+        }
+        this.tablaFacturas.setModel(modeloFacturas);
+        tablaFacturas.setBackground(new Color(0,102,204));
+        tablaFacturas.setForeground(Color.WHITE);
+        
     }
 
     /**
@@ -30,21 +74,21 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaFacturas = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtCodigoFactura = new javax.swing.JTextField();
+        btnBuscarFactura = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtCodFactDatos = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtFechaVenta = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtNombreVendedor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        txtEstadoFactura = new javax.swing.JTextField();
+        btnAnular = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -58,9 +102,9 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Listado de Facturas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 13))); // NOI18N
 
-        jTable1.setBackground(new java.awt.Color(0, 102, 204));
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaFacturas.setBackground(new java.awt.Color(0, 102, 204));
+        tablaFacturas.setForeground(new java.awt.Color(255, 255, 255));
+        tablaFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -77,11 +121,11 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "# Factura", "Código de Factura", "Fecha de Envío", "Vendedor", "Estado de Factura"
+                "# Factura", "Código de Factura", "Fecha de Venta", "Vendedor", "Estado de Factura"
             }
         ));
-        jTable1.setRowHeight(25);
-        jScrollPane1.setViewportView(jTable1);
+        tablaFacturas.setRowHeight(25);
+        jScrollPane1.setViewportView(tablaFacturas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -106,14 +150,19 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingrese el Código de la Factura: ");
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jTextField1.setToolTipText("");
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtCodigoFactura.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        txtCodigoFactura.setToolTipText("");
+        txtCodigoFactura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 204));
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Buscar");
+        btnBuscarFactura.setBackground(new java.awt.Color(0, 102, 204));
+        btnBuscarFactura.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        btnBuscarFactura.setForeground(new java.awt.Color(255, 255, 255));
+        btnBuscarFactura.setText("Buscar");
+        btnBuscarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarFacturaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -123,9 +172,9 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCodigoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnBuscarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
         jPanel4Layout.setVerticalGroup(
@@ -134,8 +183,8 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodigoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
@@ -145,39 +194,39 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Código de Factura");
 
-        jTextField2.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jTextField2.setToolTipText("");
-        jTextField2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtCodFactDatos.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        txtCodFactDatos.setToolTipText("");
+        txtCodFactDatos.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Fecha de Venta");
 
-        jTextField3.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jTextField3.setToolTipText("");
-        jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtFechaVenta.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        txtFechaVenta.setToolTipText("");
+        txtFechaVenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nombre del Vendedor");
 
-        jTextField4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jTextField4.setToolTipText("");
-        jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtNombreVendedor.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        txtNombreVendedor.setToolTipText("");
+        txtNombreVendedor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Estado de la Factura");
 
-        jTextField5.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jTextField5.setToolTipText("");
-        jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        txtEstadoFactura.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        txtEstadoFactura.setToolTipText("");
+        txtEstadoFactura.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 102, 204));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/anularT.png"))); // NOI18N
-        jButton3.setText("Anular");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnAnular.setBackground(new java.awt.Color(255, 255, 255));
+        btnAnular.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        btnAnular.setForeground(new java.awt.Color(0, 102, 204));
+        btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/anularT.png"))); // NOI18N
+        btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnAnularActionPerformed(evt);
             }
         });
 
@@ -193,26 +242,26 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtEstadoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtCodFactDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel5Layout.createSequentialGroup()
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(121, Short.MAX_VALUE))))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(86, 86, 86)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -221,21 +270,21 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCodFactDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtFechaVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEstadoFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
         );
 
@@ -304,14 +353,45 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_btnAnularActionPerformed
+
+    private void btnBuscarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFacturaActionPerformed
+        int codigo;
+        try {
+            codigo = Integer.parseInt(txtCodigoFactura.getText().trim());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Verifique si ingreso los datos correctamente"
+                    + "\n Recuerde: El formato debe ser numerico", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        txtCodigoFactura.setText("");
+        txtCodFactDatos.setText("");
+        txtEstadoFactura.setText("");
+        txtNombreVendedor.setText("");
+        txtFechaVenta.setText("");
+        FacturaCabecera fact = facturas.buscarFacturaCabecera(codigo);
+        
+        if (fact != null) {
+            txtCodFactDatos.setText(String.valueOf(fact.getId()));
+            if (fact.getEstado() == 'A') {
+                txtEstadoFactura.setText("Anulada");
+            }else if (fact.getEstado() == 'V'){
+                txtEstadoFactura.setText("Valida");
+            }
+            txtNombreVendedor.setText(fact.getEmpleado().getNombre());
+            txtFechaVenta.setText(String.valueOf(fact.getFechaVenta()) );
+        }else{
+            JOptionPane.showMessageDialog(null, "La Factura no Existe", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnBuscarFacturaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnAnular;
+    private javax.swing.JButton btnBuscarFactura;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -324,11 +404,12 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTable tablaFacturas;
+    private javax.swing.JTextField txtCodFactDatos;
+    private javax.swing.JTextField txtCodigoFactura;
+    private javax.swing.JTextField txtEstadoFactura;
+    private javax.swing.JTextField txtFechaVenta;
+    private javax.swing.JTextField txtNombreVendedor;
     // End of variables declaration//GEN-END:variables
+
 }

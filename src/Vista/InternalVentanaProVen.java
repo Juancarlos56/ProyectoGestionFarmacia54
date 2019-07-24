@@ -14,6 +14,7 @@ import Modelo.SubCategoria;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +31,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     private ControladorSubcategorias subcategoria;
     private int idCategoria;
     private int idSubCategoria;
+    private String tipoBusqueda = "jcomboCodigo Barras";
     
     /**
      * Creates new form InternalVentanaProAdmi
@@ -113,7 +115,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscarPor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -178,10 +180,15 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jComboBox1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(0, 102, 204));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Codigo Barras", "Nombre" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtBuscarPor.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txtBuscarPor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtBuscarPor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -189,6 +196,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.setBorder(null);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -200,7 +212,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(142, Short.MAX_VALUE))
@@ -217,7 +229,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(txtBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(29, 29, Short.MAX_VALUE))
         );
 
@@ -482,16 +494,64 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         eliminarRegistroTablaProducto();
         cargarProductosSubCat(idSubCategoria, nombreSubCategoria);
     }//GEN-LAST:event_tablaSubCategoriaMouseClicked
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String seleccionado = jComboBox1.getSelectedItem().toString();
+        
+        if (seleccionado.equalsIgnoreCase("jcomboCodigo Barras")== true) {
+            tipoBusqueda = "jcomboCodigo Barras";
+        }
+        
+        if (seleccionado.equalsIgnoreCase("Nombre") == true) {
+            tipoBusqueda = "jcomboNombre";
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (tipoBusqueda.equalsIgnoreCase("jcomboCodigo Barras")== true) {
+            eliminarRegistroTablaProducto();
+            Producto pro = productos.buscarProductoPorCodBarras(txtBuscarPor.getText().trim());
+            if (pro != null) {
+                ArrayList<Object[]>  prod = new ArrayList<>();
+                Object[] producto = new Object[]{pro.getCodigoBarras(),pro.getNombre(), pro.getStock(),
+                                            pro.getPrecioUnitario(), pro.getIva(), pro.getPctDescuento(),
+                                            pro.getUnidadCompra(), pro.getUnidadVenta()};
+                prod.add(producto);
+
+                for (Object[] pro1 : prod) {
+                    modeloProductos.addRow(pro1);
+                }
+                this.tablaProductos.setModel(modeloProductos);
+            }else{
+                JOptionPane.showMessageDialog(null, "El Producto no Existe", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        
+        if (tipoBusqueda.equalsIgnoreCase("jcomboNombre") == true) {
+            eliminarRegistroTablaProducto();
+            Producto pro = productos.buscarProductoPorNombre(txtBuscarPor.getText().trim());
+            if (pro != null) {
+                ArrayList<Object[]>  prod = new ArrayList<>();
+                Object[] producto = new Object[]{pro.getCodigoBarras(),pro.getNombre(), pro.getStock(),
+                                            pro.getPrecioUnitario(), pro.getIva(), pro.getPctDescuento(),
+                                            pro.getUnidadCompra(), pro.getUnidadVenta()};
+                prod.add(producto);
+
+                for (Object[] pro1 : prod) {
+                    modeloProductos.addRow(pro1);
+                }
+                this.tablaProductos.setModel(modeloProductos);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
     
     private void cargarProductosSubCat(int id, String nombreSubCategoria) {
         ArrayList<Producto> listaProductos = null;
         Categoria cat = categoria.buscarCategoria(idCategoria);
-        
         for (int i = 0; i < cat.getSubcategorias().size(); i++) {
             if (cat.getSubcategorias().get(i).getId() == id) {
                 listaProductos = subcategoria.obtenerProductosSubCategoria(cat.getSubcategorias().get(i));
-        
-            }
+            } 
         }
         
         ArrayList<Object[]>  prod = new ArrayList<>();
@@ -540,11 +600,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTable tablaCategorias;
     private javax.swing.JTable tablaProductos;
     private javax.swing.JTable tablaSubCategoria;
+    private javax.swing.JTextField txtBuscarPor;
     // End of variables declaration//GEN-END:variables
 
 
