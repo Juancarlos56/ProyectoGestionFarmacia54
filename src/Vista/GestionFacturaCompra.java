@@ -722,7 +722,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                         
                             if(producto.getCodigoBarras().equals(busqueda)){
                                 
-                                cedula25.setText(Categoria.getNombreSubCategoria());
+                                cedula25.setText(Categoria.getNombreCategoria());
                                 cedula28.setText(subcategoria.getNombreSubCategoria());
                                 cedula27.setText(producto.getNombre());
                                 cedula31.setText(producto.getCodigoBarras());

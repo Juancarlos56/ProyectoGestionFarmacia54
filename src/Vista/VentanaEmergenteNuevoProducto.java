@@ -37,7 +37,7 @@ public class VentanaEmergenteNuevoProducto extends javax.swing.JFrame {
         
         for (Categoria Categoria : Categorias) {
             
-            jComboBox1.addItem(Categoria.getNombreSubCategoria());
+            jComboBox1.addItem(Categoria.getNombreCategoria());
 
         }
         
@@ -367,7 +367,7 @@ public class VentanaEmergenteNuevoProducto extends javax.swing.JFrame {
         
         for (Categoria Categoria : Categorias) {
             
-            if (Categoria.getNombreSubCategoria().equals(jComboBox1.getSelectedItem().toString())) {
+            if (Categoria.getNombreCategoria().equals(jComboBox1.getSelectedItem().toString())) {
                 for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
                     
                     jComboBox2.addItem(subcategoria.getNombreSubCategoria());

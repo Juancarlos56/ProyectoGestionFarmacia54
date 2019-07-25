@@ -57,9 +57,9 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         
         for (Categoria Categoria : Categorias) {
             
-            jComboBox1.addItem(Categoria.getNombreSubCategoria());
+            jComboBox1.addItem(Categoria.getNombreCategoria());
             
-            if(Categoria.getNombreSubCategoria().equals(categoriaSelec.getNombreSubCategoria())){
+            if(Categoria.getNombreCategoria().equals(categoriaSelec.getNombreCategoria())){
                 
                 cat=Categorias.indexOf(Categoria);
 
@@ -89,7 +89,7 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         jComboBox1.setSelectedIndex(cat);
         for (Categoria Categoria : Categorias) {
             
-            if (Categoria.getNombreSubCategoria().equals(jComboBox1.getSelectedItem().toString())) {
+            if (Categoria.getNombreCategoria().equals(jComboBox1.getSelectedItem().toString())) {
                 for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
                     
                     jComboBox2.addItem(subcategoria.getNombreSubCategoria());
@@ -364,7 +364,7 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         
         for (Categoria Categoria : Categorias) {
             
-            if (Categoria.getNombreSubCategoria().equals(jComboBox1.getSelectedItem().toString())) {
+            if (Categoria.getNombreCategoria().equals(jComboBox1.getSelectedItem().toString())) {
                 for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
                     
                     jComboBox2.addItem(subcategoria.getNombreSubCategoria());

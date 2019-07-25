@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.ControladorEmpleados;
-import Controlador.ControladorValidaciones;
+//import Controlador.ControladorValidaciones;
 import Modelo.Empleado;
 import javax.swing.JOptionPane;
 
@@ -16,13 +16,13 @@ import javax.swing.JOptionPane;
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
-    private ControladorValidaciones validaciones;
+//    private ControladorValidaciones validaciones;
     private ControladorEmpleados empleados;
     /**
      * Creates new form VentanaLogin
      */
     public VentanaLogin() {
-        validaciones = new ControladorValidaciones();
+//        validaciones = new ControladorValidaciones();
         empleados = new ControladorEmpleados();
         initComponents();
     }
@@ -232,7 +232,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
         String username = loginID.getText().trim();
         String passwords = String.copyValueOf(password.getPassword()).trim();
-        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
+/*        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
         if (!validacion) {
             JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
             loginID.setText("");
@@ -243,7 +243,7 @@ public class VentanaLogin extends javax.swing.JFrame {
             VentanaEmpleado ve = new VentanaEmpleado(empleado);
             ve.setVisible(true);
             dispose();
-        }
+        }*/
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 
     private void loginIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginIDActionPerformed

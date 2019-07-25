@@ -135,7 +135,7 @@ public class SentenciasCRUD {
                 Categoria c = new Categoria();
                 
                 c.setId(resultado.getInt("CAT_ID"));
-                c.setNombreSubCategoria(resultado.getString("CAT_NOMBRE"));
+                c.setNombreCategoria(resultado.getString("CAT_NOMBRE"));
                 
                 Categorias.add(c);
                 
