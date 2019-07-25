@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
   <Properties>
     <Property name="closable" type="boolean" value="true"/>
     <Property name="resizable" type="boolean" value="true"/>
@@ -168,6 +168,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextArea1.addKeyListener(new KeyListener(){&#xa; &#xa;            public void keyTyped(KeyEvent e)&#xa; &#xa;            {if (jTextArea1.getText().length()== 100)&#xa; &#xa;                e.consume();&#xa;            }&#xa; &#xa;            public void keyPressed(KeyEvent arg0) {&#xa;            }&#xa; &#xa;            public void keyReleased(KeyEvent arg0) {&#xa;            }&#xa;        });"/>
+                  </AuxValues>
                 </Component>
               </SubComponents>
             </Container>
@@ -1020,6 +1023,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="jTextField6">
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextField6.addKeyListener(new KeyAdapter(){&#xa;            &#xa;            public void keyTyped(KeyEvent e){&#xa;                char caracter = e.getKeyChar();&#xa;&#xa;                    // Verificar si la tecla pulsada no es un digito&#xa;                    if(((caracter &lt; &apos;0&apos;) ||(caracter &gt; &apos;9&apos;)) &amp;&amp; (caracter != &apos;\b&apos; /*corresponde a BACK_SPACE*/)){&#xa;                        e.consume();  // ignorar el evento de teclado&#xa;                    }&#xa;            }&#xa;        });"/>
+              </AuxValues>
             </Component>
             <Component class="javax.swing.JButton" name="jButton5">
               <Properties>
@@ -1031,6 +1037,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Guardar Compra"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton5MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

@@ -5,6 +5,11 @@
  */
 package Vista;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
 import Controlador.ControladorCategorias;
 import Controlador.ControladorProveedores;
 import Modelo.Categoria;
@@ -12,6 +17,7 @@ import Modelo.Producto;
 import Modelo.Proveedor;
 import Modelo.SubCategoria;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +32,9 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     Categoria categoriaSelec;
     SubCategoria subCategoriaSelec;
     Producto productoSelec;
+    
+    boolean p;
+    Proveedor proveedorSelec;
     
     Controlador.ControladorCategorias c;
     Controlador.ControladorProveedores cp ;
@@ -117,6 +126,21 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jTextArea1.setRows(5);
         jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Ingrese Razón"));
         jScrollPane1.setViewportView(jTextArea1);
+        jTextArea1.addKeyListener(new KeyListener(){
+
+            public void keyTyped(KeyEvent e)
+
+            {if (jTextArea1.getText().length()== 100)
+
+                e.consume();
+            }
+
+            public void keyPressed(KeyEvent arg0) {
+            }
+
+            public void keyReleased(KeyEvent arg0) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -542,6 +566,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         jButton5.setText("Guardar Compra");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -570,6 +599,18 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
+
+        jTextField6.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -612,7 +653,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 659, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -639,8 +680,25 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(null,null,null);
+
+
+        cedula25.setText("");
+        cedula28.setText("");
+        cedula27.setText("");
+        cedula31.setText("");
+        cedula30.setText("");
+        cedula33.setText("");
+        cedula32.setText("");
+        cedula34.setText("");
+        jTextField5.setText("");
+
+
+        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
         veap.setVisible(true);
+        
+        
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void buscar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar4MouseClicked
@@ -672,6 +730,12 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                                 cedula33.setText(Double.toString( producto.getPrecioUnitario()));
                                 cedula32.setText(producto.getUnidadCompra());
                                 cedula34.setText(producto.getUnidadVenta());
+                                
+                                categoriaSelec = Categoria;
+                                subCategoriaSelec = subcategoria;
+                                productoSelec = producto;
+                                
+                                
                             
                             }
                         }
@@ -731,6 +795,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                         cedula.setText(Proveedor.getApellido());
                         telefono.setText(Proveedor.getRuc());
                         
+                        proveedorSelec = Proveedor;
                         
                     }
             
@@ -750,7 +815,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                         cedula.setText(Proveedor.getApellido());
                         telefono.setText(Proveedor.getRuc());
                         
-                        
+                        proveedorSelec = Proveedor;
                         
                     }
   
@@ -764,6 +829,41 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_buscarMouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        p=false;
+        
+        if(proveedorSelec == null || categoriaSelec== null || subCategoriaSelec== null || productoSelec== null ){
+            
+            JOptionPane.showMessageDialog(null, "Por favor Terminar la selecion");   
+            p=true; 
+        }else if (jTextArea1.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Por favor Ingrese una Razón de Adquisición");   
+            p=true; 
+            
+        }else if (jTextField6.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Por favor Ingrese el monto a comprar");   
+            p=true; 
+            
+        }
+        
+        
+        if(p==false){
+            
+            c.crearCompra( proveedorSelec, categoriaSelec,subCategoriaSelec,productoSelec,jTextArea1.getText(),jTextField6.getText());
+
+            dispose();
+        }
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

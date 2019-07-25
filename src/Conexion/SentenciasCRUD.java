@@ -447,15 +447,21 @@ public class SentenciasCRUD {
         
         try{
             
-            busqueda = con.getConexion().prepareStatement("select CSU_ID from PFC_SUB_CATEGORIAS where CSU_NOMBRE = ? ");
+            busqueda = con.getConexion().prepareStatement("select s.CSU_ID\n" +
+                                                            "from PFC_SUB_CATEGORIAS s,PFC_CATEGORIAS c\n" +
+                                                            "where s.CAT_ID = c.CAT_ID\n" +
+                                                            "and s.CSU_NOMBRE = ? \n" +
+                                                            "and c.CAT_NOMBRE = ?");
             busqueda.setString(1, subcategoria);
+            busqueda.setString(2, categoria);
             
             resultadobusc = busqueda.executeQuery();
             int subC=0;
             
             while (resultadobusc.next()){
-                
-                subC = resultadobusc.getInt("CSU_ID");
+
+                System.out.println(subC);
+            
             }
             
             
@@ -491,6 +497,121 @@ public class SentenciasCRUD {
         
         
         
+    }
+
+    public void editarProducto(Conexion con,String eCodigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        
+        try{
+            
+            busqueda = con.getConexion().prepareStatement("select s.CSU_ID\n" +
+                                                            "from PFC_SUB_CATEGORIAS s,PFC_CATEGORIAS c\n" +
+                                                            "where s.CAT_ID = c.CAT_ID\n" +
+                                                            "and s.CSU_NOMBRE = ? \n" +
+                                                            "and c.CAT_NOMBRE = ?");
+            busqueda.setString(1, subcategoria);
+            busqueda.setString(2, categoria);
+            
+            resultadobusc = busqueda.executeQuery();
+            int subC=0;
+            
+            while (resultadobusc.next()){
+                
+                subC = resultadobusc.getInt("CSU_ID");
+            
+            }
+            
+            
+            
+            sentencia= con.getConexion().prepareStatement("UPDATE PFC_PRODUCTOS \n" +
+                                                            "SET PRO_NOMBRE = ? ,PRO_PRECIO_UNITARIO= ? ,PRO_PORCENTAJE_DESCUENTO= ? "
+                    + "                                     ,PRO_UNIDAD_COMPRA= ? ,PRO_UNIDAD_VENTA= ? ,PRO_IVA = ?"
+                    + "                                     ,CSU_ID= ? \n" +
+                                                            "WHERE PRO_CODIGO_BARRAS = ? ");
+            
+            sentencia.setString(1, nombre);
+            sentencia.setDouble(2, Double.parseDouble(precioUnitario));
+            sentencia.setDouble(3, Double.parseDouble(descuento));
+            sentencia.setString(4, unidadCompra);
+            sentencia.setString(5, unidadVenta);
+            sentencia.setString(6, iva);
+            sentencia.setInt(7, subC);
+            
+            sentencia.setString(8, eCodigoBarras);
+            
+                        
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    
+    
+    
+    
+    }
+
+    public void editarProducto(Conexion con, Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
+        
+        try{
+            
+            //Stableciendo proveedor
+            String nombreApellido = proveedorSelec.getNombre() +" "+proveedorSelec.getApellido();
+            
+            
+            busqueda = con.getConexion().prepareStatement("select PRV_ID \n" +
+                                                            "from PFC_PROVEEDORES\n" +
+                                                            "where PRV_NOMBRE = ? ");
+            busqueda.setString(1,  nombreApellido);
+            
+            resultadobusc = busqueda.executeQuery();
+            int provId=0;
+            
+            while (resultadobusc.next()){
+                
+                provId = resultadobusc.getInt("PRV_ID");
+            
+            }
+            
+            
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_FACTURAS_COMPRAS VALUES(fco_id_seq.NEXTVAL, ? , ?, ?)");
+            
+            sentencia.setString(1, razon);
+            sentencia.setInt(2, provId);
+            sentencia.setString(3, productoSelec.getCodigoBarras());
+            sentencia.executeUpdate();
+            con.getConexion().commit();
+            
+            
+            
+            //Aumentando Stock
+            sentencia= con.getConexion().prepareStatement("UPDATE PFC_PRODUCTOS \n" +
+                                                            "SET PRO_STOCK = PRO_STOCK + ? \n" +
+                                                            "WHERE PRO_CODIGO_BARRAS = ? ");
+            
+            sentencia.setInt(1, Integer.parseInt(monto));
+            sentencia.setString(2, productoSelec.getCodigoBarras());
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+            
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+    
     }
     
     

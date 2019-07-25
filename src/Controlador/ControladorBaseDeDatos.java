@@ -9,7 +9,9 @@ import Conexion.Conexion;
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
 import Modelo.Empleado;
+import Modelo.Producto;
 import Modelo.Proveedor;
+import Modelo.SubCategoria;
 import java.util.ArrayList;
 
 /**
@@ -142,6 +144,30 @@ public class ControladorBaseDeDatos {
         }
         
         
+    }
+
+    void editarProducto(String ecodigoBarras,String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.editarProducto(con,ecodigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+            
+            con.cerrarConexion();
+        }
+    
+    }
+
+    void crearCompra(Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.editarProducto(con,proveedorSelec, categoriaSelec, subCategoriaSelec,  productoSelec, razon ,  monto);
+            
+            con.cerrarConexion();
+        }
+    
     }
     
     
