@@ -6,6 +6,11 @@
 package Controlador;
 
 import Modelo.Categoria;
+import Modelo.Producto;
+
+import Modelo.Proveedor;
+
+import Modelo.SubCategoria;
 import java.util.ArrayList;
 
 /**
@@ -14,6 +19,7 @@ import java.util.ArrayList;
  */
 public class ControladorCategorias {
     
+
     private ArrayList<Categoria> categorias;
     
     private ControladorBaseDeDatos cb;
@@ -43,5 +49,27 @@ public class ControladorCategorias {
         
         
     }
+
+    public void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+                                  
+        
+        cb.crearProducto(codigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+    
+    }
+
+    public void editarProducto(String ecodigoBarras,String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        
+        cb.editarProducto(ecodigoBarras,nombre,  precioUnitario, unidadCompra, unidadVenta,  iva,  descuento,  categoria, subcategoria);
+    }
+
+    
+    public void crearCompra(Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
+        
+        cb.crearCompra(proveedorSelec, categoriaSelec, subCategoriaSelec,  productoSelec, razon ,  monto);
+    
+    }
+
+
+
     
 }

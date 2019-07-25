@@ -5,16 +5,25 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleados;
+import Controlador.ControladorValidaciones;
+import Modelo.Empleado;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
+    private ControladorValidaciones validaciones;
+    private ControladorEmpleados empleados;
     /**
      * Creates new form VentanaLogin
      */
     public VentanaLogin() {
+        validaciones = new ControladorValidaciones();
+        empleados = new ControladorEmpleados();
         initComponents();
     }
 
@@ -221,13 +230,20 @@ public class VentanaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
-        System.out.println("Esto pasa "+loginID.getText());
-        
-        
-        
-        VentanaEmpleado ve = new VentanaEmpleado();
-        ve.setVisible(true);
-        dispose();
+        String username = loginID.getText().trim();
+        String passwords = String.copyValueOf(password.getPassword()).trim();
+        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
+        if (!validacion) {
+            JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            loginID.setText("");
+            password.setText("");
+            
+        }else{
+            Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
+            VentanaEmpleado ve = new VentanaEmpleado(empleado);
+            ve.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 
     private void loginIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginIDActionPerformed
@@ -249,9 +265,6 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inicioAdmiActionPerformed
 
     private void inicioAdmiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioAdmiMouseClicked
-       
-        System.out.println("evento joderrrrr macho ");
-        
         VentanaAdministradorLogin val = new VentanaAdministradorLogin();
         val.setVisible(true);
         dispose();

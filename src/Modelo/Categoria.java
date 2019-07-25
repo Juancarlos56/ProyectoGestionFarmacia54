@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class Categoria {
     private int id;
-    private String nombreSubCategoria;
+    private String nombreCategoria;
     private ArrayList<SubCategoria> subcategorias;
 
     public Categoria() {
@@ -28,12 +28,12 @@ public class Categoria {
         this.id = id;
     }
 
-    public String getNombreSubCategoria() {
-        return nombreSubCategoria;
+    public String getNombreCategoria() {
+        return nombreCategoria;
     }
 
-    public void setNombreSubCategoria(String nombreSubCategoria) {
-        this.nombreSubCategoria = nombreSubCategoria;
+    public void setNombreCategoria(String nombreSubCategoria) {
+        this.nombreCategoria = nombreSubCategoria;
     }
 
     public ArrayList<SubCategoria> getSubcategorias() {

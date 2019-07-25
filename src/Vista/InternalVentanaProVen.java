@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Vista;
+
 import Controlador.ControladorCategorias;
 import Modelo.Categoria;
 import Modelo.Producto;
@@ -11,12 +12,23 @@ import Modelo.SubCategoria;
 import java.util.ArrayList;
 //import static Vista.Principal.Categorias;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
  */
 public class InternalVentanaProVen extends javax.swing.JInternalFrame {
 
+    private DefaultTableModel categoriasPro;
+    private DefaultTableModel subCategoriasPro;
+    private DefaultTableModel modeloProductos;
+    private ControladorProductos productos;
+    private ControladorCategorias categoria;
+    private ControladorSubcategorias subcategoria;
+    private int idCategoria;
+    private int idSubCategoria;
+    private String tipoBusqueda = "jcomboCodigo Barras";
+    
     /**
      * Creates new form InternalVentanaProAdmi
      */
@@ -27,7 +39,15 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     DefaultTableModel tabla3;
     
     public InternalVentanaProVen() {
+        productos = new ControladorProductos();
+        categoria = new ControladorCategorias();
+        subcategoria = new ControladorSubcategorias();
+        categoriasPro = new DefaultTableModel();
+        subCategoriasPro = new DefaultTableModel();
+        modeloProductos = new DefaultTableModel();
+        
         initComponents();
+
         tabla = (DefaultTableModel) jTable1.getModel();
         tabla2 = (DefaultTableModel) jTable5.getModel();
         tabla3 = (DefaultTableModel) jTable2.getModel();
@@ -44,8 +64,61 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         }
         
         
+
     }
 
+    public void cargarCategorias(){
+        
+        ArrayList<Object> columna = new ArrayList<>();
+        columna.add("ID");
+        columna.add("Nombre de la Categoria");
+        
+        for (Object columna1 : columna) {
+           categoriasPro.addColumn(columna1);
+        }
+        tablaCategorias.setModel(categoriasPro);
+        ArrayList<Categoria> categorias = categoria.obtenerCategorias();
+        ArrayList<Object[]>  cat = new ArrayList<>();
+        for (int i = 0; i < categorias.size(); i++) {
+            Object[] categoria1 = new Object[]{categorias.get(i).getId(), categorias.get(i).getNombreCategoria()};
+            cat.add(categoria1);
+        }
+        
+        for (Object[] cat1 : cat) {
+            categoriasPro.addRow(cat1);
+        }
+        this.tablaCategorias.setModel(categoriasPro);
+        tablaCategorias.setBackground(new Color(0,102,204));
+        tablaCategorias.setForeground(Color.WHITE);
+        
+        //Cargar las tablas para los datos de Subcategoria
+        ArrayList<Object> columna2 = new ArrayList<>();
+        columna2.add("ID");
+        columna2.add("Nombre de la Subcategoria");
+        
+        for (Object columna1 : columna2) {
+           subCategoriasPro.addColumn(columna1);
+        }
+        tablaSubCategoria.setModel(subCategoriasPro);
+        
+        //Cargar las tablas para los productos
+        ArrayList<Object> columna3 = new ArrayList<>();
+        columna3.add("Codigo de Barras");
+        columna3.add("Nombre");
+        columna3.add("Stock");
+        columna3.add("Precio Unitario");
+        columna3.add("Iva");
+        columna3.add("pct.Descuento");
+        columna3.add("Unidad de Compra");
+        columna3.add("Unidad de Venta");
+        
+        for (Object columna1 : columna3) {
+           modeloProductos.addColumn(columna1);
+        }
+        tablaProductos.setModel(modeloProductos);
+        
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -61,18 +134,18 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jTextField1 = new javax.swing.JTextField();
+        txtBuscarPor = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaCategorias = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tablaSubCategoria = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setClosable(true);
@@ -126,10 +199,15 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jComboBox1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jComboBox1.setForeground(new java.awt.Color(0, 102, 204));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Codigo Barras", "Nombre" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        txtBuscarPor.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txtBuscarPor.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtBuscarPor.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -137,9 +215,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.setBorder(null);
+
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+
             }
         });
 
@@ -153,15 +233,15 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -170,19 +250,24 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                         .addGap(2, 2, 2)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(26, 26, Short.MAX_VALUE))
+                            .addComponent(txtBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(29, 29, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Categorias", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 12))); // NOI18N
 
         jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane2MouseClicked(evt);
+            }
+        });
 
-        jTable1.setBackground(new java.awt.Color(0, 102, 204));
-        jTable1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaCategorias.setBackground(new java.awt.Color(0, 102, 204));
+        tablaCategorias.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        tablaCategorias.setForeground(new java.awt.Color(255, 255, 255));
+        tablaCategorias.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -205,6 +290,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+
         jTable1.setToolTipText("");
         jTable1.setRowHeight(25);
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,20 +300,21 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -236,10 +323,10 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
 
         jScrollPane6.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable5.setBackground(new java.awt.Color(0, 102, 204));
-        jTable5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTable5.setForeground(new java.awt.Color(255, 255, 255));
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tablaSubCategoria.setBackground(new java.awt.Color(0, 102, 204));
+        tablaSubCategoria.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        tablaSubCategoria.setForeground(new java.awt.Color(255, 255, 255));
+        tablaSubCategoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -262,6 +349,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+
         jTable5.setToolTipText("");
         jTable5.setRowHeight(25);
         jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -270,6 +358,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane6.setViewportView(jTable5);
+
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -284,7 +373,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -296,22 +385,24 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable2.setBackground(new java.awt.Color(0, 102, 204));
-        jTable2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jTable2.setForeground(new java.awt.Color(255, 255, 255));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setBackground(new java.awt.Color(0, 102, 204));
+        tablaProductos.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        tablaProductos.setForeground(new java.awt.Color(255, 255, 255));
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+
+
 
             },
             new String [] {
-                "Codigo de Barras", "Categoria", "SubCategoria", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
+                "Codigo de Barras", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -322,9 +413,9 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setToolTipText("");
-        jTable2.setRowHeight(25);
-        jScrollPane1.setViewportView(jTable2);
+        tablaProductos.setToolTipText("");
+        tablaProductos.setRowHeight(25);
+        jScrollPane1.setViewportView(tablaProductos);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -348,10 +439,10 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -362,9 +453,11 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -393,6 +486,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
+
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
@@ -523,6 +617,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1MouseClicked
 
 
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;
@@ -537,10 +632,13 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tablaCategorias;
+    private javax.swing.JTable tablaProductos;
+    private javax.swing.JTable tablaSubCategoria;
+    private javax.swing.JTextField txtBuscarPor;
     // End of variables declaration//GEN-END:variables
+
+
+    
 }

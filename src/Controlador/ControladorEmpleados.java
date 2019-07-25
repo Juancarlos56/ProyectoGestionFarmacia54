@@ -6,7 +6,9 @@
 package Controlador;
 
 import Modelo.Empleado;
+
 import java.util.ArrayList;
+
 
 /**
  *
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 public class ControladorEmpleados {
     
     
+
     private ArrayList<Empleado> empleados;
     
     private ControladorBaseDeDatos cb;
@@ -41,6 +44,7 @@ public class ControladorEmpleados {
         empleados = c;
         
         
+
     }
     
 }
