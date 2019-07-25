@@ -117,6 +117,32 @@ public class ControladorBaseDeDatos {
         return proveedores;
         
     }
+
+    void crearProveedor(String text, String text0, String text1) {
+        
+        con.conectar();
+        if(con.getConexion() !=null){
+            
+            s.crearProveedores(con,text,text0,text1);
+            
+            con.cerrarConexion();
+        }
+        
+        
+    }
+
+    void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        
+        con.conectar();
+        if(con.getConexion() !=null){
+            
+            s.crearProducto(con,codigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+            
+            con.cerrarConexion();
+        }
+        
+        
+    }
     
     
     

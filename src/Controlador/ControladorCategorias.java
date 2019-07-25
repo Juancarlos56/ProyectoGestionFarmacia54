@@ -43,5 +43,14 @@ public class ControladorCategorias {
         
         
     }
+
+    public void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+                                  
+        
+        cb.crearProducto(codigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+    
+    }
+
+
     
 }

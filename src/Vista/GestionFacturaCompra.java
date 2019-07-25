@@ -27,20 +27,19 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     SubCategoria subCategoriaSelec;
     Producto productoSelec;
     
-    
+    Controlador.ControladorCategorias c;
+    Controlador.ControladorProveedores cp ;
     ArrayList<Proveedor> Proveedores= new ArrayList();
     ArrayList<Categoria> Categorias= new ArrayList();
     
     
     public GestionFacturaCompra() {
         initComponents();
-        Controlador.ControladorCategorias c = new ControladorCategorias();
-        c.cargarCategorias();
-        Categorias = c.getCategorias();
+        c= new ControladorCategorias();
         
-        Controlador.ControladorProveedores cp = new ControladorProveedores();
-        cp.cargarProveedores();
-        Proveedores = cp.getProveedores();
+        
+        cp= new ControladorProveedores();
+        
         
         
     }
@@ -646,6 +645,8 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
 
     private void buscar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar4MouseClicked
         
+        c.cargarCategorias();
+        Categorias = c.getCategorias();
         
         String sta  = jComboBox5.getSelectedItem().toString();
         
@@ -707,6 +708,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_buscar4MouseClicked
 
     private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+
+        
+        
+        cp.cargarProveedores();
+        Proveedores = cp.getProveedores();
         
         String sta  = jComboBox1.getSelectedItem().toString();
         

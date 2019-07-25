@@ -23,7 +23,7 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
      * Creates new form VentenaEmergenteProveedor
      */
     Controlador.ControladorProveedores cp ;
-    Boolean p=true;
+    Boolean p;
     ArrayList<Proveedor> Proveedores= new ArrayList();
     public VentanaEmergenteProveedor() {
         initComponents();
@@ -229,7 +229,7 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
 
     private void agregarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarClienteMouseClicked
 
-        p=true;
+        p=false;
         
         if(nombre.getText().isEmpty() || cedula.getText().isEmpty() || telefono.getText().isEmpty()){
             
@@ -251,6 +251,7 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
         
         
         if(p==false){
+            
             cp.crearProveedor(nombre.getText(), cedula.getText(),telefono.getText());
             dispose();
         

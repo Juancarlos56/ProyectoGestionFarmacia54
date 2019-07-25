@@ -29,8 +29,10 @@ import java.util.ArrayList;
  */
 public class SentenciasCRUD {
     private ResultSet resultado = null;
+    private ResultSet resultadobusc = null;
     private PreparedStatement sentencia = null;
-
+    private PreparedStatement busqueda = null;
+    
     ArrayList<Categoria> Categorias= new ArrayList();
     
     ArrayList<Empleado> Empleados= new ArrayList();
@@ -408,6 +410,87 @@ public class SentenciasCRUD {
     
         
 
+    }
+
+    public void crearProveedores(Conexion con, String text, String text0, String text1) {
+        
+        try{
+            
+            String nombreApellido = text +" "+text0;
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_PROVEEDORES VALUES(prv_id_seq.NEXTVAL, ?,?)");
+            
+            sentencia.setString(1, nombreApellido);
+            sentencia.setString(2, text1);
+            
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    
+    
+    
+    
+    
+    }
+
+    public void crearProducto(Conexion con, String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        
+        try{
+            
+            busqueda = con.getConexion().prepareStatement("select CSU_ID from PFC_SUB_CATEGORIAS where CSU_NOMBRE = ? ");
+            busqueda.setString(1, subcategoria);
+            
+            resultadobusc = busqueda.executeQuery();
+            int subC=0;
+            
+            while (resultadobusc.next()){
+                
+                subC = resultadobusc.getInt("CSU_ID");
+            }
+            
+            
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_PRODUCTOS VALUES(? , ? , ? , ?, ?, ?, 'E', ? , 0, 'A', ?)");
+            
+            sentencia.setString(1, codigoBarras);
+            sentencia.setString(2, nombre);
+            sentencia.setDouble(3, Double.parseDouble(precioUnitario));
+            sentencia.setDouble(4, Double.parseDouble(descuento));
+            sentencia.setString(5, unidadCompra);
+            sentencia.setString(6, unidadVenta);
+            sentencia.setString(7, iva);
+            sentencia.setInt(8, subC);
+            
+            
+            
+            
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        
+        
+        
+        
     }
     
     
