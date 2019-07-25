@@ -5,8 +5,8 @@
  */
 package Vista;
 
-import Controlador.ControlCliente;
-import Controlador.ValidarCedula;
+
+import Controlador.ControladorValidaciones;
 import Modelo.Cliente;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -23,9 +23,10 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
      */
     
     
-    
+    Controlador.ControladorValidaciones v;
     public VentanaEmergenteCliente() {
         initComponents();
+        v= new ControladorValidaciones();
         setLocationRelativeTo(null);
     }
 
@@ -293,7 +294,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
 
         //Validacion de cedula
-        Boolean Pol = ValidarCedula.validarDocumento(cedula.getText());
+        Boolean Pol = v.validarDocumento(cedula.getText());
         
         /*if ((nombre.getText().equals("")) || (apellido.getText().equals("")) || (cedula.getText().equals("")) || (telefono.getText().equals("")) || (celular.getText().equals(""))) {
             JOptionPane.showMessageDialog(null,"Existen Campos Vacios");

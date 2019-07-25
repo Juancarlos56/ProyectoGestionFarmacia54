@@ -390,6 +390,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Eliminar Vendedor"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -593,6 +596,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextField10.addKeyListener(new KeyAdapter(){&#xa;            &#xa;            public void keyTyped(KeyEvent e){&#xa;                char caracter = e.getKeyChar();&#xa;&#xa;                    // Verificar si la tecla pulsada no es un digito&#xa;                    if(((caracter != &apos;V&apos; ) &amp;&amp; (caracter != &apos;D&apos; ))  ){&#xa;                        e.consume();  // ignorar el evento de teclado&#xa;                    }&#xa;            }&#xa;        });"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>
@@ -734,6 +740,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Agregar Nuevo Vendedor"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton1MouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

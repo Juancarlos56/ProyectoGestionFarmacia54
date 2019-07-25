@@ -617,6 +617,87 @@ public class SentenciasCRUD {
         
     
     }
+
+    public void crearEmpleado(Conexion con, String nombre, String apellido, String cedula, String cargo) {
+       
+        try{
+            
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_EMPLEADOS VALUES(emp_id_seq.NEXTVAL, ? , ? , ? , ? , 'A')");
+            
+            sentencia.setString(1, cargo);
+            sentencia.setString(2, nombre);
+            sentencia.setString(3, apellido);
+            sentencia.setString(4, cedula);
+            
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    
+    }
+
+    public void editarEmpleado(Conexion con, String nombre, String apellido, String cedula, String cargo) {
+        try{
+            
+            
+            sentencia= con.getConexion().prepareStatement("UPDATE PFC_EMPLEADOS " +
+                                                            "SET EMP_NOMBRE = ? , EMP_APELLIDO = ? ,EMP_CARGO = ? " +
+                                                            "WHERE EMP_CEDULA =  ? ");
+            
+            sentencia.setString(1, nombre);
+            sentencia.setString(2, apellido);
+            sentencia.setString(3, cargo);
+            sentencia.setString(4, cedula);
+            
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void despEmpleado(Conexion con, String nombre, String apellido, String cedula) {
+        try{
+            
+            
+            sentencia= con.getConexion().prepareStatement("UPDATE PFC_EMPLEADOS " +
+                                                            "SET EMP_CARGO = 'D' " +
+                                                            "WHERE EMP_CEDULA =  ? ");
+            
+            sentencia.setString(1, cedula);
+            
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     
     

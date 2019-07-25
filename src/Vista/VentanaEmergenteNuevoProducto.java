@@ -264,6 +264,18 @@ public class VentanaEmergenteNuevoProducto extends javax.swing.JFrame {
             public void keyReleased(KeyEvent arg0) {
             }
         });
+
+        jTextField11.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter != 'S' ) &&  (caracter != 'N' ))  ){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
         jTextField12.addKeyListener(new KeyAdapter(){
 
             public void keyTyped(KeyEvent e){

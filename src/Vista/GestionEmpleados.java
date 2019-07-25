@@ -7,9 +7,15 @@ package Vista;
 
 import Controlador.ControladorCategorias;
 import Controlador.ControladorEmpleados;
+import Controlador.ControladorValidaciones;
 import Modelo.Empleado;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 //import static Vista.Principal.Empleados;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,15 +32,19 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     
     ArrayList<Empleado> Empleados= new ArrayList();
     
+    Controlador.ControladorEmpleados c ;
+    Controlador.ControladorValidaciones v;
     
-    
-    Empleado EmpleadoSelecionado;
+    Boolean p;
+    Boolean Pol;
+    Empleado empleadoSelecionado;
     DefaultTableModel tabla;
     public GestionEmpleados() throws IOException {
         initComponents();
         
-        
-        Controlador.ControladorEmpleados c = new ControladorEmpleados();
+        v= new ControladorValidaciones();
+        c= new ControladorEmpleados();
+        //Este de aqui abajo
         c.cargarEmpleados();
         Empleados = c.getEmpleados();
         
@@ -208,6 +218,11 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         jButton4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Eliminar Vendedor");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -360,6 +375,18 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jTextField10.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter != 'V' ) && (caracter != 'D' ))  ){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+
         jPanel8.setBackground(new java.awt.Color(255, 255, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Listado de Vendedores"));
 
@@ -410,6 +437,11 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/newVend.png"))); // NOI18N
         jButton1.setText("Agregar Nuevo Vendedor");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -474,9 +506,29 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+
+        jTextField3.setText("");
+        jTextField4.setText("");
+        jTextField5.setText("");
+        jTextField6.setText("");
         
-        VentanaEmergenteEmpleado vee = new VentanaEmergenteEmpleado(EmpleadoSelecionado);
-        vee.setVisible(true);
+        if (empleadoSelecionado== null ){
+            JOptionPane.showMessageDialog(null, "Por favor seleccionar a un empleado");   
+        
+        }else{
+        
+        
+            VentanaEmergenteEmpleado vee = null;
+            try {
+                vee = new VentanaEmergenteEmpleado(empleadoSelecionado);
+            } catch (IOException ex) {
+                Logger.getLogger(GestionEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            vee.setVisible(true);
+        }
+        
+        
+        
     }//GEN-LAST:event_jButton3ActionPerformed
 
 
@@ -503,7 +555,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
                     jTextField6.setText("Despedido");
                 }
                 
-                EmpleadoSelecionado=Empleado;
+                empleadoSelecionado=Empleado;
                 
                 }   
             
@@ -576,6 +628,132 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         
         
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        
+        Pol =v.validarDocumento(jTextField9.getText());
+        System.out.println(Pol);
+        p=false;
+        
+        
+        // nombre                             Apellido                            Cedula                            Cargo
+        if(jTextField7.getText().isEmpty() || jTextField8.getText().isEmpty() || jTextField9.getText().isEmpty() ||jTextField10.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Por favor Rellenar Los campos");   
+            p=true;
+            
+        }else if (Pol == false){
+            
+            
+            JOptionPane.showMessageDialog(null, "La cedula ingresada no es valida");   
+            p=true;
+            
+            }else{
+            
+            
+            for (Empleado Empleado : Empleados) {
+                        
+                if(Empleado.getCedula().equals(jTextField9.getText())){
+                    JOptionPane.showMessageDialog(null, "La cedula ingresada ya existe ya Existe");   
+                        p=true;
+                                
+                }
+  
+            }
+            
+            
+        }
+        
+        
+        
+        if(p==false){
+            
+            c.crearEmpleado(jTextField7.getText(), jTextField8.getText(), jTextField9.getText(),jTextField10.getText());
+        }
+        
+        c.clearEmpleados();
+        
+        try {
+                c.cargarEmpleados();
+            } catch (IOException ex) {
+                Logger.getLogger(GestionEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
+        tabla.setRowCount(0);
+        
+        
+        Empleados = c.getEmpleados();  
+        for (Empleado Empleado : Empleados) {
+            
+            if (Empleado.getCargo() == 'V'){
+                tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+            }else{
+                tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+            }
+            
+            }
+        jTextField7.setText("");
+        jTextField8.setText("");
+        jTextField9.setText("");
+        jTextField10.setText("");
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        
+        
+        
+        if (empleadoSelecionado== null ){
+            JOptionPane.showMessageDialog(null, "Por favor seleccionar a un empleado");   
+        
+        }else if(empleadoSelecionado.getCargo() == 'D' ){
+            JOptionPane.showMessageDialog(null, "La persona seleccionada ya a sido desempleada");   
+        }else{
+            
+            int conf;
+            conf = JOptionPane.showConfirmDialog(null,"Confirmar Despido","Confirmar" , JOptionPane.YES_NO_OPTION);     
+            if (conf==JOptionPane.YES_OPTION){
+                c.despEmpleado(empleadoSelecionado.getNombre(),empleadoSelecionado.getApellido(),empleadoSelecionado.getCedula());
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText("");
+                jTextField6.setText("");
+                
+                c.clearEmpleados();
+                try {
+                    c.cargarEmpleados();
+                } catch (IOException ex) {
+                    Logger.getLogger(GestionEmpleados.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        
+                tabla.setRowCount(0);
+        
+        
+                Empleados = c.getEmpleados();  
+                for (Empleado Empleado : Empleados) {
+            
+                    if (Empleado.getCargo() == 'V'){
+                        tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+                    }else{
+                        tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+                    }
+            
+                }
+            }
+        
+        }
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
 
 
