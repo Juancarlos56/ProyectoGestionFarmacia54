@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.ControladorEmpleados;
-//import Controlador.ControladorValidaciones;
+import Controlador.ControladorValidaciones;
 import Modelo.Empleado;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
-//    private ControladorValidaciones validaciones;
+    private ControladorValidaciones validaciones;
     private ControladorEmpleados empleados;
     /**
      * Creates new form VentanaLogin

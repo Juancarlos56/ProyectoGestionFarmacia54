@@ -10,8 +10,7 @@ import Modelo.Categoria;
 import Modelo.Producto;
 import Modelo.SubCategoria;
 import java.util.ArrayList;
-//import static Vista.Principal.Categorias;
-
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,7 +31,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     DefaultTableModel tabla;
     DefaultTableModel tabla2;
     DefaultTableModel tabla3;
-    
     public GestionProductos() {
         initComponents();
         
@@ -53,9 +51,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
             tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreCategoria()});
             
         }
-        
-        
-        
     }
 
     /**
@@ -67,7 +62,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -79,6 +73,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -96,8 +91,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTextField12 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
@@ -111,9 +104,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jPanel10 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("Unidad de Compra");
 
         setClosable(true);
         setMaximizable(true);
@@ -178,99 +168,83 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Código de Barras");
-        jPanel3.add(jLabel4);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nombre");
-        jPanel3.add(jLabel5);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Precio Unitario");
-        jPanel3.add(jLabel6);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Unidad de Venta");
-        jPanel3.add(jLabel7);
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("Unidad de Compra");
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Porcentaje de Descuento");
-        jPanel3.add(jLabel9);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Iva");
-        jPanel3.add(jLabel10);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Stock");
-        jPanel3.add(jLabel11);
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Categoría");
-        jPanel3.add(jLabel12);
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("SubCategoría");
-        jPanel3.add(jLabel13);
 
         jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField3.setToolTipText("");
         jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField3);
 
         jTextField4.setEditable(false);
         jTextField4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField4.setToolTipText("");
         jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField4);
 
         jTextField5.setEditable(false);
         jTextField5.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField5.setToolTipText("");
         jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField5);
 
         jTextField6.setEditable(false);
         jTextField6.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField6.setToolTipText("");
         jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField6);
 
         jTextField7.setEditable(false);
         jTextField7.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField7.setToolTipText("");
         jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField7);
 
         jTextField8.setEditable(false);
         jTextField8.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField8.setToolTipText("");
         jTextField8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField8);
 
         jTextField9.setEditable(false);
         jTextField9.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField9.setToolTipText("");
         jTextField9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField9);
 
         jTextField10.setEditable(false);
         jTextField10.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField10.setToolTipText("");
         jTextField10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField10);
 
         jTextField11.setEditable(false);
         jTextField11.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField11.setToolTipText("");
         jTextField11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField11);
 
         jTextField12.setEditable(false);
         jTextField12.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField12.setToolTipText("");
         jTextField12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
-        jPanel3.add(jTextField12);
 
         jButton3.setBackground(new java.awt.Color(0, 102, 204));
         jButton3.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
@@ -281,33 +255,18 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        jPanel3.add(jButton3);
 
         jButton4.setBackground(new java.awt.Color(0, 102, 204));
         jButton4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Eliminar Producto");
-        jPanel3.add(jButton4);
-
-        jButton7.setBackground(new java.awt.Color(0, 102, 204));
-        jButton7.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Guardar Cambios");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
-        jPanel3.add(jButton7);
-
-        jLabel2.setText("Unidad Compra");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -315,17 +274,15 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel2)))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -341,7 +298,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(0, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -363,11 +320,9 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(3, 3, 3)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -392,9 +347,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBackground(new java.awt.Color(0, 102, 204));
@@ -437,7 +390,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "ID", "Categoria"
@@ -494,7 +451,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable5.setForeground(new java.awt.Color(255, 255, 255));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
                 "ID", "SubCategoria"
@@ -551,7 +512,15 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable2.setForeground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Codigo de Barras", "Categoria", "SubCategoria", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
@@ -680,8 +649,24 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         
+        
+        if (categoriaSelec== null || subCategoriaSelec == null ||productoSelec==null){
+            JOptionPane.showMessageDialog(null, "Por favor seleccionar un Producto");   
+        
+        }else{
+        
+            VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
+            veap.setVisible(true);
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         tabla2.setRowCount(0);
         int row= jTable1.getSelectedRow();
         
@@ -701,12 +686,9 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 
             }            
         }
-        
-        
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
-
         tabla3.setRowCount(0);
         int row= jTable5.getSelectedRow();
         
@@ -734,8 +716,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
             
             
         }
-
-        // TODO add your handling code here:
     }//GEN-LAST:event_jTable5MouseClicked
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
@@ -801,8 +781,6 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2MouseClicked
 
     private void jTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MouseClicked
-        
-        
         int row= jTable2.getSelectedRow();
         
         
@@ -846,36 +824,22 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                     }   
                 }
         
-        
-        
-        
-        
     }//GEN-LAST:event_jTable2MouseClicked
 
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton7ActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
-        veap.setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
