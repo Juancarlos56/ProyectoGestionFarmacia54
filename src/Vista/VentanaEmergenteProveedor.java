@@ -5,6 +5,14 @@
  */
 package Vista;
 
+import Controlador.ControladorProveedores;
+import Modelo.Proveedor;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
@@ -14,8 +22,20 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
     /**
      * Creates new form VentenaEmergenteProveedor
      */
+    Controlador.ControladorProveedores cp ;
+    Boolean p=true;
+    ArrayList<Proveedor> Proveedores= new ArrayList();
     public VentanaEmergenteProveedor() {
         initComponents();
+        cp= new ControladorProveedores();
+        cp.cargarProveedores();
+        Proveedores = cp.getProveedores();
+        
+        
+
+
+        
+        
         setLocationRelativeTo(null);
     }
 
@@ -82,6 +102,11 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
         agregarCliente.setForeground(new java.awt.Color(255, 255, 255));
         agregarCliente.setText("Agregar Proveedor");
         agregarCliente.setBorder(null);
+        agregarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarClienteMouseClicked(evt);
+            }
+        });
         agregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarClienteActionPerformed(evt);
@@ -129,6 +154,34 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        telefono.addKeyListener(new KeyListener(){
+
+            public void keyTyped(KeyEvent e)
+
+            {if (telefono.getText().length()== 11)
+
+                e.consume();
+            }
+
+            public void keyPressed(KeyEvent arg0) {
+            }
+
+            public void keyReleased(KeyEvent arg0) {
+            }
+        });
+
+        telefono.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -173,6 +226,38 @@ public class VentanaEmergenteProveedor extends javax.swing.JFrame {
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
 
     }//GEN-LAST:event_agregarClienteActionPerformed
+
+    private void agregarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarClienteMouseClicked
+
+        p=true;
+        
+        if(nombre.getText().isEmpty() || cedula.getText().isEmpty() || telefono.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Por favor Rellenar Los campos");   
+            p=true;
+        }else{
+            for(Proveedor Proveedor : Proveedores){
+                if (Proveedor.getRuc().equals(telefono.getText())){
+                
+                    JOptionPane.showMessageDialog(null, "El RUC ingresado ya Existe");   
+                    p=true;
+                }
+            
+            }
+            
+            
+        }
+        
+        
+        
+        if(p==false){
+            cp.crearProveedor(nombre.getText(), cedula.getText(),telefono.getText());
+            dispose();
+        
+        }
+        
+        
+    }//GEN-LAST:event_agregarClienteMouseClicked
 
     /**
      * @param args the command line arguments

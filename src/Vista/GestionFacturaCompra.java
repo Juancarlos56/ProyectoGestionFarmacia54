@@ -623,6 +623,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     private void newClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newClienteMouseClicked
         VentanaEmergenteProveedor vep = new VentanaEmergenteProveedor();
         vep.setVisible(true);
+        
     }//GEN-LAST:event_newClienteMouseClicked
 
     private void nombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre2ActionPerformed

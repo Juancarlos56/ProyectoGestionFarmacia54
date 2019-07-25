@@ -36,5 +36,9 @@ public class ControladorProveedores {
     public void cargarProveedores() {
         proveedores = cb.obtenerProveedores();
     }
+
+    public void crearProveedor(String text, String text0, String text1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
