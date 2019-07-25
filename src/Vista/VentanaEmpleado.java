@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -17,11 +18,13 @@ import javax.swing.JDesktopPane;
  */
 public class VentanaEmpleado extends javax.swing.JFrame {
 
+    private Empleado empleado;
+    
     /**
      * Creates new form VentanaEmpleado
      */
-    public VentanaEmpleado() {
-        
+    public VentanaEmpleado(Empleado empleado) {
+        this.empleado = empleado;
         initComponents();
         setLocationRelativeTo(null);
     }
@@ -87,7 +90,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrarSeccion.png"))); // NOI18N
         jLabel2.setText("Cerrar Sección");
-        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel2MouseClicked(evt);
@@ -101,7 +104,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         productos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         productos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prod.png"))); // NOI18N
         productos.setText("Lista de Productos");
-        productos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        productos.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         productos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 productosMouseClicked(evt);
@@ -114,7 +117,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         factura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         factura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/facturaD.png"))); // NOI18N
         factura.setText("Facturación");
-        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        factura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         factura.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 facturaMouseClicked(evt);
@@ -127,7 +130,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         anularFactura.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         anularFactura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/anularP.png"))); // NOI18N
         anularFactura.setText("Anular Facturas");
-        anularFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        anularFactura.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         anularFactura.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 anularFacturaMouseClicked(evt);
@@ -180,7 +183,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void facturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaMouseClicked
-        InternalVentanaFacturaVen ivfv = new InternalVentanaFacturaVen();
+        InternalVentanaFacturar ivfv = new InternalVentanaFacturar();
         escritorio.add(ivfv);
         ivfv.show();
     }//GEN-LAST:event_facturaMouseClicked
@@ -231,12 +234,6 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaEmpleado().setVisible(true);
-            }
-        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -295,7 +295,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
         //Validacion de cedula
         Boolean Pol = ValidarCedula.validarDocumento(cedula.getText());
         
-        if ((nombre.getText().equals("")) || (apellido.getText().equals("")) || (cedula.getText().equals("")) || (telefono.getText().equals("")) || (celular.getText().equals(""))) {
+        /*if ((nombre.getText().equals("")) || (apellido.getText().equals("")) || (cedula.getText().equals("")) || (telefono.getText().equals("")) || (celular.getText().equals(""))) {
             JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
         } else if(Pol==false){
             JOptionPane.showMessageDialog(null,"La cedula ingresada no es valida");
@@ -307,10 +307,10 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
             ControlCliente.cargarNenFactura();
             
             dispose();
-        };
+        };*/ 
         
         
-        
+        System.out.println("FAlat");
         
         
     }//GEN-LAST:event_agregarClienteActionPerformed

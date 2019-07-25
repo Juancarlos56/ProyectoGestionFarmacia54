@@ -5,16 +5,25 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleados;
+import Controlador.ControladorValidaciones;
+import Modelo.Empleado;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
  */
 public class VentanaLogin extends javax.swing.JFrame {
 
+    private ControladorValidaciones validaciones;
+    private ControladorEmpleados empleados;
     /**
      * Creates new form VentanaLogin
      */
     public VentanaLogin() {
+        validaciones = new ControladorValidaciones();
+        empleados = new ControladorEmpleados();
         initComponents();
     }
 
@@ -35,7 +44,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         loginID = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        password = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         iniciarSeccion = new javax.swing.JButton();
         inicioAdmi = new javax.swing.JTextField();
@@ -74,9 +83,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
-
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -112,13 +119,13 @@ public class VentanaLogin extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Login ID");
+        jLabel4.setText("Usuario");
 
-        jPasswordField1.setForeground(new java.awt.Color(51, 51, 51));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        password.setForeground(new java.awt.Color(51, 51, 51));
+        password.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                passwordActionPerformed(evt);
             }
         });
 
@@ -130,7 +137,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         iniciarSeccion.setForeground(new java.awt.Color(255, 255, 255));
         iniciarSeccion.setText("Sign up");
         iniciarSeccion.setBorder(null);
-        iniciarSeccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        iniciarSeccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         iniciarSeccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarSeccionActionPerformed(evt);
@@ -142,7 +149,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         inicioAdmi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inicioAdmi.setText("¿Desea ingresar como Administrador? Click aqui.");
         inicioAdmi.setBorder(null);
-        inicioAdmi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        inicioAdmi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         inicioAdmi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inicioAdmiMouseClicked(evt);
@@ -170,7 +177,7 @@ public class VentanaLogin extends javax.swing.JFrame {
                                 .addGap(138, 138, 138))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6))
                                 .addGap(42, 42, 42)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -199,7 +206,7 @@ public class VentanaLogin extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(password, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(49, 49, 49)
                 .addComponent(iniciarSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -223,10 +230,20 @@ public class VentanaLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
-        System.out.println("Esto pasa "+loginID.getText());
-        VentanaEmpleado ve = new VentanaEmpleado();
-        ve.setVisible(true);
-        dispose();
+        String username = loginID.getText().trim();
+        String passwords = String.copyValueOf(password.getPassword()).trim();
+        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
+        if (!validacion) {
+            JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+            loginID.setText("");
+            password.setText("");
+            
+        }else{
+            Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
+            VentanaEmpleado ve = new VentanaEmpleado(empleado);
+            ve.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 
     private void loginIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginIDActionPerformed
@@ -235,11 +252,11 @@ public class VentanaLogin extends javax.swing.JFrame {
         
     }//GEN-LAST:event_loginIDActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         // TODO add your handling code here:
         String evento = evt.getActionCommand();
         System.out.println("evento joderrrrr "+evento);
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_passwordActionPerformed
 
     private void inicioAdmiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inicioAdmiActionPerformed
         // TODO add your handling code here:
@@ -248,18 +265,13 @@ public class VentanaLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_inicioAdmiActionPerformed
 
     private void inicioAdmiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inicioAdmiMouseClicked
-       
-        System.out.println("evento joderrrrr macho ");
-        
         VentanaAdministradorLogin val = new VentanaAdministradorLogin();
         val.setVisible(true);
         dispose();
     }//GEN-LAST:event_inicioAdmiMouseClicked
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-
         System.exit(0);
-
     }//GEN-LAST:event_jLabel1MouseClicked
 
 
@@ -274,7 +286,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField loginID;
+    private javax.swing.JPasswordField password;
     // End of variables declaration//GEN-END:variables
 }

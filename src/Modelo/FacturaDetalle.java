@@ -13,13 +13,14 @@ import java.util.ArrayList;
  */
 public class FacturaDetalle {
     private int id;
-    private String descripcion;
-    private int cantidad;
+    private int cantidad; 
+    private double precio;
     private double subtotal;
-    private ArrayList<Producto> productos;
+    private double descuento;
+    private Producto producto;
 
     public FacturaDetalle() {
-        productos = new ArrayList<>();
+        producto = new Producto();
     }
 
     public int getId() {
@@ -30,12 +31,20 @@ public class FacturaDetalle {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public double getPrecio() {
+        return precio;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setPrecio(double precio) {
+        this.precio = precio;
+    }
+
+    public double getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(double descuento) {
+        this.descuento = descuento;
     }
 
     public int getCantidad() {
@@ -54,14 +63,13 @@ public class FacturaDetalle {
         this.subtotal = subtotal;
     }
 
-    public ArrayList<Producto> getProductos() {
-        return productos;
+    public Producto getProducto() {
+        return producto;
     }
 
-    public void addProductos(Producto productos) {
-        this.productos.add(productos);
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
-    
     
     public double calcularSubtotal(){
         return 0;
