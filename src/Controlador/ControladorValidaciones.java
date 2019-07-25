@@ -12,34 +12,7 @@ import Modelo.Empleado;
  * @author Carlos
  */
 public class ControladorValidaciones {
-    
-    private ControladorClientes clientes; 
-    private ControladorEmpleados empleados;
 
-    public ControladorValidaciones() {
-        clientes = new ControladorClientes();
-        empleados = new ControladorEmpleados();
-    }
-
-    public boolean validarExistenciaEmpleado(String username, String cedula){
-        //Floro aqui metodo para validad si existe dicho empleado;
-       
-        //Metodo para la validacion de cedula
-        if (!validarDocumento(cedula)) {
-            return false;
-        }
-        
-        //Aqui se verifica el username y contraseña
-        Empleado empleado = empleados.buscarEmpleadoLogin(username,cedula);
-        
-        //Verificacion si los datos son correctos
-        if (empleado != null) {
-            return true;
-        }else{
-            return false;
-        }
-    }
-    
     public boolean validarDocumento(String documentoIDE) {
         boolean documentoIDECorrecto;
         try {

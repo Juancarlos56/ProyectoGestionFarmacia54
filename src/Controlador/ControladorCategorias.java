@@ -43,7 +43,7 @@ public class ControladorCategorias {
         p.setEstado('H');
         p.setIva('S');
         p.setNombre("Pañales huggies");
-        p.setOrigen("Si".toCharArray());
+        //p.setOrigen("Si".toCharArray());
         p.setPctDescuento(56);
         p.setPrecioUnitario(6.90);
         p.setStock(30);
@@ -65,7 +65,7 @@ public class ControladorCategorias {
         pd.setEstado('H');
         pd.setIva('S');
         pd.setNombre("Pañales huggies");
-        pd.setOrigen("Si".toCharArray());
+        //pd.setOrigen("Si".toCharArray());
         pd.setPctDescuento(66);
         pd.setPrecioUnitario(5.90);
         pd.setStock(30);

@@ -183,7 +183,7 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void facturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaMouseClicked
-        InternalVentanaFacturar ivfv = new InternalVentanaFacturar();
+        InternalVentanaFacturar ivfv = new InternalVentanaFacturar(empleado);
         escritorio.add(ivfv);
         ivfv.show();
     }//GEN-LAST:event_facturaMouseClicked

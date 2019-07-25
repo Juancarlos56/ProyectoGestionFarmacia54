@@ -8,6 +8,7 @@ package Vista;
 import Controlador.ControladorEmpleados;
 import Controlador.ControladorValidaciones;
 import Modelo.Empleado;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -232,17 +233,23 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
         String username = loginID.getText().trim();
         String passwords = String.copyValueOf(password.getPassword()).trim();
-        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
-        if (!validacion) {
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-            loginID.setText("");
-            password.setText("");
-            
-        }else{
+        Boolean cedulaValida = validaciones.validarDocumento(passwords);
+        
+        if (cedulaValida) {
             Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
-            VentanaEmpleado ve = new VentanaEmpleado(empleado);
-            ve.setVisible(true);
-            dispose();
+            //No es diferente
+            if (empleado != null) {
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                loginID.setText("");
+                password.setText("");
+
+            }else{
+                VentanaEmpleado ve = new VentanaEmpleado(empleado);
+                ve.setVisible(true);
+                dispose();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Cedula Incorrecta", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 

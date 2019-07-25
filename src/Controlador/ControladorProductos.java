@@ -17,11 +17,12 @@ import java.util.ArrayList;
  */
 public class ControladorProductos {
 
-    private ArrayList<Categoria> categorias;
-    private SentenciasCRUD st;
+    private ArrayList<Categoria> categoriasProductos = new ArrayList<>();
+    private ControladorBaseDeDatos cb;
 
     public ControladorProductos() {
-       categorias = new ArrayList<>();
+       cb = new ControladorBaseDeDatos();
+       categoriasProductos = cb.obtenerCategorias();
        
     }
     
@@ -31,34 +32,52 @@ public class ControladorProductos {
     }
     
     public Producto buscarProductoPorCodBarras(String codBarras ){
-        Producto p = new Producto();
-        p.setCodigoBarras(codBarras);
-        p.setEstado('H');
-        p.setIva('S');
-        p.setNombre("Alcancecer");
-        p.setOrigen("Si".toCharArray());
-        p.setPctDescuento(55);
-        p.setPrecioUnitario(0.5);
-        p.setStock(10);
-        p.setUnidadCompra("Cajas");
-        p.setUnidadVenta("tabletas");
-        
-        return p;
+        for (int i = 0; i < categoriasProductos.size(); i++) {
+            for (int j = 0; j < categoriasProductos.get(i).getSubcategorias().size(); j++) {
+                for (int k = 0; k < categoriasProductos.get(i).getSubcategorias().get(j).getProductos().size(); k++) {
+                    if (categoriasProductos.get(i).getSubcategorias().get(j).getProductos().get(k).getCodigoBarras().equals(codBarras)) {
+                        return categoriasProductos.get(i).getSubcategorias().get(j).getProductos().get(k);
+                    }
+                }
+                
+            }
+        }
+        return null;
     }
     
     public Producto buscarProductoPorNombre(String nombre){
-        Producto p = new Producto();
-        p.setCodigoBarras("6");
-        p.setEstado('H');
-        p.setIva('S');
-        p.setNombre(nombre);
-        p.setOrigen("Si".toCharArray());
-        p.setPctDescuento(55);
-        p.setPrecioUnitario(0.5);
-        p.setStock(10);
-        p.setUnidadCompra("Cajas");
-        p.setUnidadVenta("tabletas");
-        return p;
+        
+        
+         for (int i = 0; i < categoriasProductos.size(); i++) {
+            for (int j = 0; j < categoriasProductos.get(i).getSubcategorias().size(); j++) {
+                for (int k = 0; k < categoriasProductos.get(i).getSubcategorias().get(j).getProductos().size(); k++) {
+                    if ((categoriasProductos.get(i).getSubcategorias().get(j).getProductos().get(k).getNombre().compareTo(nombre)) == 0) {
+                        return categoriasProductos.get(i).getSubcategorias().get(j).getProductos().get(k);
+                    }
+                }
+                
+            }
+        }
+        return null;
     }
+    
+    public boolean verificarStockProduto(Producto p, int cantidadCompra){
+        if (p.getStock() - cantidadCompra > 0 ) {
+            return true;
+        }
+        return false;
+    }
+
+    public ArrayList<Categoria> getCategoriasProductos() {
+        return categoriasProductos;
+    }
+
+    public void setCategoriasProductos(ArrayList<Categoria> categoriasProductos) {
+        this.categoriasProductos = categoriasProductos;
+    }
+
+    
+
+
     
 }
