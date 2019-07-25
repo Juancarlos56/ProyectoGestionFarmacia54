@@ -562,7 +562,7 @@ public class SentenciasCRUD {
     
     }
 
-    public void editarProducto(Conexion con, Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
+    public void compraProducto(Conexion con, Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
         
         try{
             
@@ -697,6 +697,33 @@ public class SentenciasCRUD {
         }catch(SQLException e) {
             e.printStackTrace();
         }
+    }
+
+
+    public void elimProd(Conexion con, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
+        try{
+            
+            sentencia= con.getConexion().prepareStatement("UPDATE PFC_PRODUCTOS \n" +
+                                                            "SET PRO_ESTADO = 'I' " +
+                                                            "WHERE PRO_CODIGO_BARRAS = ? ");
+            
+            sentencia.setString(1, productoSelec.getCodigoBarras());
+            
+                        
+            
+            //Ejecutar INSERT
+            
+            sentencia.executeUpdate();
+            
+            
+            con.getConexion().commit();
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    
     }
     
     

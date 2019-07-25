@@ -134,7 +134,7 @@ public class ControladorBaseDeDatos {
         
         if(con.getConexion() !=null){
             
-            s.editarProducto(con,proveedorSelec, categoriaSelec, subCategoriaSelec,  productoSelec, razon ,  monto);
+            s.compraProducto(con, proveedorSelec, categoriaSelec, subCategoriaSelec, productoSelec, razon, monto);
             
             con.cerrarConexion();
         }
@@ -175,6 +175,20 @@ public class ControladorBaseDeDatos {
             con.cerrarConexion();
         }
         
+    }
+
+    void elimProd(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
+        
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.elimProd(con,categoriaSelec,subCategoriaSelec,productoSelec);
+            
+            con.cerrarConexion();
+        }
+    
+    
     }
     
     
