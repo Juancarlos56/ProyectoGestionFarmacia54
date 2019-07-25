@@ -681,21 +681,23 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
+        if (categoriaSelec== null || subCategoriaSelec== null || productoSelec== null){
+            JOptionPane.showMessageDialog(null, "Por favor Seleccione un producto");   
+        }else{
+            cedula25.setText("");
+            cedula28.setText("");
+            cedula27.setText("");
+            cedula31.setText("");
+            cedula30.setText("");
+            cedula33.setText("");
+            cedula32.setText("");
+            cedula34.setText("");
+            jTextField5.setText("");
 
-        cedula25.setText("");
-        cedula28.setText("");
-        cedula27.setText("");
-        cedula31.setText("");
-        cedula30.setText("");
-        cedula33.setText("");
-        cedula32.setText("");
-        cedula34.setText("");
-        jTextField5.setText("");
 
-
-        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
-        veap.setVisible(true);
-        
+            VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
+            veap.setVisible(true);
+        }
         
         
         
@@ -755,8 +757,19 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                         
                             if(producto.getNombre().equals(busqueda)){
                                 
+                                cedula25.setText(Categoria.getNombreCategoria());
+                                cedula28.setText(subcategoria.getNombreSubCategoria());
+                                cedula27.setText(producto.getNombre());
+                                cedula31.setText(producto.getCodigoBarras());
+                                cedula30.setText(Integer.toString(producto.getStock()));
+                                cedula33.setText(Double.toString( producto.getPrecioUnitario()));
+                                cedula32.setText(producto.getUnidadCompra());
+                                cedula34.setText(producto.getUnidadVenta());
                                 
-                            
+                                categoriaSelec = Categoria;
+                                subCategoriaSelec = subcategoria;
+                                productoSelec = producto;
+                                
                             }
                         }
                     }   

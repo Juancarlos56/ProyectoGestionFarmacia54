@@ -382,6 +382,7 @@ public class VentanaEmergenteNuevoProducto extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox1MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
         p=false;
         // CodigoBarras                        Nombre                             PrecioUnitario                   U.Compra                             U.Venta                        IVA                                  Descuento
         if(jTextField8.getText().isEmpty() || jTextField4.getText().isEmpty() || jTextField5.getText().isEmpty() ||jTextField7.getText().isEmpty()|| jTextField6.getText().isEmpty()|| jTextField11.getText().isEmpty()|| jTextField12.getText().isEmpty()){

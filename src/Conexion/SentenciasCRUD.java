@@ -450,11 +450,11 @@ public class SentenciasCRUD {
         
         try{
             
-            busqueda = con.getConexion().prepareStatement("select s.CSU_ID\n" +
-                                                            "from PFC_SUB_CATEGORIAS s,PFC_CATEGORIAS c\n" +
-                                                            "where s.CAT_ID = c.CAT_ID\n" +
-                                                            "and s.CSU_NOMBRE = ? \n" +
-                                                            "and c.CAT_NOMBRE = ?");
+            busqueda = con.getConexion().prepareStatement("select s.CSU_ID " +
+                                                            "from PFC_SUB_CATEGORIAS s,PFC_CATEGORIAS c " +
+                                                            "where s.CAT_ID = c.CAT_ID " +
+                                                            "and s.CSU_NOMBRE = ? " +
+                                                            "and c.CAT_NOMBRE = ? ");
             busqueda.setString(1, subcategoria);
             busqueda.setString(2, categoria);
             
@@ -463,7 +463,8 @@ public class SentenciasCRUD {
             
             while (resultadobusc.next()){
 
-                System.out.println(subC);
+               subC = resultadobusc.getInt("CSU_ID");
+                
             
             }
             
