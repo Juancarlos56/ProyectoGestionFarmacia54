@@ -191,9 +191,9 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_facturaMouseClicked
 
     private void productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productosMouseClicked
-        InternalVentanaProVen ivpv = new InternalVentanaProVen();
+        /*InternalVentanaProVen ivpv = new InternalVentanaProVen();
         escritorio.add(ivpv);
-        ivpv.show();
+        ivpv.show();*/
     }//GEN-LAST:event_productosMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked

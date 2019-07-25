@@ -178,80 +178,99 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Código de Barras");
+        jPanel3.add(jLabel4);
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Nombre");
+        jPanel3.add(jLabel5);
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Precio Unitario");
+        jPanel3.add(jLabel6);
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Unidad de Venta");
+        jPanel3.add(jLabel7);
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel9.setText("Porcentaje de Descuento");
+        jPanel3.add(jLabel9);
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Iva");
+        jPanel3.add(jLabel10);
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setText("Stock");
+        jPanel3.add(jLabel11);
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Categoría");
+        jPanel3.add(jLabel12);
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("SubCategoría");
+        jPanel3.add(jLabel13);
 
         jTextField3.setEditable(false);
         jTextField3.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField3.setToolTipText("");
         jTextField3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField3);
 
         jTextField4.setEditable(false);
         jTextField4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField4.setToolTipText("");
         jTextField4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField4);
 
         jTextField5.setEditable(false);
         jTextField5.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField5.setToolTipText("");
         jTextField5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField5);
 
         jTextField6.setEditable(false);
         jTextField6.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField6.setToolTipText("");
         jTextField6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField6);
 
         jTextField7.setEditable(false);
         jTextField7.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField7.setToolTipText("");
         jTextField7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField7);
 
         jTextField8.setEditable(false);
         jTextField8.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField8.setToolTipText("");
         jTextField8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField8);
 
         jTextField9.setEditable(false);
         jTextField9.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField9.setToolTipText("");
         jTextField9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField9);
 
         jTextField10.setEditable(false);
         jTextField10.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField10.setToolTipText("");
         jTextField10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField10);
 
         jTextField11.setEditable(false);
         jTextField11.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField11.setToolTipText("");
         jTextField11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField11);
 
         jTextField12.setEditable(false);
         jTextField12.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField12.setToolTipText("");
         jTextField12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
+        jPanel3.add(jTextField12);
 
         jButton3.setBackground(new java.awt.Color(0, 102, 204));
         jButton3.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
@@ -262,11 +281,13 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 jButton3ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton3);
 
         jButton4.setBackground(new java.awt.Color(0, 102, 204));
         jButton4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Eliminar Producto");
+        jPanel3.add(jButton4);
 
         jButton7.setBackground(new java.awt.Color(0, 102, 204));
         jButton7.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
@@ -277,6 +298,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 jButton7ActionPerformed(evt);
             }
         });
+        jPanel3.add(jButton7);
 
         jLabel2.setText("Unidad Compra");
 
