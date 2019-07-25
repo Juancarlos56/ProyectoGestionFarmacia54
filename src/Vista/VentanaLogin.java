@@ -8,6 +8,7 @@ package Vista;
 import Controlador.ControladorEmpleados;
 import Controlador.ControladorValidaciones;
 import Modelo.Empleado;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -22,7 +23,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     /**
      * Creates new form VentanaLogin
      */
-    public VentanaLogin() {
+    public VentanaLogin() throws IOException {
         validaciones = new ControladorValidaciones();
         empleados = new ControladorEmpleados();
         initComponents();
