@@ -322,7 +322,7 @@
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextField11.addKeyListener(new KeyListener(){&#xa; &#xa;            public void keyTyped(KeyEvent e)&#xa; &#xa;            {if (jTextField11.getText().length()== 1)&#xa; &#xa;                e.consume();&#xa;            }&#xa; &#xa;            public void keyPressed(KeyEvent arg0) {&#xa;            }&#xa; &#xa;            public void keyReleased(KeyEvent arg0) {&#xa;            }&#xa;        });"/>
+                    <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jTextField11.addKeyListener(new KeyListener(){&#xa; &#xa;            public void keyTyped(KeyEvent e)&#xa; &#xa;            {if (jTextField11.getText().length()== 1)&#xa; &#xa;                e.consume();&#xa;            }&#xa; &#xa;            public void keyPressed(KeyEvent arg0) {&#xa;            }&#xa; &#xa;            public void keyReleased(KeyEvent arg0) {&#xa;            }&#xa;        });&#xa;&#xa;jTextField11.addKeyListener(new KeyAdapter(){&#xa;            &#xa;            public void keyTyped(KeyEvent e){&#xa;                char caracter = e.getKeyChar();&#xa;&#xa;                    // Verificar si la tecla pulsada no es un digito&#xa;                    if(((caracter != &apos;S&apos; ) &amp;&amp;  (caracter != &apos;N&apos; ))  ){&#xa;                        e.consume();  // ignorar el evento de teclado&#xa;                    }&#xa;            }&#xa;        });"/>
                   </AuxValues>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jTextField12">

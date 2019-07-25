@@ -302,6 +302,17 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
                 }
             }
         });
+        jTextField11.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter != 'S' ) &&(caracter != 'N' ))  ){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));

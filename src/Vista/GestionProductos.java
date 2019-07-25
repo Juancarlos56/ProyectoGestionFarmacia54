@@ -27,7 +27,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
     Producto productoSelec;
     
     ArrayList<Categoria> Categorias= new ArrayList();
-    
+    Controlador.ControladorCategorias c;
     DefaultTableModel tabla;
     DefaultTableModel tabla2;
     DefaultTableModel tabla3;
@@ -39,7 +39,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         tabla3 = (DefaultTableModel) jTable2.getModel();
         
         
-        Controlador.ControladorCategorias c = new ControladorCategorias();
+        c = new ControladorCategorias();
         c.cargarCategorias();
         Categorias = c.getCategorias();
         
@@ -260,6 +260,11 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jButton4.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton4.setForeground(new java.awt.Color(255, 255, 255));
         jButton4.setText("Eliminar Producto");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -390,11 +395,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable1.setForeground(new java.awt.Color(255, 255, 255));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "Categoria"
@@ -451,11 +452,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable5.setForeground(new java.awt.Color(255, 255, 255));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "ID", "SubCategoria"
@@ -512,15 +509,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
         jTable2.setForeground(new java.awt.Color(255, 255, 255));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Codigo de Barras", "Categoria", "SubCategoria", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
@@ -702,10 +691,12 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 
                     for (Producto producto : subcategoria.getProductos()) {
                         
-                        tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreCategoria(),subcategoria.getNombreSubCategoria(),
+                        //Filtro anti productos inactivos
+                        if(producto.getEstado()!=('I')){
+                            tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreCategoria(),subcategoria.getNombreSubCategoria(),
                             producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
                             producto.getUnidadVenta()});
-                        
+                        }
                     }
                 
                 
@@ -720,6 +711,23 @@ public class GestionProductos extends javax.swing.JInternalFrame {
 
     private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
         tabla3.setRowCount(0);
+        tabla2.setRowCount(0);
+        tabla.setRowCount(0);
+        c.vaciarCategorias();
+        c.cargarCategorias();
+        Categorias = c.getCategorias();
+        
+        
+        
+        
+        for (Categoria Categoria : Categorias) {
+            
+            tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreCategoria()});
+            
+        }
+        
+        
+        
         
         String sta  = jComboBox1.getSelectedItem().toString();
         
@@ -734,7 +742,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                     for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
 
                         for (Producto producto : subcategoria.getProductos()) {
-                        
+                                                                           //Pequeño filtro para descartar los productos descartados
                             if(producto.getCodigoBarras().equals(busqueda)){
                                 
                                 tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreCategoria(),subcategoria.getNombreSubCategoria(),
@@ -825,6 +833,59 @@ public class GestionProductos extends javax.swing.JInternalFrame {
                 }
         
     }//GEN-LAST:event_jTable2MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        
+        if (categoriaSelec== null || subCategoriaSelec == null ||productoSelec==null){
+            JOptionPane.showMessageDialog(null, "Por favor seleccionar un producto");   
+        
+        }else if(productoSelec.getEstado()== 'I' ){
+            JOptionPane.showMessageDialog(null, "El producto ya se encuentra Incativo");   
+        }else{
+            
+            int conf;
+            conf = JOptionPane.showConfirmDialog(null,"Confirmar Eliminacion ","Confirmar" , JOptionPane.YES_NO_OPTION);     
+            
+            if (conf==JOptionPane.YES_OPTION){
+                
+            
+                
+                c.delProd(categoriaSelec,subCategoriaSelec,productoSelec );
+                   
+                jTextField3.setText("");
+                jTextField4.setText("");
+                jTextField5.setText((""));
+                jTextField6.setText("");
+                jTextField7.setText("");           
+                jTextField8.setText("");
+                jTextField9.setText("");         
+                jTextField10.setText("");        
+                jTextField11.setText("");         
+                jTextField12.setText("");
+                    
+                    
+                tabla3.setRowCount(0);
+                tabla2.setRowCount(0);
+                tabla.setRowCount(0);
+                c.vaciarCategorias();
+                c.cargarCategorias();
+                Categorias = c.getCategorias();
+
+
+
+
+                for (Categoria Categoria : Categorias) {
+
+                    tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreCategoria()});
+
+                }
+            }
+        
+        }
+        
+        
+        
+    }//GEN-LAST:event_jButton4MouseClicked
 
     
     

@@ -70,6 +70,14 @@ public class ControladorCategorias {
     
     }
 
+    public void vaciarCategorias() {
+        categorias.clear();
+    }
+
+    public void delProd(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
+        cb.elimProd(categoriaSelec,subCategoriaSelec,productoSelec);
+    }
+
     
 
     
