@@ -56,5 +56,9 @@ public class Empleado extends Persona{
     public void setEstadoEmpleado(char estadoEmpleado) {
         this.estadoEmpleado = estadoEmpleado;
     }
+
+    public void getCargo(String empleado) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

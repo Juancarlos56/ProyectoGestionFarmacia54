@@ -7,7 +7,9 @@ package Controlador;
 
 import Modelo.Categoria;
 import Modelo.Producto;
+
 import Modelo.Proveedor;
+
 import Modelo.SubCategoria;
 import java.util.ArrayList;
 
@@ -17,6 +19,7 @@ import java.util.ArrayList;
  */
 public class ControladorCategorias {
     
+
     private ArrayList<Categoria> categorias;
     
     private ControladorBaseDeDatos cb;
@@ -65,6 +68,7 @@ public class ControladorCategorias {
         cb.crearCompra(proveedorSelec, categoriaSelec, subCategoriaSelec,  productoSelec, razon ,  monto);
     
     }
+
 
 
     

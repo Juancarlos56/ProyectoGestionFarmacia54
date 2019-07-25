@@ -72,7 +72,6 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Actualizar Nombre: ");
 
-        nombre.setEditable(false);
         nombre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -82,7 +81,6 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
             }
         });
 
-        cedula.setEditable(false);
         cedula.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -91,7 +89,6 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Actualizar Cargo: ");
 
-        telefono.setEditable(false);
         telefono.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -100,7 +97,6 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Actualizar Apellido:");
 
-        apellido.setEditable(false);
         apellido.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         apellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
