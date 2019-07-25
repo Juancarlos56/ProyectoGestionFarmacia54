@@ -5,6 +5,20 @@
  */
 package Vista;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+
+import Controlador.ControladorCategorias;
+import Controlador.ControladorProveedores;
+import Modelo.Categoria;
+import Modelo.Producto;
+import Modelo.Proveedor;
+import Modelo.SubCategoria;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
@@ -14,8 +28,29 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionFacturaCompra
      */
+    
+    Categoria categoriaSelec;
+    SubCategoria subCategoriaSelec;
+    Producto productoSelec;
+    
+    boolean p;
+    Proveedor proveedorSelec;
+    
+    Controlador.ControladorCategorias c;
+    Controlador.ControladorProveedores cp ;
+    ArrayList<Proveedor> Proveedores= new ArrayList();
+    ArrayList<Categoria> Categorias= new ArrayList();
+    
+    
     public GestionFacturaCompra() {
         initComponents();
+        c= new ControladorCategorias();
+        
+        
+        cp= new ControladorProveedores();
+        
+        
+        
     }
 
     /**
@@ -91,6 +126,21 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jTextArea1.setRows(5);
         jTextArea1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Ingrese Razón"));
         jScrollPane1.setViewportView(jTextArea1);
+        jTextArea1.addKeyListener(new KeyListener(){
+
+            public void keyTyped(KeyEvent e)
+
+            {if (jTextArea1.getText().length()== 100)
+
+                e.consume();
+            }
+
+            public void keyPressed(KeyEvent arg0) {
+            }
+
+            public void keyReleased(KeyEvent arg0) {
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -98,12 +148,13 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(174, 174, 174))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(174, 174, 174))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,7 +175,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jLabel5.setText("Buscar por: ");
 
         jComboBox1.setForeground(new java.awt.Color(0, 102, 204));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "RUC", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Nombre", "RUC"}));
         jComboBox1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jTextField3.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -137,13 +188,18 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         buscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         buscar.setText("Buscar");
         buscar.setBorder(null);
+        buscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscarMouseClicked(evt);
+            }
+        });
 
         newCliente.setBackground(new java.awt.Color(255, 255, 255));
         newCliente.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         newCliente.setForeground(new java.awt.Color(0, 102, 204));
         newCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         newCliente.setText("¿Desea almacenar un nuevo proveedor? click aquí");
-        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         newCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newClienteMouseClicked(evt);
@@ -194,7 +250,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE))
+                                .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE))
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -280,6 +336,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         buscar4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         buscar4.setText("Buscar");
         buscar4.setBorder(null);
+        buscar4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                buscar4MouseClicked(evt);
+            }
+        });
 
         jComboBox5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jComboBox5.setForeground(new java.awt.Color(0, 102, 204));
@@ -376,7 +437,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jLabel19.setForeground(new java.awt.Color(0, 102, 204));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("¿Desea crear un Nuevo Producto? Click aquí");
-        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel19.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel19.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel19MouseClicked(evt);
@@ -505,6 +566,11 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         jButton5.setBackground(new java.awt.Color(255, 255, 255));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/guardar.png"))); // NOI18N
         jButton5.setText("Guardar Compra");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -533,6 +599,18 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57))
         );
+
+        jTextField6.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -575,7 +653,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 651, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -585,6 +663,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     private void newClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newClienteMouseClicked
         VentanaEmergenteProveedor vep = new VentanaEmergenteProveedor();
         vep.setVisible(true);
+        
     }//GEN-LAST:event_newClienteMouseClicked
 
     private void nombre2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre2ActionPerformed
@@ -601,65 +680,209 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jLabel19MouseClicked
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto();
+
+
+        cedula25.setText("");
+        cedula28.setText("");
+        cedula27.setText("");
+        cedula31.setText("");
+        cedula30.setText("");
+        cedula33.setText("");
+        cedula32.setText("");
+        cedula34.setText("");
+        jTextField5.setText("");
+
+
+        VentanaEmergenteActualizarProducto veap = new VentanaEmergenteActualizarProducto(categoriaSelec,subCategoriaSelec,productoSelec);
         veap.setVisible(true);
+        
+        
+        
+        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void buscar4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscar4MouseClicked
+        
+        c.cargarCategorias();
+        Categorias = c.getCategorias();
+        
+        String sta  = jComboBox5.getSelectedItem().toString();
+        
+        String busqueda = jTextField5.getText();
+        
+        
+        switch (sta){
+            case "Codigo de Barras" :
+                    
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getCodigoBarras().equals(busqueda)){
+                                
+                                cedula25.setText(Categoria.getNombreSubCategoria());
+                                cedula28.setText(subcategoria.getNombreSubCategoria());
+                                cedula27.setText(producto.getNombre());
+                                cedula31.setText(producto.getCodigoBarras());
+                                cedula30.setText(Integer.toString(producto.getStock()));
+                                cedula33.setText(Double.toString( producto.getPrecioUnitario()));
+                                cedula32.setText(producto.getUnidadCompra());
+                                cedula34.setText(producto.getUnidadVenta());
+                                
+                                categoriaSelec = Categoria;
+                                subCategoriaSelec = subcategoria;
+                                productoSelec = producto;
+                                
+                                
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                break;
+            case "Nombre" :
+                for (Categoria Categoria : Categorias) {
+            
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if(producto.getNombre().equals(busqueda)){
+                                
+                                
+                            
+                            }
+                        }
+                    }   
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+    }//GEN-LAST:event_buscar4MouseClicked
+
+    private void buscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_buscarMouseClicked
+
+        
+        
+        cp.cargarProveedores();
+        Proveedores = cp.getProveedores();
+        
+        String sta  = jComboBox1.getSelectedItem().toString();
+        
+        String busqueda = jTextField3.getText();
+        
+        
+        switch (sta){
+            
+            case "Nombre":
+                    
+                for (Proveedor Proveedor : Proveedores) {
+                    
+                    if (Proveedor.getNombre().equals(busqueda)) {
+                        
+                        nombre2.setText(Proveedor.getNombre());
+                        cedula.setText(Proveedor.getApellido());
+                        telefono.setText(Proveedor.getRuc());
+                        
+                        proveedorSelec = Proveedor;
+                        
+                    }
+            
+  
+                }
+                
+                
+                
+                
+                break;
+            case  "RUC"  :
+                for (Proveedor Proveedor : Proveedores) {
+                    
+                    if (Proveedor.getRuc() . equals(busqueda)) {
+                        
+                        nombre2.setText(Proveedor.getNombre());
+                        cedula.setText(Proveedor.getApellido());
+                        telefono.setText(Proveedor.getRuc());
+                        
+                        proveedorSelec = Proveedor;
+                        
+                    }
+  
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+    }//GEN-LAST:event_buscarMouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        p=false;
+        
+        if(proveedorSelec == null || categoriaSelec== null || subCategoriaSelec== null || productoSelec== null ){
+            
+            JOptionPane.showMessageDialog(null, "Por favor Terminar la selecion");   
+            p=true; 
+        }else if (jTextArea1.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Por favor Ingrese una Razón de Adquisición");   
+            p=true; 
+            
+        }else if (jTextField6.getText().isEmpty()) {
+            
+            JOptionPane.showMessageDialog(null, "Por favor Ingrese el monto a comprar");   
+            p=true; 
+            
+        }
+        
+        
+        if(p==false){
+            
+            c.crearCompra( proveedorSelec, categoriaSelec,subCategoriaSelec,productoSelec,jTextArea1.getText(),jTextField6.getText());
+
+            dispose();
+        }
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton5MouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buscar;
-    private javax.swing.JButton buscar1;
-    private javax.swing.JButton buscar2;
-    private javax.swing.JButton buscar3;
     private javax.swing.JButton buscar4;
     private javax.swing.JTextField cedula;
-    private javax.swing.JTextField cedula1;
-    private javax.swing.JTextField cedula10;
-    private javax.swing.JTextField cedula11;
-    private javax.swing.JTextField cedula12;
-    private javax.swing.JTextField cedula13;
-    private javax.swing.JTextField cedula14;
-    private javax.swing.JTextField cedula15;
-    private javax.swing.JTextField cedula16;
-    private javax.swing.JTextField cedula17;
-    private javax.swing.JTextField cedula18;
-    private javax.swing.JTextField cedula19;
-    private javax.swing.JTextField cedula2;
-    private javax.swing.JTextField cedula20;
-    private javax.swing.JTextField cedula21;
-    private javax.swing.JTextField cedula22;
-    private javax.swing.JTextField cedula23;
-    private javax.swing.JTextField cedula24;
     private javax.swing.JTextField cedula25;
     private javax.swing.JTextField cedula27;
     private javax.swing.JTextField cedula28;
-    private javax.swing.JTextField cedula3;
     private javax.swing.JTextField cedula30;
     private javax.swing.JTextField cedula31;
     private javax.swing.JTextField cedula32;
     private javax.swing.JTextField cedula33;
     private javax.swing.JTextField cedula34;
-    private javax.swing.JTextField cedula4;
-    private javax.swing.JTextField cedula5;
-    private javax.swing.JTextField cedula6;
-    private javax.swing.JTextField cedula7;
-    private javax.swing.JTextField cedula8;
-    private javax.swing.JTextField cedula9;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
@@ -667,29 +890,7 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
-    private javax.swing.JLabel jLabel37;
-    private javax.swing.JLabel jLabel38;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
     private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel46;
@@ -698,30 +899,17 @@ public class GestionFacturaCompra extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel newCliente;
     private javax.swing.JTextField nombre2;
     private javax.swing.JTextField telefono;

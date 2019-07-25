@@ -984,7 +984,7 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jRadioButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones();
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(null);
         ved.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 

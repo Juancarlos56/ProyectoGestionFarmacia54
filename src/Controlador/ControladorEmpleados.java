@@ -7,6 +7,9 @@ package Controlador;
 
 import Modelo.Empleado;
 
+import java.util.ArrayList;
+
+
 /**
  *
  * @author Carlos
@@ -14,22 +17,34 @@ import Modelo.Empleado;
 public class ControladorEmpleados {
     
     
-    /**
-     * Este metodo retorna el Empleado siempre y cuando la cedula y username
-     * sean igual a la de los empleados guardados en la base de datos
-     * sino deberia retornar Null 
-     * @param username
-     * @param cedula
-     * @return 
-     */
-    public Empleado buscarEmpleadoLogin(String nombre, String cedula){
+
+    private ArrayList<Empleado> empleados;
+    
+    private ControladorBaseDeDatos cb;
+
+    public ControladorEmpleados() {
+        cb= new ControladorBaseDeDatos();
+    }
+    
+    
+    
+
+    public ArrayList<Empleado> getEmpleados() {
+        return empleados;
+    }
+
+    public void setEmpleados(ArrayList<Empleado> empleados) {
+        this.empleados = empleados;
+    }
+
+    
+    public void cargarEmpleados(){
+       
+        ArrayList<Empleado> c = cb.obtenerEmpleados();
+        empleados = c;
+        
         
 
-        //Esto es solo para prueba
-        Empleado e = new Empleado();
-        e.setCedula("0106113301");
-        e.setNombre("Carlos");
-        return e;
     }
     
 }

@@ -5,6 +5,13 @@
  */
 package Vista;
 
+import Controlador.ControladorCategorias;
+import Controlador.ControladorEmpleados;
+import Modelo.Empleado;
+import java.util.ArrayList;
+//import static Vista.Principal.Empleados;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
@@ -14,8 +21,40 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     /**
      * Creates new form GestionEmpleados
      */
+    
+    
+    ArrayList<Empleado> Empleados= new ArrayList();
+    
+    
+    
+    Empleado EmpleadoSelecionado;
+    DefaultTableModel tabla;
     public GestionEmpleados() {
         initComponents();
+        
+        
+        Controlador.ControladorEmpleados c = new ControladorEmpleados();
+        c.cargarEmpleados();
+        Empleados = c.getEmpleados();
+        
+        
+        tabla = (DefaultTableModel) jTable1.getModel();
+        //jTable1
+        for (Empleado Empleado : Empleados) {
+            
+            if (Empleado.getCargo() == 'V'){
+                tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+            }else{
+                tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+            }
+            
+        }
+        
+        
+        
+        
+        
+        
     }
 
     /**
@@ -86,6 +125,11 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
         jButton2.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Buscar");
+        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -320,15 +364,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Nombre", "Apellido", "Cédula", "Cargo"
@@ -343,6 +379,11 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
             }
         });
         jTable1.setRowHeight(25);
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -432,9 +473,109 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        VentanaEmergenteEmpleado vee = new VentanaEmergenteEmpleado();
+        
+        VentanaEmergenteEmpleado vee = new VentanaEmergenteEmpleado(EmpleadoSelecionado);
         vee.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
+
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        
+        int row= jTable1.getSelectedRow();
+        
+
+        for (Empleado Empleado : Empleados) {
+        
+            if (Empleado.getCedula().equals((String) jTable1.getValueAt(row, 2))){
+                
+                jTextField3.setText(Empleado.getNombre());
+                jTextField4.setText(Empleado.getApellido());
+                jTextField5.setText(Empleado.getCedula());
+                
+                if (Empleado.getCargo() == 'V'){
+                    jTextField6.setText("Vendedor");
+                }else{
+                    jTextField6.setText("Despedido");
+                }
+                
+                EmpleadoSelecionado=Empleado;
+                
+                }   
+            
+        }
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
+        
+        tabla.setRowCount(0);
+        
+        String sta  = jComboBox1.getSelectedItem().toString();
+        
+        String busqueda = jTextField2.getText();
+        
+        
+        switch (sta){
+            case  "Cedula" :
+                    
+                for (Empleado Empleado : Empleados) {
+            
+
+                        
+                    if(Empleado.getCedula().equals(busqueda)){
+                                
+                        if (Empleado.getCargo() == 'V'){
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+                        }else{
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+                        }
+                            
+                    }
+ 
+                }
+                
+                
+                
+                
+                break;
+            case "Nombre" :
+                
+                for (Empleado Empleado : Empleados) {
+            
+
+                        
+                    if(Empleado.getNombre().equals(busqueda)){
+                                
+                        if (Empleado.getCargo() == 'V'){
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Vendedor"});
+                        }else{
+                            tabla.addRow(new Object[]{   Empleado.getNombre(),Empleado.getApellido(),Empleado.getCedula(),"Despedido"});
+                        }
+                            
+                    }
+ 
+                }
+                
+                
+                
+                
+                
+                break;
+        }
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_jButton2MouseClicked
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

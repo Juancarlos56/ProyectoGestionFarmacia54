@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public class Cliente extends Persona{
+    
     private String cedula;
     private String tlfConvencional;
     private String tlfCelular;

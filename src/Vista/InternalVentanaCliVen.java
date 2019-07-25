@@ -348,9 +348,9 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
         listarPersonas();
 
     }//GEN-LAST:event_agregarClienteActionPerformed
-
+//HEYASD ASDJASJDAS JLDJLASDJASLDASD AQUI ARREGLAR
     private void btnDirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDirMouseClicked
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones();
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(null);
         ved.setVisible(true);
     }//GEN-LAST:event_btnDirMouseClicked
 

@@ -5,11 +5,13 @@
  */
 package Controlador;
 
+
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
 import Modelo.Producto;
 import Modelo.SubCategoria;
 import java.util.ArrayList;
+
 
 /**
  *
@@ -17,6 +19,10 @@ import java.util.ArrayList;
  */
 public class ControladorProductos {
 
+
+
+
+// Bueno.. Yo no utilizo esto Asi que GG Juan (Lo voy a dejar aqui por si acaso)
     private ArrayList<Categoria> categorias;
     private SentenciasCRUD st;
 
@@ -60,5 +66,6 @@ public class ControladorProductos {
         p.setUnidadVenta("tabletas");
         return p;
     }
+
     
 }

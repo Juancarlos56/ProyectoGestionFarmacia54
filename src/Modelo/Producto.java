@@ -21,12 +21,12 @@ public class Producto {
     private int stock;
     private double pctDescuento; 
     private double precioUnitario;
-    private char[] origen;
+    private char/*[]*/ origen;
     private char estado;
 
     public Producto() {
         compras = new ArrayList<>();
-        origen = new char[2];
+        //origen = new char[2];
     }
 
     public String getCodigoBarras() {
@@ -102,11 +102,11 @@ public class Producto {
         this.compras = compras;
     }
 
-    public char[] getOrigen() {
+    public char /*[]*/ getOrigen() {
         return origen;
     }
 
-    public void setOrigen(char[] origen) {
+    public void setOrigen(char/*[]*/origen) {
         this.origen = origen;
     }
 
