@@ -135,7 +135,7 @@ public class SentenciasCRUD {
                 Categoria c = new Categoria();
                 
                 c.setId(resultado.getInt("CAT_ID"));
-                c.setNombreSubCategoria(resultado.getString("CAT_NOMBRE"));
+                c.setNombreCategoria(resultado.getString("CAT_NOMBRE"));
                 
                 Categorias.add(c);
                 
@@ -233,7 +233,7 @@ public class SentenciasCRUD {
     }
     
     
-    public void cargarClientes(Conexion con) {
+    public ArrayList<Cliente> cargarClientes(Conexion con) {
         
         try{                                                    //aqui van las consultas
             sentencia = con.getConexion().prepareStatement("select * from PFC_CLIENTES");
@@ -257,11 +257,14 @@ public class SentenciasCRUD {
                 
                 Clientes.add(c);    
             }
+            
+            return Clientes;
         }catch(SQLException e){
             e.printStackTrace();
-        }   
+            return null;
+        }  
         
-    }    
+    }        
 
     /*public void cargarDireciones(Conexion con) {
         

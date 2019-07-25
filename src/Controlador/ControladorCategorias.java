@@ -42,10 +42,11 @@ public class ControladorCategorias {
     
             
             
-    public void cargarCategorias(){
+    public ArrayList<Categoria> cargarCategorias(){
        
         ArrayList<Categoria> c = cb.obtenerCategorias();
         categorias = c;
+        return categorias;
         
         
     }
@@ -69,7 +70,7 @@ public class ControladorCategorias {
     
     }
 
-
+    
 
     
 }

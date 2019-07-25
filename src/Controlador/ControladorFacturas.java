@@ -7,6 +7,7 @@ package Controlador;
 
 import Modelo.Empleado;
 import Modelo.FacturaCabecera;
+import Modelo.Producto;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class ControladorFacturas {
     private ArrayList<FacturaCabecera> facturasCabeceras;
 
     public ControladorFacturas() {
-        this.empleados = new ControladorEmpleados();
+        //this.empleados = new ControladorEmpleados();
         this.clientes = new ControladorClientes();
         this.direcciones = new ControladorDirecciones();
         this.productos = new ControladorProductos();
@@ -70,4 +71,15 @@ public class ControladorFacturas {
         }
         return null;
     }
+    
+    public Double calcularSubtotalFacturaDetalle(Producto pro, int cantidadCompra){
+        Double subT = pro.getPrecioUnitario()*cantidadCompra;
+        return subT;
+    }
+    
+    public Double calcularDescuentoFacturaDetalle(Producto pro, Double subT){
+        Double desc = (pro.getPrecioUnitario() * pro.getPctDescuento())/100;
+        return desc;
+    }
+    
 }

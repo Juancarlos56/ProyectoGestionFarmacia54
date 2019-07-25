@@ -8,6 +8,8 @@ package Vista;
 import Controlador.ControladorEmpleados;
 import Controlador.ControladorValidaciones;
 import Modelo.Empleado;
+import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +23,7 @@ public class VentanaLogin extends javax.swing.JFrame {
     /**
      * Creates new form VentanaLogin
      */
-    public VentanaLogin() {
+    public VentanaLogin() throws IOException {
         validaciones = new ControladorValidaciones();
         empleados = new ControladorEmpleados();
         initComponents();
@@ -83,7 +85,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("X");
-        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel1MouseClicked(evt);
@@ -137,7 +139,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         iniciarSeccion.setForeground(new java.awt.Color(255, 255, 255));
         iniciarSeccion.setText("Sign up");
         iniciarSeccion.setBorder(null);
-        iniciarSeccion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        iniciarSeccion.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         iniciarSeccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 iniciarSeccionActionPerformed(evt);
@@ -149,7 +151,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         inicioAdmi.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         inicioAdmi.setText("¿Desea ingresar como Administrador? Click aqui.");
         inicioAdmi.setBorder(null);
-        inicioAdmi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        inicioAdmi.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         inicioAdmi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 inicioAdmiMouseClicked(evt);
@@ -232,17 +234,23 @@ public class VentanaLogin extends javax.swing.JFrame {
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
         String username = loginID.getText().trim();
         String passwords = String.copyValueOf(password.getPassword()).trim();
-        Boolean validacion = validaciones.validarExistenciaEmpleado(username,passwords);
-        if (!validacion) {
-            JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-            loginID.setText("");
-            password.setText("");
-            
-        }else{
+        Boolean cedulaValida = validaciones.validarDocumento(passwords);
+        
+        if (cedulaValida) {
             Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
-            VentanaEmpleado ve = new VentanaEmpleado(empleado);
-            ve.setVisible(true);
-            dispose();
+            //No es diferente
+            if (empleado != null) {
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                loginID.setText("");
+                password.setText("");
+
+            }else{
+                VentanaEmpleado ve = new VentanaEmpleado(empleado);
+                ve.setVisible(true);
+                dispose();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Cedula Incorrecta", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 

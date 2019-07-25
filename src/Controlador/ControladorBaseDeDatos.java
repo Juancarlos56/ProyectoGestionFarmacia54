@@ -8,6 +8,7 @@ package Controlador;
 import Conexion.Conexion;
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
+import Modelo.Cliente;
 import Modelo.Empleado;
 import Modelo.Producto;
 import Modelo.Proveedor;
@@ -130,6 +131,18 @@ public class ControladorBaseDeDatos {
             con.cerrarConexion();
         }
         
+        
+    }
+    
+    public ArrayList<Cliente> obtenerClientes(){
+        
+        ArrayList<Cliente> clientes = new ArrayList<>();
+        con.conectar();
+        if(con.getConexion() !=null){
+            clientes = s.cargarClientes(con);
+            con.cerrarConexion();
+        }
+        return clientes;
         
     }
 

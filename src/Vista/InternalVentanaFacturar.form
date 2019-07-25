@@ -29,7 +29,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="1" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -78,7 +78,6 @@
                       <Component id="jPanel9" alignment="0" min="-2" pref="117" max="-2" attributes="0"/>
                       <Component id="jPanel10" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -164,8 +163,8 @@
                           <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                              <Component id="nombre" alignment="0" max="32767" attributes="0"/>
-                              <Component id="apellido" alignment="0" max="32767" attributes="0"/>
+                              <Component id="nombreEmpleado" alignment="0" max="32767" attributes="0"/>
+                              <Component id="cedulaEmpleado" alignment="0" max="32767" attributes="0"/>
                               <Component id="nombre1" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
@@ -187,12 +186,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel7" alignment="0" min="-2" pref="27" max="-2" attributes="0"/>
-                              <Component id="nombre" alignment="0" pref="33" max="32767" attributes="0"/>
+                              <Component id="nombreEmpleado" alignment="0" pref="33" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jLabel19" alignment="0" max="32767" attributes="0"/>
-                              <Component id="apellido" alignment="0" pref="30" max="32767" attributes="0"/>
+                              <Component id="cedulaEmpleado" alignment="0" pref="30" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -252,7 +251,7 @@
                     <Property name="text" type="java.lang.String" value="Nombre del Empleado: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="nombre">
+                <Component class="javax.swing.JTextField" name="nombreEmpleado">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -268,7 +267,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreEmpleadoActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel19">
@@ -283,7 +282,7 @@
                     <Property name="text" type="java.lang.String" value="Cedula del Empleado:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="apellido">
+                <Component class="javax.swing.JTextField" name="cedulaEmpleado">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -349,9 +348,9 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel5" min="-2" pref="98" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" min="-2" pref="144" max="-2" attributes="0"/>
+                                  <Component id="tipoBusquedaCliente" min="-2" pref="144" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                  <Component id="jTextField3" min="-2" pref="235" max="-2" attributes="0"/>
+                                  <Component id="txtIngresoDatoCliente" min="-2" pref="235" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -362,9 +361,9 @@
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="telefono" alignment="1" pref="256" max="32767" attributes="0"/>
-                                      <Component id="cedula" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="nombre2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="telefonoCliente" alignment="1" pref="256" max="32767" attributes="0"/>
+                                      <Component id="cedulaCliente" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="nombreCliente" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="1" attributes="0">
@@ -383,8 +382,8 @@
                                                   </Group>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="celular" alignment="0" pref="216" max="32767" attributes="0"/>
-                                                      <Component id="celular1" alignment="0" max="32767" attributes="0"/>
+                                                      <Component id="apellidoCliente" alignment="0" pref="216" max="32767" attributes="0"/>
+                                                      <Component id="celularCliente" alignment="0" max="32767" attributes="0"/>
                                                   </Group>
                                               </Group>
                                           </Group>
@@ -401,35 +400,35 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jTextField3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="jComboBox1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                              <Component id="txtIngresoDatoCliente" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="tipoBusquedaCliente" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="jLabel5" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                               <Component id="buscar" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                                   <Component id="jLabel4" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="nombre2" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                                  <Component id="nombreCliente" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel18" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                                      <Component id="celular" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                      <Component id="apellidoCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel16" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                              <Component id="cedula" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="cedulaCliente" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               <Component id="jLabel20" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
-                              <Component id="celular1" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                              <Component id="celularCliente" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel17" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                              <Component id="telefono" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
+                              <Component id="telefonoCliente" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
                               <Component id="newCliente" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
@@ -450,7 +449,7 @@
                     <Property name="text" type="java.lang.String" value="Buscar por: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="jComboBox1">
+                <Component class="javax.swing.JComboBox" name="tipoBusquedaCliente">
                   <Properties>
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="66" red="0" type="rgb"/>
@@ -458,7 +457,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="2">
                         <StringItem index="0" value="Cedula"/>
-                        <StringItem index="1" value="ID"/>
+                        <StringItem index="1" value="Nombre"/>
                       </StringArray>
                     </Property>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -469,8 +468,11 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoBusquedaClienteActionPerformed"/>
+                  </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField3">
+                <Component class="javax.swing.JTextField" name="txtIngresoDatoCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -504,6 +506,9 @@
                       <Border info="null"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscarActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="newCliente">
                   <Properties>
@@ -519,7 +524,7 @@
                     <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value="&#xbf;Desea almacenar un nuevo cliente? click aqui"/>
                     <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                      <Color id="Cursor Por defecto"/>
+                      <Color id="Hand Cursor"/>
                     </Property>
                   </Properties>
                   <Events>
@@ -535,7 +540,7 @@
                     <Property name="text" type="java.lang.String" value="Nombre: "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="nombre2">
+                <Component class="javax.swing.JTextField" name="nombreCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -550,7 +555,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombre2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreClienteActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel16">
@@ -565,7 +570,7 @@
                     <Property name="text" type="java.lang.String" value="Cedula:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="cedula">
+                <Component class="javax.swing.JTextField" name="cedulaCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -589,7 +594,7 @@
                     <Property name="text" type="java.lang.String" value=" Telefono "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="telefono">
+                <Component class="javax.swing.JTextField" name="telefonoCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -619,7 +624,7 @@
                     <Property name="text" type="java.lang.String" value="Celular:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="celular">
+                <Component class="javax.swing.JTextField" name="apellidoCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -634,7 +639,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="celular1">
+                <Component class="javax.swing.JTextField" name="celularCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="14" style="0"/>
@@ -648,6 +653,9 @@
                       </Border>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="celularClienteActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -676,24 +684,24 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="jLabel1" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel1" min="-2" pref="100" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jLabel22" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel21" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel22" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="jLabel28" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jLabel29" alignment="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cedula3" alignment="0" pref="199" max="32767" attributes="0"/>
-                                  <Component id="cedula2" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="cedula1" alignment="1" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nombrePro" min="-2" pref="199" max="-2" attributes="0"/>
+                                  <Component id="uniCompraPro" min="-2" pref="199" max="-2" attributes="0"/>
+                                  <Component id="uniVentaPro" min="-2" pref="199" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -706,18 +714,18 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cedula5" alignment="0" pref="268" max="32767" attributes="0"/>
-                                  <Component id="cedula4" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cedula6" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="ivaPro" alignment="0" pref="268" max="32767" attributes="0"/>
+                                  <Component id="precioUnitarioPro" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="stockPro" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jComboBox2" min="-2" pref="147" max="-2" attributes="0"/>
+                              <Component id="tipoBusquedaProducto" min="-2" pref="147" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" pref="234" max="-2" attributes="0"/>
+                              <Component id="txtIngresoDatosPro" min="-2" pref="234" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="buscar1" pref="222" max="32767" attributes="0"/>
+                              <Component id="buscar1" pref="214" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -727,15 +735,15 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel10" alignment="0" pref="220" max="32767" attributes="0"/>
+                                  <Component id="jLabel10" alignment="0" pref="212" max="32767" attributes="0"/>
                                   <Component id="jLabel27" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jLabel23" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="cedula7" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="cedula8" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField9" alignment="0" pref="219" max="32767" attributes="0"/>
+                                  <Component id="codBarrasPro" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="pct_descuentoPro" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="cantidadCompraPro" alignment="0" pref="219" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -750,48 +758,48 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="jComboBox2" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="tipoBusquedaProducto" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" pref="38" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel6" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula1" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula4" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="precioUnitarioPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jLabel26" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="jLabel22" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="nombrePro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel21" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula2" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jLabel24" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula5" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="ivaPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="jLabel28" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="uniCompraPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jLabel22" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula3" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                                   <Component id="jLabel25" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula6" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="stockPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="jLabel29" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="uniVentaPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="jTextField1" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
+                                  <Component id="txtIngresoDatosPro" alignment="3" min="-2" pref="38" max="-2" attributes="0"/>
                                   <Component id="buscar1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel23" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula7" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="codBarrasPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel27" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                                  <Component id="cedula8" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="pct_descuentoPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel10" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                                  <Component id="jTextField9" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                                  <Component id="cantidadCompraPro" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton1" min="-2" pref="62" max="-2" attributes="0"/>
@@ -818,7 +826,7 @@
                 <Property name="text" type="java.lang.String" value="Buscar"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="txtIngresoDatosPro">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
@@ -852,8 +860,11 @@
                   <Border info="null"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buscar1ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="tipoBusquedaProducto">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
@@ -875,6 +886,9 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tipoBusquedaProductoActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -914,9 +928,13 @@
                   </Border>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JTextField" name="jTextField9">
+            <Component class="javax.swing.JTextField" name="cantidadCompraPro">
               <Properties>
+                <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="12" style="0"/>
                 </Property>
@@ -924,64 +942,10 @@
                   <Color blue="cc" green="66" red="0" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="55"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder>
                       <Color PropertyName="color" blue="66" green="66" red="66" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField9ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Categoria:"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="cedula1">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
-                    </LineBorder>
-                  </Border>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel21">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="text" type="java.lang.String" value="Subcategoria: "/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="cedula2">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Calibri" size="14" style="0"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="0"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                    <LineBorder>
-                      <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
                     </LineBorder>
                   </Border>
                 </Property>
@@ -996,7 +960,7 @@
                 <Property name="text" type="java.lang.String" value="Nombre: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedula3">
+            <Component class="javax.swing.JTextField" name="nombrePro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1021,7 +985,7 @@
                 <Property name="text" type="java.lang.String" value="C&#xf3;digo de Barras:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedula4">
+            <Component class="javax.swing.JTextField" name="precioUnitarioPro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1046,7 +1010,7 @@
                 <Property name="text" type="java.lang.String" value="IVA: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedula5">
+            <Component class="javax.swing.JTextField" name="ivaPro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1071,7 +1035,7 @@
                 <Property name="text" type="java.lang.String" value="Stock:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedula6">
+            <Component class="javax.swing.JTextField" name="stockPro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1096,7 +1060,7 @@
                 <Property name="text" type="java.lang.String" value="Precio Unitario:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedula7">
+            <Component class="javax.swing.JTextField" name="codBarrasPro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1121,7 +1085,7 @@
                 <Property name="text" type="java.lang.String" value="Porcentaje de Descuento"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="cedula8">
+            <Component class="javax.swing.JTextField" name="pct_descuentoPro">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -1137,8 +1101,58 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cedula8ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pct_descuentoProActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel28">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Calibri" size="14" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Unidad de Compra"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="uniCompraPro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Calibri" size="14" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel29">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Calibri" size="14" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Unidad de Venta"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="uniVentaPro">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Calibri" size="14" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
+                    <LineBorder>
+                      <Color PropertyName="color" blue="cc" green="cc" red="cc" type="rgb"/>
+                    </LineBorder>
+                  </Border>
+                </Property>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>
@@ -1163,9 +1177,9 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="845" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane3" alignment="1" pref="845" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" alignment="0" pref="845" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1175,7 +1189,7 @@
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane3" min="-2" pref="227" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="25" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -1194,7 +1208,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="jTable3">
+                <Component class="javax.swing.JTable" name="tablaDetalles">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="cc" green="66" red="0" type="rgb"/>
@@ -1244,15 +1258,16 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="jButton3" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel21" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel12" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel13" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
@@ -1262,6 +1277,7 @@
                                   <Component id="jTextField6" alignment="0" pref="218" max="32767" attributes="0"/>
                                   <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jTextField9" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                           </Group>
@@ -1284,12 +1300,17 @@
                           <Component id="jLabel12" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jTextField5" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel21" alignment="3" min="-2" pref="24" max="-2" attributes="0"/>
+                          <Component id="jTextField9" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel13" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="jTextField6" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="30" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -1360,6 +1381,23 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField6ActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel21">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Iva Total:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="jTextField9">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Calibri" size="14" style="0"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="66"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField9ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

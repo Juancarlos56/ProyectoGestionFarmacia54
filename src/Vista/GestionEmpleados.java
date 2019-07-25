@@ -8,6 +8,7 @@ package Vista;
 import Controlador.ControladorCategorias;
 import Controlador.ControladorEmpleados;
 import Modelo.Empleado;
+import java.io.IOException;
 import java.util.ArrayList;
 //import static Vista.Principal.Empleados;
 import javax.swing.table.DefaultTableModel;
@@ -29,7 +30,7 @@ public class GestionEmpleados extends javax.swing.JInternalFrame {
     
     Empleado EmpleadoSelecionado;
     DefaultTableModel tabla;
-    public GestionEmpleados() {
+    public GestionEmpleados() throws IOException {
         initComponents();
         
         

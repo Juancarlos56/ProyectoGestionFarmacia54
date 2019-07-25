@@ -6,11 +6,15 @@
 package Vista;
 
 import Controlador.ControladorCategorias;
+import Controlador.ControladorProductos;
+import Controlador.ControladorSubcategorias;
 import Modelo.Categoria;
 import Modelo.Producto;
 import Modelo.SubCategoria;
+import java.awt.Color;
 import java.util.ArrayList;
-//import static Vista.Principal.Categorias;
+import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,12 +36,6 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     /**
      * Creates new form InternalVentanaProAdmi
      */
-    
-    ArrayList<Categoria> Categorias= new ArrayList();
-    DefaultTableModel tabla;
-    DefaultTableModel tabla2;
-    DefaultTableModel tabla3;
-    
     public InternalVentanaProVen() {
         productos = new ControladorProductos();
         categoria = new ControladorCategorias();
@@ -47,24 +45,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         modeloProductos = new DefaultTableModel();
         
         initComponents();
-
-        tabla = (DefaultTableModel) jTable1.getModel();
-        tabla2 = (DefaultTableModel) jTable5.getModel();
-        tabla3 = (DefaultTableModel) jTable2.getModel();
-        
-        Controlador.ControladorCategorias c = new ControladorCategorias();
-        c.cargarCategorias();
-        Categorias = c.getCategorias();
-        
-        
-        for (Categoria Categoria : Categorias) {
-            
-            tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreSubCategoria()});
-            
-        }
-        
-        
-
+        cargarCategorias();
     }
 
     public void cargarCategorias(){
@@ -77,7 +58,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
            categoriasPro.addColumn(columna1);
         }
         tablaCategorias.setModel(categoriasPro);
-        ArrayList<Categoria> categorias = categoria.obtenerCategorias();
+        ArrayList<Categoria> categorias = categoria.getCategorias();
         ArrayList<Object[]>  cat = new ArrayList<>();
         for (int i = 0; i < categorias.size(); i++) {
             Object[] categoria1 = new Object[]{categorias.get(i).getId(), categorias.get(i).getNombreCategoria()};
@@ -215,11 +196,9 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/lupa.png"))); // NOI18N
         jButton1.setText("Buscar");
         jButton1.setBorder(null);
-
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -290,16 +269,14 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-
-        jTable1.setToolTipText("");
-        jTable1.setRowHeight(25);
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaCategorias.setToolTipText("");
+        tablaCategorias.setRowHeight(25);
+        tablaCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable1MouseClicked(evt);
+                tablaCategoriasMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable1);
-
+        jScrollPane2.setViewportView(tablaCategorias);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -349,16 +326,14 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-
-        jTable5.setToolTipText("");
-        jTable5.setRowHeight(25);
-        jTable5.addMouseListener(new java.awt.event.MouseAdapter() {
+        tablaSubCategoria.setToolTipText("");
+        tablaSubCategoria.setRowHeight(25);
+        tablaSubCategoria.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable5MouseClicked(evt);
+                tablaSubCategoriaMouseClicked(evt);
             }
         });
-        jScrollPane6.setViewportView(jTable5);
-
+        jScrollPane6.setViewportView(tablaSubCategoria);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -390,9 +365,12 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         tablaProductos.setForeground(new java.awt.Color(255, 255, 255));
         tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
-
-
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
                 "Codigo de Barras", "Nombre", "Stock", "Precio Unitario", "IVA", "% Descuento", "Unidad de Compra", "Unidad de Venta"
@@ -453,11 +431,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -487,137 +461,131 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
+    private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane2MouseClicked
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-
-        
-        tabla2.setRowCount(0);
-        int row= jTable1.getSelectedRow();
-        
-        
-
-        
-        for (Categoria Categoria : Categorias) {
-            
-            if (Categoria.getId() == (Integer) jTable1.getValueAt(row, 0)){
-                
-                
-                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
-                    
-                    tabla2.addRow(new Object[]{subcategoria.getId(),subcategoria.getNombreSubCategoria()});
-                }
-                
-                
-            }            
+    private void tablaCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaCategoriasMouseClicked
+        int seleccion = tablaCategorias.rowAtPoint(evt.getPoint());
+        idCategoria = Integer.parseInt(String.valueOf(tablaCategorias.getValueAt(seleccion, 0)));
+        String nombreCategoria = String.valueOf(tablaCategorias.getValueAt(seleccion, 1));
+        eliminarRegistroTabla();
+        cargarSubCategoria(idCategoria, nombreCategoria);
+    }//GEN-LAST:event_tablaCategoriasMouseClicked
+   
+    private void cargarSubCategoria(int id, String nombreCategoria) {
+        ArrayList<SubCategoria> subcategorias = categoria.getCategorias(id, nombreCategoria);
+        ArrayList<Object[]>  subcat = new ArrayList<>();
+        for (int i = 0; i < subcategorias.size(); i++) {
+            Object[] categoria1 = new Object[]{subcategorias.get(i).getId(), subcategorias.get(i).getNombreSubCategoria()};
+            subcat.add(categoria1);
         }
         
-        
+        for (Object[] cat1 : subcat) {
+            subCategoriasPro.addRow(cat1);
+        }
+        this.tablaSubCategoria.setModel(subCategoriasPro);
+    }
+ 
+    private void tablaSubCategoriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaSubCategoriaMouseClicked
+        int seleccion = tablaSubCategoria.rowAtPoint(evt.getPoint());
+        idSubCategoria = Integer.parseInt(String.valueOf(tablaSubCategoria.getValueAt(seleccion, 0)));
+        String nombreSubCategoria = String.valueOf(tablaSubCategoria.getValueAt(seleccion, 1));
+        eliminarRegistroTablaProducto();
+        cargarProductosSubCat(idSubCategoria, nombreSubCategoria);
+    }//GEN-LAST:event_tablaSubCategoriaMouseClicked
 
-
-         
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        String seleccionado = jComboBox1.getSelectedItem().toString();
         
-
-
+        if (seleccionado.equalsIgnoreCase("jcomboCodigo Barras")== true) {
+            tipoBusqueda = "jcomboCodigo Barras";
+        }
         
-    }//GEN-LAST:event_jTable1MouseClicked
+        if (seleccionado.equalsIgnoreCase("Nombre") == true) {
+            tipoBusqueda = "jcomboNombre";
+        }
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jTable5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable5MouseClicked
-        
-        tabla3.setRowCount(0);
-        int row= jTable5.getSelectedRow();
-        
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (tipoBusqueda.equalsIgnoreCase("jcomboCodigo Barras")== true) {
+            eliminarRegistroTablaProducto();
+            Producto pro = productos.buscarProductoPorCodBarras(txtBuscarPor.getText().trim());
+            if (pro != null) {
+                ArrayList<Object[]>  prod = new ArrayList<>();
+                Object[] producto = new Object[]{pro.getCodigoBarras(),pro.getNombre(), pro.getStock(),
+                                            pro.getPrecioUnitario(), pro.getIva(), pro.getPctDescuento(),
+                                            pro.getUnidadCompra(), pro.getUnidadVenta()};
+                prod.add(producto);
 
-        
-        for (Categoria Categoria : Categorias) {
-            
-            for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
-                
-                if (subcategoria.getId() == (Integer) jTable5.getValueAt(row, 0)){
-                
-                    for (Producto producto : subcategoria.getProductos()) {
-                        
-                        tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
-                            producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
-                            producto.getUnidadVenta()});
-                        
-                    }
-                
-                
-                }   
-                
-                
+                for (Object[] pro1 : prod) {
+                    modeloProductos.addRow(pro1);
+                }
+                this.tablaProductos.setModel(modeloProductos);
+            }else{
+                JOptionPane.showMessageDialog(null, "El Producto no Existe", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
             }
-            
-            
         }
         
-        
-        
-    }//GEN-LAST:event_jTable5MouseClicked
+        if (tipoBusqueda.equalsIgnoreCase("jcomboNombre") == true) {
+            eliminarRegistroTablaProducto();
+            Producto pro = productos.buscarProductoPorNombre(txtBuscarPor.getText().trim());
+            if (pro != null) {
+                ArrayList<Object[]>  prod = new ArrayList<>();
+                Object[] producto = new Object[]{pro.getCodigoBarras(),pro.getNombre(), pro.getStock(),
+                                            pro.getPrecioUnitario(), pro.getIva(), pro.getPctDescuento(),
+                                            pro.getUnidadCompra(), pro.getUnidadVenta()};
+                prod.add(producto);
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        
-        tabla3.setRowCount(0);
-        
-        String sta  = jComboBox1.getSelectedItem().toString();
-        
-        String busqueda = jTextField1.getText();
-        
-        
-        switch (sta){
-            case "Codigo Barras" :
-                    
-                for (Categoria Categoria : Categorias) {
-            
-                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
-
-                        for (Producto producto : subcategoria.getProductos()) {
-                        
-                            if(producto.getCodigoBarras().equals(busqueda)){
-                                
-                                tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
-                                    producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
-                                    producto.getUnidadVenta()});
-                            
-                            }
-                        }
-                    }   
+                for (Object[] pro1 : prod) {
+                    modeloProductos.addRow(pro1);
                 }
-                
-                
-                
-                
-                break;
-            case "Nombre" :
-                for (Categoria Categoria : Categorias) {
-            
-                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
-
-                        for (Producto producto : subcategoria.getProductos()) {
-                        
-                            if(producto.getNombre().equals(busqueda)){
-                                
-                                tabla3.addRow(new Object[]{   producto.getCodigoBarras(), Categoria.getNombreSubCategoria(),subcategoria.getNombreSubCategoria(),
-                                    producto.getNombre(), producto.getStock(),producto.getPrecioUnitario(), producto.getIva(),producto.getPctDescuento(),producto.getUnidadCompra(),
-                                    producto.getUnidadVenta()});
-                            
-                            }
-                        }
-                    }   
-                }
-                
-                
-                
-                
-                
-                break;
+                this.tablaProductos.setModel(modeloProductos);
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+    
+    private void cargarProductosSubCat(int id, String nombreSubCategoria) {
+        ArrayList<Producto> listaProductos = null;
+        Categoria cat = categoria.buscarCategoria(idCategoria);
+        for (int i = 0; i < cat.getSubcategorias().size(); i++) {
+            if (cat.getSubcategorias().get(i).getId() == id) {
+                listaProductos = subcategoria.obtenerProductosSubCategoria(cat.getSubcategorias().get(i));
+            } 
         }
         
+        ArrayList<Object[]>  prod = new ArrayList<>();
+        for (int i = 0; i < listaProductos.size(); i++) {
+            Object[] pro = new Object[]{listaProductos.get(i).getCodigoBarras(),listaProductos.get(i).getNombre(), listaProductos.get(i).getStock(),
+                                                listaProductos.get(i).getPrecioUnitario(), listaProductos.get(i).getIva(), listaProductos.get(i).getPctDescuento(),
+                                                listaProductos.get(i).getUnidadCompra(), listaProductos.get(i).getUnidadVenta()};
+            prod.add(pro);
+        }
         
-    }//GEN-LAST:event_jButton1MouseClicked
-
-
-
+        for (Object[] pro1 : prod) {
+            modeloProductos.addRow(pro1);
+        }
+        this.tablaProductos.setModel(modeloProductos);
+    
+    }
+    
+    public void eliminarRegistroTabla(){
+        DefaultTableModel tb = (DefaultTableModel) tablaSubCategoria.getModel();
+        int a = tablaSubCategoria.getRowCount()-1;
+        for (int i = a; i >= 0; i--) {           
+        tb.removeRow(tb.getRowCount()-1);
+        } 
+        eliminarRegistroTablaProducto();
+    }
+    
+    public void eliminarRegistroTablaProducto(){
+        DefaultTableModel tb = (DefaultTableModel) tablaProductos.getModel();
+        int a = tablaProductos.getRowCount()-1;
+        for (int i = a; i >= 0; i--) {           
+        tb.removeRow(tb.getRowCount()-1);
+        } 
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox jComboBox1;

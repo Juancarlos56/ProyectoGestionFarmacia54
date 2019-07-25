@@ -6,6 +6,9 @@
 package Vista;
 
 //import Controlador.ClasedeAlmacenamientoTemporal;
+
+import java.io.IOException;
+
 //import Controlador.ControladorBaseDeDatos;
 //import Modelo.Categoria;
 //import Modelo.Cliente;
@@ -32,7 +35,7 @@ public class Principal {
     
     
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
 
         //System.out.println("Hola mundo Juan rama");
