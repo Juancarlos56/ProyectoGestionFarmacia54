@@ -33,14 +33,10 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     String dTipo;
     DefaultTableModel tabla;
     
-    public VentanaEmergenteDirecciones( String tipo) {
+    public VentanaEmergenteDirecciones(Cliente clt) {
         initComponents();
         setLocationRelativeTo(null);
-        
-        
-    }
-
-    VentanaEmergenteDirecciones(Cliente cli) {
+        //dTipo = tipo;
         
     }
     
@@ -81,10 +77,10 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        nombre = new javax.swing.JTextField();
-        cedula = new javax.swing.JTextField();
+        principal = new javax.swing.JTextField();
+        secundaria = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        telefono = new javax.swing.JTextField();
+        ciudad = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         agregarCliente = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -103,26 +99,26 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Ingresar Calle Principal");
 
-        nombre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        nombre.addActionListener(new java.awt.event.ActionListener() {
+        principal.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        principal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        principal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        principal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombreActionPerformed(evt);
+                principalActionPerformed(evt);
             }
         });
 
-        cedula.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        cedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        secundaria.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        secundaria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        secundaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Ingresar Ciudad ");
 
-        telefono.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        ciudad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        ciudad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        ciudad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -151,9 +147,9 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                    .addComponent(cedula)
-                    .addComponent(telefono))
+                    .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(secundaria)
+                    .addComponent(ciudad))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -165,18 +161,18 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombre)
+                    .addComponent(principal)
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(secundaria, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(telefono, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addComponent(ciudad, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -281,29 +277,29 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+    private void principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombreActionPerformed
+    }//GEN-LAST:event_principalActionPerformed
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
         
         switch (dTipo){
             case "nuevo":
-//                String callep = nombre.getText();
-//                String calles = cedula.getText();
-//                String ciudad = telefono.getText();
-//                
-//                if ((nombre.getText().equals("")) || (cedula.getText().equals(""))|| (telefono.getText().equals(""))) {
-//                    JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
-//                    
-//                }else {
-//                    
-//                    DireccionesTemp.addDirec(callep,calles,ciudad);
-//                    
-//                    tabla.addRow(new Object[]{ciudad,callep,calles}); 
-//                    
-//                }
-//        
+                String callep = principal.getText();
+                String calles = secundaria.getText();
+                String ciudades = ciudad.getText();
+                
+                if ((principal.getText().equals("")) || (secundaria.getText().equals(""))|| (ciudad.getText().equals(""))) {
+                    JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
+                    
+                }else {
+                    
+                    DireccionesTemp.addDirec(callep,calles,ciudades);
+                    
+                    tabla.addRow(new Object[]{ciudad,callep,calles}); 
+                    
+                }
+        
                 
                 
                 
@@ -371,15 +367,15 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JButton btnUtilizarDireccionExistente;
-    private javax.swing.JTextField cedula;
+    private javax.swing.JTextField ciudad;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField nombre;
+    private javax.swing.JTextField principal;
+    private javax.swing.JTextField secundaria;
     private javax.swing.JTable tablaDirecciones;
-    private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

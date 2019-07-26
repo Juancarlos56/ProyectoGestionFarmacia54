@@ -74,9 +74,9 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="nombre" alignment="0" pref="252" max="32767" attributes="0"/>
-                      <Component id="cedula" alignment="0" max="32767" attributes="0"/>
-                      <Component id="telefono" alignment="0" max="32767" attributes="0"/>
+                      <Component id="principal" alignment="0" pref="252" max="32767" attributes="0"/>
+                      <Component id="secundaria" alignment="0" max="32767" attributes="0"/>
+                      <Component id="ciudad" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -92,7 +92,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="nombre" alignment="0" max="32767" attributes="0"/>
+                      <Component id="principal" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel4" min="-2" pref="27" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="9" max="32767" attributes="0"/>
@@ -101,12 +101,12 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel7" min="-2" pref="26" max="-2" attributes="0"/>
-                      <Component id="cedula" min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="secundaria" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel6" max="32767" attributes="0"/>
-                      <Component id="telefono" pref="28" max="32767" attributes="0"/>
+                      <Component id="ciudad" pref="28" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="agregarCliente" min="-2" pref="36" max="-2" attributes="0"/>
@@ -125,7 +125,7 @@
             <Property name="text" type="java.lang.String" value="Ingresar Calle Principal"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="nombre">
+        <Component class="javax.swing.JTextField" name="principal">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="14" style="0"/>
@@ -140,10 +140,10 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nombreActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="principalActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="cedula">
+        <Component class="javax.swing.JTextField" name="secundaria">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="14" style="0"/>
@@ -167,7 +167,7 @@
             <Property name="text" type="java.lang.String" value="Ingresar Ciudad "/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="telefono">
+        <Component class="javax.swing.JTextField" name="ciudad">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Calibri" size="14" style="0"/>
