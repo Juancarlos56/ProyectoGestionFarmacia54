@@ -119,5 +119,13 @@ public class ControladorBaseDeDatos {
         return clientes;
         
     }
+
+    public void agregarNuevoCliente(Cliente cliente) {
+        con.conectar();
+        if(con.getConexion() !=null){
+            s.agregarNuevoClientes(con, cliente);
+            con.cerrarConexion();
+        }
+    }
     
 }

@@ -6,6 +6,7 @@
 package Conexion;
 
 import Modelo.Categoria;
+import Modelo.Ciudad;
 import Modelo.Cliente;
 import Modelo.Direccion;
 import Modelo.Empleado;
@@ -32,14 +33,15 @@ import oracle.jdbc.OracleResultSet;
 public class SentenciasCRUD {
     private ResultSet resultado = null;
     private PreparedStatement sentencia = null;
-
+    private PreparedStatement busqueda = null;
+    
     ArrayList<Categoria> Categorias= new ArrayList();
     
     ArrayList<Empleado> Empleados= new ArrayList();
     
     ArrayList<Cliente> Clientes= new ArrayList();
     
-    
+    ArrayList<Ciudad> Ciudades = new ArrayList<>();
     
     
     
@@ -235,8 +237,6 @@ public class SentenciasCRUD {
         try{                                                    //aqui van las consultas
             sentencia = con.getConexion().prepareStatement("select * from PFC_CLIENTES");
             
-            
-            
             resultado = sentencia.executeQuery();
             
             // Se Presenta el resultado
@@ -251,57 +251,61 @@ public class SentenciasCRUD {
                 c.setApellido(resultado.getString("CLI_APELLIDO"));
                 c.setTlfConvencional(resultado.getString("CLI_TELEFONO_CONVENCIONAL"));
                 c.setTlfCelular(resultado.getString("CLI_TELEFONO_CELULAR"));
-                
-                Clientes.add(c);    
+                Clientes.add(c);  
+                //cargarCiudades(con);
+                //cargarDirecciones(con);
             }
             
             return Clientes;
         }catch(SQLException e){
             e.printStackTrace();
             return null;
-        }  
-        
-    }    
-
-    /*public void cargarDireciones(Conexion con) {
-        
-        try{                                                    //aqui van las consultas
-            sentencia = con.getConexion().prepareStatement("select DIR_ID, DIR_CALLE_PRINCIPAL,DIR_CALLE_SECUNDARIA,CLI_ID,CUI_NOMBRE\n" +
-                                                                "from PFC_DIRECCIONES, PFC_CIUDADES\n" +
-                                                                "where PFC_CIUDADES.CUI_ID = PFC_DIRECCIONES.CUI_ID;");
-
+        } 
+    }  
+    
+    private void cargarCiudades(Conexion con) {
+        try {
+            sentencia = con.getConexion().prepareStatement("select * from PFC_CIUDADES ");
             resultado = sentencia.executeQuery();
-            
-            // Se Presenta el resultado
-            
-            while (resultado.next()){
+            while (resultado.next()) {                
+                Ciudad c = new Ciudad();
+                c.setId(resultado.getInt("CUI_ID"));
+                c.setNombre(resultado.getString("CUI_NOMBRE"));
+                Ciudades.add(c);     
+            }
+        } catch (Exception e) {
+        }
+    }
+    
+    
+    private void cargarDirecciones(Conexion con) {
+        try {
+            sentencia = con.getConexion().prepareStatement("SELECT * FROM PFC_DIRECCIONES ");
+            resultado = sentencia.executeQuery();
+            while (resultado.next()) { 
                 
                 Direccion d = new Direccion();
-                
+                d.setCallePrincipal(resultado.getString("DIR_CALLE_PRINCIPAL"));
+                d.setCalleSecundaria(resultado.getString("DIR_CALLE_SECUNDARIA"));
                 d.setId(resultado.getInt("DIR_ID"));
-                d.setCiudadNombre( resultado.getString("CUI_NOMBRE") );
-                d.setCallePrincipal( resultado.getString("DIR_CALLE_PRINCIPAL") );
-                d.setCalleSecundaria( resultado.getString("DIR_CALLE_SECUNDARIA") );
                 
-                for (Cliente Cliente : Clientes) {
-                    
-                    if (Cliente.getId() == resultado.getInt("CLI_ID")) {
-                     
-                        Cliente.addDirecciones(d);
-                        
-                    }
+                for (int i = 0; i < Ciudades.size(); i++) {
+                    if (Ciudades.get(i).getId() == resultado.getInt("CUI_ID")) {
+                        d.setCiudad(Ciudades.get(i));
+                    }   
                 }
                 
+                for (int i = 0; i < Clientes.size(); i++) {
+                    if (Clientes.get(i).getId() == resultado.getInt("CLI_ID")) {
+                        Clientes.get(i).addDirecciones(d);
+                    }   
+                }
                 
             }
-            
-        }catch(SQLException e){
-            e.printStackTrace();
-        }   
-        
-        
-    }*/
-    
+        } catch (Exception e) {
+        }
+    }
+
     public void cargarFacturas(Conexion con) {
         
         try{                                                    //aqui van las consultas
@@ -377,11 +381,28 @@ public class SentenciasCRUD {
         
         
     }
-    
-    
-    
-    
-    
+
+    public void agregarNuevoClientes(Conexion con, Cliente cliente) {
+        
+        
+        try{
+            
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_CLIENTES VALUES(cli_id_seq.NEXTVAL, ?, ?, ?, ?, ?)");
+            
+            sentencia.setString(1, cliente.getCedula());
+            sentencia.setString(2, cliente.getNombre());
+            sentencia.setString(3, cliente.getApellido());
+            sentencia.setString(4, cliente.getTlfConvencional());
+            sentencia.setString(5, cliente.getTlfCelular());
+          
+            //Ejecutar INSERT
+            sentencia.executeUpdate();
+            con.getConexion().commit();
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
     
     
 }

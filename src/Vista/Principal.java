@@ -5,6 +5,8 @@
  */
 package Vista;
 
+import java.io.IOException;
+
 /**
  *
  * @author Carlos
@@ -14,7 +16,7 @@ public class Principal {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         // TODO code application logic here
         VentanaLogin v = new VentanaLogin();
         v.setVisible(true);

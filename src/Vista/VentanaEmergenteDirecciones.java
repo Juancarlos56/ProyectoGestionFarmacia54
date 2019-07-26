@@ -5,19 +5,61 @@
  */
 package Vista;
 
+import Controlador.ControladorDirecciones;
+import Modelo.Cliente;
+import Modelo.Direccion;
+import Modelo.FacturaCabecera;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Carlos
  */
 public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
+    private Controlador.ControladorClientes cc;
+    private FacturaCabecera fc;
+    private Cliente cl;
+    private DefaultTableModel direcciones;
     /**
      * Creates new form VentanaEmergenteDirecciones
      */
-    public VentanaEmergenteDirecciones() {
+    public VentanaEmergenteDirecciones(Cliente cl) {
+        direcciones = new DefaultTableModel();
+        cc = new Controlador.ControladorClientes();
+        this.cl = cl;
+        this.fc = fc;
         initComponents();
         setLocationRelativeTo(null);
+        cargarModeloTabla();
     }
+    
+    public void cargarModeloTabla(){
+        
+        ArrayList<Object> columna = new ArrayList<>();
+        columna.add("Ciudad");
+        columna.add("Calle Principal");
+        columna.add("Calle Secundaria");
+        
+        for (Object columna1 : columna) {
+           direcciones.addColumn(columna1);
+        }
+        tablaDirecciones.setModel(direcciones);
+        ArrayList<Object[]>  dir = new ArrayList<>(); 
+        for (int i = 0; i < cl.getDirecciones().size(); i++) {
+                Object[] d = new Object[]{cl.getDirecciones().get(i).getCiudad().getNombre(),cl.getDirecciones().get(i).getCallePrincipal(),
+                                      cl.getDirecciones().get(i).getCalleSecundaria()};
+                dir.add(d);
+            
+        }
+        
+        for (Object[] det : dir) {
+            direcciones.addRow(det);
+        }
+        this.tablaDirecciones.setModel(direcciones);
+    } 
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,9 +79,9 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         agregarCliente = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
-        agregarCliente2 = new javax.swing.JButton();
+        btnUtilizarDireccionExistente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaDirecciones = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -104,10 +146,10 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                     .addComponent(cedula)
                     .addComponent(telefono))
                 .addContainerGap())
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(127, 127, 127))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,23 +176,24 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         jPanel7.setBackground(new java.awt.Color(255, 255, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)), "Buscar Ciudad", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Calibri", 0, 14))); // NOI18N
 
-        agregarCliente2.setBackground(new java.awt.Color(0, 102, 255));
-        agregarCliente2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        agregarCliente2.setForeground(new java.awt.Color(255, 255, 255));
-        agregarCliente2.setText("Utilizar esta Dirección");
-        agregarCliente2.setBorder(null);
-        agregarCliente2.addActionListener(new java.awt.event.ActionListener() {
+        btnUtilizarDireccionExistente.setBackground(new java.awt.Color(0, 102, 255));
+        btnUtilizarDireccionExistente.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        btnUtilizarDireccionExistente.setForeground(new java.awt.Color(255, 255, 255));
+        btnUtilizarDireccionExistente.setText("Utilizar esta Dirección");
+        btnUtilizarDireccionExistente.setBorder(null);
+        btnUtilizarDireccionExistente.setEnabled(false);
+        btnUtilizarDireccionExistente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregarCliente2ActionPerformed(evt);
+                btnUtilizarDireccionExistenteActionPerformed(evt);
             }
         });
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setBackground(new java.awt.Color(0, 102, 204));
-        jTable1.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(255, 255, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaDirecciones.setBackground(new java.awt.Color(0, 102, 204));
+        tablaDirecciones.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
+        tablaDirecciones.setForeground(new java.awt.Color(255, 255, 255));
+        tablaDirecciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -177,9 +220,14 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jTable1.setRowHeight(25);
-        jScrollPane1.setViewportView(jTable1);
+        tablaDirecciones.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tablaDirecciones.setRowHeight(25);
+        tablaDirecciones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaDireccionesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tablaDirecciones);
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -191,7 +239,7 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(150, 150, 150)
-                .addComponent(agregarCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUtilizarDireccionExistente, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -200,7 +248,7 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(agregarCliente2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnUtilizarDireccionExistente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(6, 6, 6))
         );
 
@@ -231,49 +279,32 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
     }//GEN-LAST:event_agregarClienteActionPerformed
 
-    private void agregarCliente2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarCliente2ActionPerformed
+    private void btnUtilizarDireccionExistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtilizarDireccionExistenteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_agregarCliente2ActionPerformed
+    }//GEN-LAST:event_btnUtilizarDireccionExistenteActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteDirecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteDirecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteDirecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteDirecciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+    private void tablaDireccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDireccionesMouseClicked
+        btnUtilizarDireccionExistente.setEnabled(true);
+        int seleccion = tablaDirecciones.rowAtPoint(evt.getPoint());
+        String ciudad = String.valueOf(tablaDirecciones.getValueAt(seleccion, 1));
+        String callePrincipal = String.valueOf(tablaDirecciones.getValueAt(seleccion, 2));
+        String calleSecundaria = String.valueOf(tablaDirecciones.getValueAt(seleccion, 3));
+        
+//        for (int i = 0; i < cl.getDirecciones().size(); i++) {
+//            for (int j = 0; j < cl.getDirecciones().get(i).getCiudades().size(); j++) {
+//                if (cl.getDirecciones().get(i).getCiudades().get(j).getNombre().equalsIgnoreCase(ciudad) == true) {
+//                    Direccion auxD = cl.getDirecciones().get(i);
+//                }
+//            } 
+//        }
+//        
+//        
+    }//GEN-LAST:event_tablaDireccionesMouseClicked
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaEmergenteDirecciones().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
-    private javax.swing.JButton agregarCliente2;
+    private javax.swing.JButton btnUtilizarDireccionExistente;
     private javax.swing.JTextField cedula;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
@@ -281,8 +312,8 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField nombre;
+    private javax.swing.JTable tablaDirecciones;
     private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

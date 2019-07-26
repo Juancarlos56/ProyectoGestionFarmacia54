@@ -9,6 +9,9 @@ import Modelo.Empleado;
 import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JDesktopPane;
 
@@ -195,9 +198,13 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_productosMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        VentanaLogin vl = new VentanaLogin();
-        vl.setVisible(true);
-        dispose();
+        try {
+            VentanaLogin vl = new VentanaLogin();
+            vl.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void anularFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anularFacturaMouseClicked
