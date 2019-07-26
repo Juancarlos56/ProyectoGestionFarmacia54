@@ -233,16 +233,20 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
         Boolean cedulaValida = validaciones.validarDocumento(passwords);
         
         if (cedulaValida) {
-            Empleado empleado = empleados.buscarEmpleadoLoginAdmi(username, passwords);
-            //No es diferente
-            if (empleado == null) {
-                JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
-                nombre.setText("");
-                cedula.setText("");
-            }else{
-                VentanaPrincipalAdministrador vpa= new VentanaPrincipalAdministrador(empleado);
-                vpa.setVisible(true);
-                dispose();
+            try {
+                Empleado empleado = empleados.buscarEmpleadoLoginAdmi(username, passwords);
+                //No es diferente
+                if (empleado == null) {
+                    JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                    nombre.setText("");
+                    cedula.setText("");
+                }else{
+                    VentanaPrincipalAdministrador vpa= new VentanaPrincipalAdministrador(empleado);
+                    vpa.setVisible(true);
+                    dispose();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaAdministradorLogin.class.getName()).log(Level.SEVERE, null, ex);
             }
         }else{
             JOptionPane.showMessageDialog(null, "Cedula Incorrecta", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
@@ -262,7 +266,13 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
-        System.exit(0);
+        try {
+            VentanaLogin vl = new VentanaLogin();
+            vl.setVisible(true);
+            dispose();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaAdministradorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jLabel1MouseClicked
 
 
