@@ -17,17 +17,17 @@ import javax.swing.JOptionPane;
  * @author Carlos
  */
 public class VentanaEmergenteCliente extends javax.swing.JFrame {
-
+    private Controlador.ControladorClientes cl;
+    private Cliente c;
+    private ControladorValidaciones v;
     /**
      * Creates new form VentanaEmergenteCliente
      */
-    
-    
-    Controlador.ControladorValidaciones v;
-    public VentanaEmergenteCliente() {
+    public VentanaEmergenteCliente(Controlador.ControladorClientes cl) {
         initComponents();
-        v= new ControladorValidaciones();
+        v = new ControladorValidaciones();
         setLocationRelativeTo(null);
+        this.cl = cl;
     }
 
     /**
@@ -54,7 +54,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         celular = new javax.swing.JTextField();
         agregarCliente = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnDireccion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cliente");
@@ -158,13 +158,14 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 255));
-        jButton1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 102, 204));
-        jButton1.setText("Ingresar Direccion");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnDireccion.setBackground(new java.awt.Color(255, 255, 255));
+        btnDireccion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        btnDireccion.setForeground(new java.awt.Color(0, 102, 204));
+        btnDireccion.setText("Ingresar Direccion");
+        btnDireccion.setEnabled(false);
+        btnDireccion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnDireccionActionPerformed(evt);
             }
         });
 
@@ -191,7 +192,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
                             .addComponent(celular)))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(jButton1)
+                        .addComponent(btnDireccion)
                         .addGap(54, 54, 54)
                         .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(50, Short.MAX_VALUE))
@@ -223,7 +224,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(agregarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(55, 55, 55))
         );
 
@@ -292,27 +293,13 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-
-        //Validacion de cedula
-        Boolean Pol = v.validarDocumento(cedula.getText());
-        
-        /*if ((nombre.getText().equals("")) || (apellido.getText().equals("")) || (cedula.getText().equals("")) || (telefono.getText().equals("")) || (celular.getText().equals(""))) {
-            JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
-        } else if(Pol==false){
-            JOptionPane.showMessageDialog(null,"La cedula ingresada no es valida");
-        }else {
-                    
-            ControlCliente.newC(nombre.getText(),apellido.getText(),cedula.getText(),telefono.getText(),celular.getText());
-            
-            
-            ControlCliente.cargarNenFactura();
-            
-            dispose();
-        };*/ 
-        
-        
-        System.out.println("FAlat");
-        
+        c = new Cliente();
+        c.setApellido(apellido.getText());
+        c.setCedula(cedula.getText());
+        c.setNombre(nombre.getText());
+        c.setTlfCelular(celular.getText());
+        c.setTlfConvencional(telefono.getText());
+        btnDireccion.setEnabled(true);
         
     }//GEN-LAST:event_agregarClienteActionPerformed
 
@@ -320,65 +307,20 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones("nuevo");
+    private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
+        VentanaEmergenteDireccionesCliente ved = new VentanaEmergenteDireccionesCliente(c);
         ved.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        c = ved.getCl();
+        cl.crearNuevoCliente(c);
+    }//GEN-LAST:event_btnDireccionActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
-    
-    
-    
-    
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaEmergenteCliente.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaEmergenteCliente().setVisible(true);
-            }
-        });
-        
-  
-
-
-        
-        
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JTextField apellido;
+    private javax.swing.JButton btnDireccion;
     private javax.swing.JTextField cedula;
     private javax.swing.JTextField celular;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

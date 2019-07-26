@@ -78,7 +78,4 @@ public class ControladorCategorias {
         cb.elimProd(categoriaSelec,subCategoriaSelec,productoSelec);
     }
 
-    
-
-    
 }

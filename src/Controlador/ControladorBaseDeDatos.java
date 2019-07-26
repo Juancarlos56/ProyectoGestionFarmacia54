@@ -13,6 +13,7 @@ import Modelo.Empleado;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import Modelo.SubCategoria;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -40,7 +41,50 @@ public class ControladorBaseDeDatos {
     }
     
     
-  
+    /*public void iniciarConexion() {
+        // TODO code application logic here
+        Conexion con = new Conexion();
+        
+        SentenciasCRUD s = new SentenciasCRUD(); 
+         
+        //Base de datos local
+        con.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
+        con.setUsername("farmacia");
+        con.setPassword("farm_123");
+        
+        con.conectar();
+        
+        
+        if(con.getConexion() !=null){
+            
+            //System.out.println("Base de datos conectada");
+            
+            s.cargarCategorias(con);
+            s.cargarSubCategorias(con);
+            s.cargarProductos(con);
+            
+            s.cargarEmpleados(con);
+            
+            s.cargarClientes(con);
+            //s.cargarDireciones(con);
+            
+            
+            
+            s.cargarFacturas(con);
+            
+            
+            //s.cargarFacturas(con);
+            
+            
+            
+            
+            con.cerrarConexion();
+            
+        
+        }
+        
+    }*/
+
     public ArrayList<Categoria> obtenerCategorias() {
     
         ArrayList<Categoria> CategoriasC= new ArrayList();
@@ -53,20 +97,6 @@ public class ControladorBaseDeDatos {
         
     }
     
-    
-    public ArrayList<Empleado> obtenerEmpleados(){
-        
-        ArrayList<Empleado> Empleados= new ArrayList();
-        
-        con.conectar();
-        if(con.getConexion() !=null){
-            Empleados=s.cargarEmpleados(con);
-            con.cerrarConexion();
-        }
-        return Empleados;
-        
-    }
-
     ArrayList<Proveedor> obtenerProveedores() {
         
         ArrayList<Proveedor> proveedores= new ArrayList();
@@ -78,7 +108,7 @@ public class ControladorBaseDeDatos {
         return proveedores;
         
     }
-
+    
     void crearProveedor(String text, String text0, String text1) {
         
         con.conectar();
@@ -89,6 +119,19 @@ public class ControladorBaseDeDatos {
             con.cerrarConexion();
         }
         
+        
+    }
+    
+    
+    public ArrayList<Empleado> obtenerEmpleados() throws IOException{
+        
+        ArrayList<Empleado> Empleados= new ArrayList<>();
+        con.conectar();
+        if(con.getConexion() !=null){
+            Empleados=s.cargarEmpleados(con);
+            con.cerrarConexion();
+        }
+        return Empleados;
         
     }
     
@@ -104,6 +147,14 @@ public class ControladorBaseDeDatos {
         
     }
 
+    public void agregarNuevoCliente(Cliente cliente) {
+        con.conectar();
+        if(con.getConexion() !=null){
+            s.agregarNuevoClientes(con, cliente);
+            con.cerrarConexion();
+        }
+    }
+    
     void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
         
         con.conectar();
@@ -190,8 +241,5 @@ public class ControladorBaseDeDatos {
     
     
     }
-    
-    
-    
     
 }

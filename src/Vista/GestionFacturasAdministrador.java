@@ -104,9 +104,11 @@ public class GestionFacturasAdministrador extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
-//        InternalVentanaFacturar ivfa = new InternalVentanaFacturar();
-//        jDesktopPane1.add(ivfa);
-//        ivfa.show();
+        
+        //Esta comentado falta enviar Empleado
+        //InternalVentanaFacturar ivfa = new InternalVentanaFacturar();
+        //jDesktopPane1.add(ivfa);
+        //ivfa.show();
     }//GEN-LAST:event_facturaActionPerformed
 
     private void anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularActionPerformed

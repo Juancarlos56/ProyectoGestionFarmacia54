@@ -5,6 +5,7 @@
  */
 package Controlador;
 
+import Modelo.Ciudad;
 import Modelo.Direccion;
 import java.util.ArrayList;
 
@@ -33,12 +34,14 @@ public class DireccionesTemp {
         
         sta.setCallePrincipal(callep);
         sta.setCalleSecundaria(calles);
-        sta.setCiudadNombre(ciudad);
+        Ciudad c = new Ciudad();
+        c.setNombre(ciudad);
+        sta.setCiudad(c);
         int t = actId();
         sta.setId( t );
         
         
-        System.out.println(sta.getCallePrincipal()+ sta.getCalleSecundaria() + sta.getCiudadNombre() + sta.getId());
+        System.out.println(sta.getCallePrincipal()+ sta.getCalleSecundaria() + sta.getCiudad().getNombre() + sta.getId());
         
         
         

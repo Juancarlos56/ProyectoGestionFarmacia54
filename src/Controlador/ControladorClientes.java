@@ -14,14 +14,17 @@ import java.util.ArrayList;
  */
 public class ControladorClientes {
     
+    private ControladorDirecciones cd;
     private ArrayList<Cliente> clientes = new ArrayList<>();
     private ControladorBaseDeDatos cb;
 
     public ControladorClientes() {
         cb = new ControladorBaseDeDatos();
-        clientes = cb.obtenerClientes();
     }
 
+    public ArrayList<Cliente> cargarClientes() {
+        return cb.obtenerClientes();
+    }
     
     public ArrayList<Cliente> getClientes() {
         return clientes;
@@ -51,6 +54,11 @@ public class ControladorClientes {
         return null;
     }
     
+    
+    public Cliente crearNuevoCliente(Cliente cliente) {
+        cb.agregarNuevoCliente(cliente);
+        return null;
+    }
     
     
     

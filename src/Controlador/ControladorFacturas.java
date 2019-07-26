@@ -73,13 +73,46 @@ public class ControladorFacturas {
     }
     
     public Double calcularSubtotalFacturaDetalle(Producto pro, int cantidadCompra){
-        Double subT = pro.getPrecioUnitario()*cantidadCompra;
+        Double subT = 0.0;
+        if (pro.getIva() == 'S') {
+            subT = ((pro.getPrecioUnitario()*cantidadCompra)*112)/100;
+            return subT;
+        }
+        
+        if (pro.getIva() == 'N') {
+            subT = pro.getPrecioUnitario()*cantidadCompra;
+            return subT;
+        }
         return subT;
     }
     
     public Double calcularDescuentoFacturaDetalle(Producto pro, Double subT){
         Double desc = (pro.getPrecioUnitario() * pro.getPctDescuento())/100;
         return desc;
+    }
+    
+    public Double calcularDescuentoTotal(FacturaCabecera fac){
+        Double desc = 0.0;
+        for (int i = 0; i < fac.getDetalle().size(); i++) {
+            desc = desc + fac.getDetalle().get(i).getDescuento();
+        }
+        return desc;
+    }
+    
+    public Double calcularSubtotalTotal(FacturaCabecera fac){
+        Double sbt = 0.0;
+        for (int i = 0; i < fac.getDetalle().size(); i++) {
+            sbt = sbt + fac.getDetalle().get(i).getSubtotal();
+        }
+        return sbt;
+    }
+    
+    public Double calcularTotal(FacturaCabecera fac){
+        Double total = 0.0;
+        for (int i = 0; i < fac.getDetalle().size(); i++) {
+            total = total + fac.getDetalle().get(i).getPrecio();
+        }
+        return total;
     }
     
 }

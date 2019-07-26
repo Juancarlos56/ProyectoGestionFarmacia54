@@ -239,7 +239,7 @@ public class VentanaLogin extends javax.swing.JFrame {
         if (cedulaValida) {
             Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
             //No es diferente
-            if (empleado != null) {
+            if (empleado == null) {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
                 loginID.setText("");
                 password.setText("");

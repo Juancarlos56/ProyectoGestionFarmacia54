@@ -16,7 +16,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
 
     //Esto es solo para una prueba
     ArrayList<Cliente> clts = new ArrayList<>();
-    
+    private Cliente clt;
     
     /**
      * Creates new form VentanaCliAdmi
@@ -143,7 +143,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
         btnDir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnDir.setText("Ingresar Direccion");
         btnDir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        btnDir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDir.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btnDirMouseClicked(evt);
@@ -294,15 +294,14 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1))
+                        .addContainerGap())))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -337,7 +336,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-        Cliente clt = new Cliente();
+        clt = new Cliente();
         clt.setId(5);
         clt.setApellido(apellido.getText());
         clt.setCedula(cedula.getText());
@@ -350,7 +349,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_agregarClienteActionPerformed
 //HEYASD ASDJASJDAS JLDJLASDJASLDASD AQUI ARREGLAR
     private void btnDirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDirMouseClicked
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(null);
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(clt);
         ved.setVisible(true);
     }//GEN-LAST:event_btnDirMouseClicked
 
