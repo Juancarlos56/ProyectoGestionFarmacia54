@@ -13,12 +13,15 @@ import java.util.ArrayList;
  */
 public class Empleado extends Persona{
     private String cedula;
-    private char cargo;
+    private char  cargo;
     private ArrayList<FacturaCabecera> facturas;
     private char estadoEmpleado;
 
+    
+    
     public Empleado() {
         super();
+        //cargo = new char[2];
         facturas = new ArrayList<>();
     }
     
@@ -54,8 +57,5 @@ public class Empleado extends Persona{
         this.estadoEmpleado = estadoEmpleado;
     }
 
-    public void getCargo(String empleado) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
     
 }

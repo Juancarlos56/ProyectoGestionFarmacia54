@@ -12,6 +12,8 @@ import Modelo.Cliente;
 import Modelo.Direccion;
 import Modelo.Empleado;
 import Modelo.Producto;
+import Modelo.Proveedor;
+import Modelo.SubCategoria;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -96,6 +98,31 @@ public class ControladorBaseDeDatos {
         
     }
     
+    ArrayList<Proveedor> obtenerProveedores() {
+        
+        ArrayList<Proveedor> proveedores= new ArrayList();
+        con.conectar();
+        if(con.getConexion() !=null){
+            proveedores=s.cargarProveedores(con);
+            con.cerrarConexion();
+        }
+        return proveedores;
+        
+    }
+    
+    void crearProveedor(String text, String text0, String text1) {
+        
+        con.conectar();
+        if(con.getConexion() !=null){
+            
+            s.crearProveedores(con,text,text0,text1);
+            
+            con.cerrarConexion();
+        }
+        
+        
+    }
+    
     
     public ArrayList<Empleado> obtenerEmpleados() throws IOException{
         
@@ -133,6 +160,93 @@ public class ControladorBaseDeDatos {
         con.conectar();
         if(con.getConexion() !=null){
             s.agregarNuevaDirecc(con, cedula,direcciones);
+            con.cerrarConexion();
+        }
+    
+    
+    }
+    
+    void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        
+        con.conectar();
+        if(con.getConexion() !=null){
+            
+            s.crearProducto(con,codigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+            
+            con.cerrarConexion();
+        }
+        
+        
+    }
+
+    void editarProducto(String ecodigoBarras,String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.editarProducto(con,ecodigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+            
+            con.cerrarConexion();
+        }
+    
+    }
+
+    void crearCompra(Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.compraProducto(con, proveedorSelec, categoriaSelec, subCategoriaSelec, productoSelec, razon, monto);
+            
+            con.cerrarConexion();
+        }
+    
+    }
+
+    void crearEmpleado(String nombre, String apellido, String cedula, String cargo) {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.crearEmpleado(con,nombre,apellido,cedula,cargo);
+            
+            con.cerrarConexion();
+        }
+    }
+
+    void editarEmpleado(String nombre, String apellido, String cedula, String cargo) {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.editarEmpleado(con,nombre,apellido,cedula,cargo);
+            
+            con.cerrarConexion();
+        }
+        
+    }
+
+    void despEmpleado(String nombre, String apellido, String cedula) {
+        
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.despEmpleado(con,nombre,apellido,cedula);
+            
+            con.cerrarConexion();
+        }
+        
+    }
+
+    void elimProd(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
+        
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.elimProd(con,categoriaSelec,subCategoriaSelec,productoSelec);
+            
             con.cerrarConexion();
         }
     

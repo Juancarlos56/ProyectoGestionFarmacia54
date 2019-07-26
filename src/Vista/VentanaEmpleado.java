@@ -65,7 +65,6 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Factura");
         setBackground(new java.awt.Color(102, 102, 255));
-        setPreferredSize(new java.awt.Dimension(1920, 1080));
         setSize(new java.awt.Dimension(1466, 657));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
@@ -192,9 +191,9 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_facturaMouseClicked
 
     private void productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productosMouseClicked
-        InternalVentanaProVen ivpv = new InternalVentanaProVen();
+        /*InternalVentanaProVen ivpv = new InternalVentanaProVen();
         escritorio.add(ivpv);
-        ivpv.show();
+        ivpv.show();*/
     }//GEN-LAST:event_productosMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -238,6 +237,8 @@ public class VentanaEmpleado extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(VentanaEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

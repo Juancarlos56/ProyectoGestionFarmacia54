@@ -7,6 +7,9 @@ package Controlador;
 
 import Modelo.Categoria;
 import Modelo.Producto;
+
+import Modelo.Proveedor;
+
 import Modelo.SubCategoria;
 import java.util.ArrayList;
 
@@ -16,88 +19,63 @@ import java.util.ArrayList;
  */
 public class ControladorCategorias {
     
-    ControladorSubcategorias subCategoria;
-    ArrayList<Categoria> categorias;
-    ArrayList<SubCategoria> subCategorias;
 
+    private ArrayList<Categoria> categorias;
+    
+    private ControladorBaseDeDatos cb;
+    
     public ControladorCategorias() {
-        subCategoria = new ControladorSubcategorias();
-        categorias = new  ArrayList<>();
-        subCategorias = new ArrayList<>();
-    }
-    
-    
-    
-    //Metodo para que me devuelva la lista de Categorias que existen
-    public ArrayList<Categoria> obtenerCategorias(){
-        
-        //Esto es para prueba
-        Categoria c = new Categoria();
-        c.setId(0);
-        c.setNombreCategoria("Pañales");
-        SubCategoria s = new SubCategoria();
-        s.setId(0);
-        s.setNombreSubCategoria("Pañales para niño");
-        Producto p = new Producto();
-        p.setCodigoBarras("1");
-        p.setEstado('H');
-        p.setIva('S');
-        p.setNombre("Pañales huggies");
-        //p.setOrigen("Si".toCharArray());
-        p.setPctDescuento(56);
-        p.setPrecioUnitario(6.90);
-        p.setStock(30);
-        p.setUnidadCompra("Paquetes");
-        p.setUnidadVenta("unidades");
-        s.addProductos(p);
-        c.addSubcategorias(s);
-        categorias.add(c);
-        
-        //Esto es para prueba
-        Categoria cd = new Categoria();
-        cd.setId(1);
-        cd.setNombreCategoria("Tetas");
-        SubCategoria sd = new SubCategoria();
-        sd.setId(0);
-        sd.setNombreSubCategoria("tetas para niño");
-        Producto pd = new Producto();
-        pd.setCodigoBarras("2");
-        pd.setEstado('H');
-        pd.setIva('S');
-        pd.setNombre("Pañales huggies");
-        //pd.setOrigen("Si".toCharArray());
-        pd.setPctDescuento(66);
-        pd.setPrecioUnitario(5.90);
-        pd.setStock(30);
-        pd.setUnidadCompra("Paquetes");
-        pd.setUnidadVenta("unidades");
-        sd.addProductos(pd);
-        cd.addSubcategorias(sd);
-        categorias.add(cd);
-        
-        
-        return categorias;
-    } 
-    
-    //Metodo para devolver una SubCategoria en Especifico
-    public ArrayList<SubCategoria> obtenerSubCategorias(int id, String nombreCat){
-        //Esto es Prueba
-        Categoria cat = buscarCategoria(id);
-        return subCategoria.listarSubCategoriasEspecifica(cat);
+        cb= new ControladorBaseDeDatos();
     }
 
-    //Buscar una Categoria por el ID
-    public Categoria buscarCategoria(int id) {
-        
-        //Esto es para prueba
-        for (int i = 0; i < categorias.size(); i++) {
-            if(id == categorias.get(i).getId()){
-            return categorias.get(i);
-            }
-        }
-       
-        return null;
+    public ArrayList<Categoria> getCategorias() {
+        return categorias;
+    }
+
+    
+    
+    
+    public void setCategorias(ArrayList<Categoria> categorias) {
+        this.categorias = categorias;
     }
     
     
+            
+            
+    public ArrayList<Categoria> cargarCategorias(){
+       
+        ArrayList<Categoria> c = cb.obtenerCategorias();
+        categorias = c;
+        return categorias;
+        
+        
+    }
+
+    public void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+                                  
+        
+        cb.crearProducto(codigoBarras, nombre, precioUnitario, unidadCompra ,  unidadVenta , iva, descuento,  categoria, subcategoria);
+    
+    }
+
+    public void editarProducto(String ecodigoBarras,String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
+        
+        cb.editarProducto(ecodigoBarras,nombre,  precioUnitario, unidadCompra, unidadVenta,  iva,  descuento,  categoria, subcategoria);
+    }
+
+    
+    public void crearCompra(Proveedor proveedorSelec, Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec, String razon, String monto) {
+        
+        cb.crearCompra(proveedorSelec, categoriaSelec, subCategoriaSelec,  productoSelec, razon ,  monto);
+    
+    }
+
+    public void vaciarCategorias() {
+        categorias.clear();
+    }
+
+    public void delProd(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
+        cb.elimProd(categoriaSelec,subCategoriaSelec,productoSelec);
+    }
+
 }

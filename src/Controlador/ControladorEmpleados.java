@@ -16,11 +16,17 @@ import java.util.ArrayList;
 public class ControladorEmpleados {
     
     private ArrayList<Empleado> empleados = new ArrayList<>();
+    
     private ControladorBaseDeDatos bd;
     
     public ControladorEmpleados() throws IOException {
         bd = new ControladorBaseDeDatos();
-        cargarEmpleados();
+        
+        //Comentado este cargar empleados por que causa que se duplique la lista dentro del gestion Empleados
+        //Es mejor Poner el metodo Dentro de la clase a usar
+        //Para entender mejor, hacer referencia a GestionEmpleados dentro de la vista
+        //cargarEmpleados();
+    
     }
     
     public void cargarEmpleados() throws IOException{
@@ -67,12 +73,32 @@ public class ControladorEmpleados {
         return e;
     }
     
+    
     public ArrayList<Empleado> getEmpleados() {
         return empleados;
     }
 
     public void setEmpleados(ArrayList<Empleado> empleados) {
         this.empleados = empleados;
+    }
+
+    public void crearEmpleado(String nombre, String apellido, String cedula, String cargo) {
+        
+        bd.crearEmpleado(nombre,apellido,cedula,cargo);
+        
+    }
+
+    public void clearEmpleados() {
+        empleados.clear();
+    }
+
+    public void editarEmpleado(String nombre, String apellido, String cedula, String cargo) {
+        
+        bd.editarEmpleado(nombre,apellido,cedula,cargo);
+    }
+
+    public void despEmpleado(String nombre, String apellido, String cedula) {
+        bd.despEmpleado(nombre,apellido,cedula);
     }
     
 }

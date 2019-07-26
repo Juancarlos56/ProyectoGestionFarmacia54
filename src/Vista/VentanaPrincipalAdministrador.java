@@ -7,6 +7,9 @@ package Vista;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -274,7 +277,12 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void GestionarVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarVendedoresActionPerformed
-        GestionEmpleados ge = new GestionEmpleados();
+        GestionEmpleados ge = null;
+        try {
+            ge = new GestionEmpleados();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaPrincipalAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         escritorioAdmi.add(ge);
         ge.show();
     }//GEN-LAST:event_GestionarVendedoresActionPerformed

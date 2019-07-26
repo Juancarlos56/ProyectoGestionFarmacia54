@@ -5,18 +5,39 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleados;
+import Modelo.Empleado;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
  */
 public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
 
+    Boolean p;
+    Controlador.ControladorEmpleados c ;
     /**
      * Creates new form VentanaEmergenteEmpleado
+     * @param EmpleadoSelecionado
      */
-    public VentanaEmergenteEmpleado() {
+    public VentanaEmergenteEmpleado(Empleado EmpleadoSelecionado) throws IOException {
         initComponents();
         setLocationRelativeTo(null);
+        c= new ControladorEmpleados();
+        nombre.setText(EmpleadoSelecionado.getNombre());
+        apellido.setText(EmpleadoSelecionado.getApellido());
+        cedula.setText(EmpleadoSelecionado.getCedula());
+        cargo.setText(EmpleadoSelecionado.getCargo()+"");
+   
+        
+        
+        
     }
 
     /**
@@ -32,11 +53,11 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
-        cedula = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        telefono = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         apellido = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        cargo = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        cedula = new javax.swing.JTextField();
         agregarCliente = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -65,25 +86,26 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
             }
         });
 
-        cedula.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        cedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        apellido.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        apellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Actualizar Cargo: ");
 
-        telefono.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        cargo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        cargo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cargo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Actualizar Apellido:");
 
-        apellido.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        apellido.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        apellido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        cedula.setEditable(false);
+        cedula.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        cedula.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
         agregarCliente.setBackground(new java.awt.Color(0, 102, 255));
         agregarCliente.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -114,10 +136,10 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(apellido, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                    .addComponent(cedula, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                     .addComponent(nombre)
-                    .addComponent(cedula)
-                    .addComponent(telefono)))
+                    .addComponent(apellido)
+                    .addComponent(cargo)))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(135, 135, 135)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -134,19 +156,31 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cargo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(apellido, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41))
         );
+
+        cargo.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter != 'V' ) &&(caracter != 'D' ))  ){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 204));
 
@@ -207,7 +241,27 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
+        
+        
+        p=false;
+        
+        if(nombre.getText().isEmpty() || apellido.getText().isEmpty() || cedula.getText().isEmpty() ||cargo.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Por favor Rellenar Los campos");   
+            p=true;
+        }
 
+        
+        if(p==false){
+            
+            c.editarEmpleado(nombre.getText(),apellido.getText(),cedula.getText(),cargo.getText());
+            
+            dispose();
+        
+        }
+        
+        
+        
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     /**
@@ -241,7 +295,11 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmergenteEmpleado().setVisible(true);
+                try {
+                    new VentanaEmergenteEmpleado(null).setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(VentanaEmergenteEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -249,6 +307,7 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JTextField apellido;
+    private javax.swing.JTextField cargo;
     private javax.swing.JTextField cedula;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -259,6 +318,5 @@ public class VentanaEmergenteEmpleado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField nombre;
-    private javax.swing.JTextField telefono;
     // End of variables declaration//GEN-END:variables
 }

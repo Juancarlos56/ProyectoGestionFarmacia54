@@ -24,24 +24,28 @@ public class Conexion {
     Metodo sirve para conectar con la base datos oracle
     */
     public void conectar(){
-        try {
+        try{
             this.setConexion(DriverManager.getConnection(this.getUrl(), this.getUsername(), this.getPassword()));
-        } catch (SQLException e) {
+        }catch(SQLException e){
             e.printStackTrace();
         }
     
     }
     //Sirve para cerrar la conexion con la base da datos
     public void cerrarConexion(){
-        try {
-            if (this.getConexion() != null && !this.getConexion().isClosed()) {
+        try{                              //Si no esta cerrado El !!!!!!
+            if(this.getConexion() !=null && !this.getConexion().isClosed()){
                 this.getConexion().close();
             }
-        } catch (SQLException e) {
+        }catch(SQLException e){
             e.printStackTrace();
+            
         }
     
     }
+    
+    
+    
     
     public String getUsername() {
         return username;

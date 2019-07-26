@@ -5,6 +5,18 @@
  */
 package Vista;
 
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import Controlador.ControladorCategorias;
+import Modelo.Categoria;
+import Modelo.Producto;
+import Modelo.SubCategoria;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+//import static Vista.Principal.Categorias;
+
 /**
  *
  * @author Carlos
@@ -13,11 +25,94 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
 
     /**
      * Creates new form VentanaEmergenteActualizarProducto
+     * @param categoriaSelec
+     * @param subCategoriaSelec
+     * @param productoSelec
      */
-    public VentanaEmergenteActualizarProducto() {
+    
+    
+    ArrayList<Categoria> Categorias= new ArrayList();
+    Controlador.ControladorCategorias c ;
+    Boolean p;
+    String ecodigoBarras;
+    
+    public VentanaEmergenteActualizarProducto(Categoria categoriaSelec, SubCategoria subCategoriaSelec, Producto productoSelec) {
         initComponents();
+        
+        ecodigoBarras= productoSelec.getCodigoBarras();
+        jTextField4.setText(productoSelec.getNombre());
+        jTextField5.setText(Double.toString(productoSelec.getPrecioUnitario()));
+        jTextField6.setText(Double.toString(productoSelec.getPctDescuento()));
+        jTextField11.setText(productoSelec.getIva()+"");
+        jTextField12.setText(productoSelec.getUnidadCompra());
+        jTextField13.setText(productoSelec.getUnidadVenta());
+        int cat =0;
+        int sucat=0;
+        
+        
+        c= new ControladorCategorias();
+        c.cargarCategorias();
+        Categorias = c.getCategorias();
+        
+        
+        for (Categoria Categoria : Categorias) {
+            
+            jComboBox1.addItem(Categoria.getNombreCategoria());
+            
+            if(Categoria.getNombreCategoria().equals(categoriaSelec.getNombreCategoria())){
+                
+                cat=Categorias.indexOf(Categoria);
+
+                
+                
+                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                    
+                    
+                    if(subcategoria.getNombreSubCategoria().equals(subCategoriaSelec.getNombreSubCategoria())){
+                    
+                        sucat=Categoria.getSubcategorias().indexOf(subcategoria);
+    
+                    }
+                }
+                
+                
+                
+            }
+            
+            
+        }
+        
+        
+        
+        System.out.println(cat);
+        
+        jComboBox1.setSelectedIndex(cat);
+        for (Categoria Categoria : Categorias) {
+            
+            if (Categoria.getNombreCategoria().equals(jComboBox1.getSelectedItem().toString())) {
+                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                    
+                    jComboBox2.addItem(subcategoria.getNombreSubCategoria());
+                
+                } 
+                
+                
+            }
+
+        }
+       
+        jComboBox2.setSelectedIndex(sucat);
+        
+        
+        
+        
+        
+        
+        
         setLocationRelativeTo(null);
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -98,9 +193,14 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         jTextField12.setToolTipText("");
         jTextField12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(102, 102, 102)));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] {  }));
+        jComboBox1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jComboBox1MouseClicked(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] {}));
 
         jTextField13.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
         jTextField13.setToolTipText("");
@@ -180,6 +280,40 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jTextField5.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b') && (caracter != '.')){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+        jTextField6.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b') && (caracter != '.')){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+        jTextField11.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter != 'S' ) &&(caracter != 'N' ))  ){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 102, 204));
         jLabel1.setText("Actualización de Producto");
@@ -188,6 +322,11 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
         jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Guardar Cambios");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -229,6 +368,54 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBox1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jComboBox1MouseClicked
+        jComboBox2.removeAllItems();
+        
+        jComboBox1.getSelectedItem().toString();
+        
+        for (Categoria Categoria : Categorias) {
+            
+            if (Categoria.getNombreCategoria().equals(jComboBox1.getSelectedItem().toString())) {
+                for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                    
+                    jComboBox2.addItem(subcategoria.getNombreSubCategoria());
+                
+                } 
+                
+                
+            }
+
+        }
+        
+                  
+    }//GEN-LAST:event_jComboBox1MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+
+        p=false;
+        // Nombre                             PrecioUnitario                   U.Compra                             U.Venta                        IVA                                  Descuento
+        if( jTextField4.getText().isEmpty() || jTextField5.getText().isEmpty() ||jTextField12.getText().isEmpty()|| jTextField13.getText().isEmpty()|| jTextField11.getText().isEmpty()|| jTextField6.getText().isEmpty()){
+            
+            JOptionPane.showMessageDialog(null, "Por favor Rellenar Los campos");   
+            p=true;
+        }
+        
+        
+        
+        if(p==false){
+            
+            String categoria  = jComboBox1.getSelectedItem().toString();
+            String subcategoria  = jComboBox2.getSelectedItem().toString();
+            
+            
+            c.editarProducto(ecodigoBarras,jTextField4.getText() , jTextField5.getText() , jTextField12.getText(),jTextField13.getText(), jTextField11.getText(), jTextField6.getText(), categoria,subcategoria);
+            
+            dispose();
+        
+        }
+        
+    }//GEN-LAST:event_jButton1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -259,7 +446,7 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmergenteActualizarProducto().setVisible(true);
+                new VentanaEmergenteActualizarProducto(null,null,null).setVisible(true);
             }
         });
     }
@@ -286,4 +473,6 @@ public class VentanaEmergenteActualizarProducto extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
+
+
 }
