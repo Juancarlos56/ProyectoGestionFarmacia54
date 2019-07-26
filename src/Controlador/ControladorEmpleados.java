@@ -58,6 +58,7 @@ public class ControladorEmpleados {
             
         }
         
+        
 
         //Esto es solo para prueba
         Empleado e = new Empleado();

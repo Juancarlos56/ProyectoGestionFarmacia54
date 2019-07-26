@@ -6,6 +6,7 @@
 package Vista;
 
 import Modelo.Cliente;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,6 +15,7 @@ import Modelo.Cliente;
 public class VentanaEmergenteCliente extends javax.swing.JFrame {
     private Controlador.ControladorClientes cl;
     private Cliente c;
+
     /**
      * Creates new form VentanaEmergenteCliente
      */
@@ -236,13 +238,37 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-        c = new Cliente();
-        c.setApellido(apellido.getText());
-        c.setCedula(cedula.getText());
-        c.setNombre(nombre.getText());
-        c.setTlfCelular(celular.getText());
-        c.setTlfConvencional(telefono.getText());
-        btnDireccion.setEnabled(true);
+        
+        if(apellido.getText().isEmpty() || cedula.getText().isEmpty() || nombre.getText().isEmpty() || celular.getText().isEmpty() || telefono.getText().isEmpty() ){
+            
+            JOptionPane.showMessageDialog(null, "Existen campos Vacios "); 
+            
+            
+        }else{
+            
+            
+            
+            
+            c = new Cliente();
+            c.setApellido(apellido.getText());
+            c.setCedula(cedula.getText());
+            c.setNombre(nombre.getText());
+            c.setTlfCelular(celular.getText());
+            c.setTlfConvencional(telefono.getText());
+            btnDireccion.setEnabled(true);
+            //Para que no se creen dos clientes del mismo
+            agregarCliente.setEnabled(false);
+            JOptionPane.showMessageDialog(null, "Cliente creado "); 
+            
+            cl.crearNuevoCliente(c);
+            
+        }
+        
+        
+        
+        
+        
+        
         
     }//GEN-LAST:event_agregarClienteActionPerformed
 
@@ -254,7 +280,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
         VentanaEmergenteDireccionesCliente ved = new VentanaEmergenteDireccionesCliente(c);
         ved.setVisible(true);
         c = ved.getCl();
-        cl.crearNuevoCliente(c);
+        
     }//GEN-LAST:event_btnDireccionActionPerformed
 
 

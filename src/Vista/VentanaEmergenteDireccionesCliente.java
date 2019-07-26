@@ -10,6 +10,7 @@ import Modelo.Cliente;
 import Modelo.Direccion;
 import Modelo.FacturaCabecera;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,11 +23,14 @@ public class VentanaEmergenteDireccionesCliente extends javax.swing.JFrame {
     private FacturaCabecera fc;
     private Cliente cl;
     private DefaultTableModel direcciones; 
+    private ArrayList<Direccion> direccionest;
+    boolean p;
     /**
      * Creates new form VentanaEmergenteDireccionesClienete
      */
     public VentanaEmergenteDireccionesCliente(Cliente cl) {
         direcciones = new DefaultTableModel();
+        direccionest = cl.getDirecciones();
         cc = new Controlador.ControladorClientes();
         this.cl = cl;
         this.fc = fc;
@@ -175,13 +179,41 @@ public class VentanaEmergenteDireccionesCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_callePrinActionPerformed
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-        Direccion d = new Direccion();
-        d.setCallePrincipal(callePrin.getText());
-        d.setCalleSecundaria(calleSec.getText());
-        Ciudad c = new Ciudad();
-        c.setNombre(Ciudad.getText());
-        d.setCiudad(c);
-        cl.addDirecciones(d);
+        
+        p=true;
+        if(callePrin.getText().isEmpty() || calleSec.getText().isEmpty() || Ciudad.getText().isEmpty() ){
+            
+            JOptionPane.showMessageDialog(null, "Existen campos Vacios "); 
+            
+        }else{
+               
+            Direccion d = new Direccion();
+            d.setCallePrincipal(callePrin.getText());
+            d.setCalleSecundaria(calleSec.getText());
+            Ciudad c = new Ciudad();
+            c.setNombre(Ciudad.getText());
+            d.setCiudad(c);
+            
+            for (int i = 0; i < direccionest.size(); i++) {
+                
+                if (direccionest.contains(d)){
+                    p=false;
+                    JOptionPane.showMessageDialog(null, "Direccion ya ingresada "); 
+                    
+                }
+                
+            }
+            
+            if (p==true){
+
+                cl.addDirecciones(d);
+
+                direccionest.add(d);
+            }
+        }
+        
+        
+        
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     public Cliente getCl() {

@@ -9,6 +9,7 @@ import Conexion.Conexion;
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
 import Modelo.Cliente;
+import Modelo.Direccion;
 import Modelo.Empleado;
 import Modelo.Producto;
 import java.io.IOException;
@@ -126,6 +127,16 @@ public class ControladorBaseDeDatos {
             s.agregarNuevoClientes(con, cliente);
             con.cerrarConexion();
         }
+    }
+
+    public void agregarDireccionCliente(String cedula, Direccion direcciones) {
+        con.conectar();
+        if(con.getConexion() !=null){
+            s.agregarNuevaDirecc(con, cedula,direcciones);
+            con.cerrarConexion();
+        }
+    
+    
     }
     
 }
