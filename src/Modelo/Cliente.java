@@ -22,6 +22,7 @@ public class Cliente extends Persona{
     
     public Cliente() {
         super();
+        cb = new ControladorBaseDeDatos();
         direcciones = new ArrayList<>();
     }
 
@@ -53,9 +54,18 @@ public class Cliente extends Persona{
         return direcciones;
     }
 
-    public void addDirecciones(Direccion direcciones) {
+
+
+    public void addDirecciones(String cedula, Direccion direcciones) {
         this.direcciones.add(direcciones);
-        cb.agregarDireccionCliente(cedula,direcciones);
         
+        System.out.println(cedula + " "+ direcciones.getCallePrincipal());
+        cb.agregarDireccionCliente(cedula,direcciones);
     }
+
+    public void addDireccionesP(Direccion d) {
+        this.direcciones.add(d);
+    
+    }
+
 }

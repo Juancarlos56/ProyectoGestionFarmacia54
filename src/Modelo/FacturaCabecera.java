@@ -24,6 +24,7 @@ public class FacturaCabecera {
     private Cliente cliente;
     private Empleado empleado;   
     private ArrayList<RecetaMedica> recetas;
+    private Direccion direccion;
 
     public FacturaCabecera() {
         detalle = new ArrayList<>();
@@ -32,6 +33,11 @@ public class FacturaCabecera {
         empleado = new Empleado();
     }
 
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -118,6 +124,10 @@ public class FacturaCabecera {
 
     public void setRecetas(RecetaMedica recetas) {
         this.recetas.add(recetas);
+    }
+
+    public void setDireccion(Direccion direccionesT1) {
+        direccion = direccionesT1;
     }
     
 }

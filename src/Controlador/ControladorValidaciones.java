@@ -6,6 +6,7 @@
 package Controlador;
 
 import Modelo.Empleado;
+import java.sql.Date;
 
 /**
  *
@@ -13,6 +14,19 @@ import Modelo.Empleado;
  */
 public class ControladorValidaciones {
 
+    
+    /*Date now = GestionBiblioteca.getHora();
+                        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+                        SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");*/
+    
+    // Uso : date.format(now)
+    public Date getHora() {
+         Date now = new Date(System.currentTimeMillis());
+         return now;
+    }
+    
+    
+    
     public boolean validarDocumento(String documentoIDE) {
         boolean documentoIDECorrecto;
         try {

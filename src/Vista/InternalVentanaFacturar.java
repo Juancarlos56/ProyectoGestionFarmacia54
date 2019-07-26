@@ -8,6 +8,7 @@ package Vista;
 import Controlador.ControladorClientes;
 import Controlador.ControladorFacturas;
 import Controlador.ControladorProductos;
+import Controlador.ControladorValidaciones;
 import Modelo.Categoria;
 import Modelo.Cliente;
 import Modelo.Empleado;
@@ -15,9 +16,12 @@ import Modelo.FacturaCabecera;
 import Modelo.FacturaDetalle;
 import Modelo.Producto;
 import java.awt.Component;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import java.sql.Date;
+import java.sql.SQLException;
 
 /**
  *
@@ -27,29 +31,53 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
 
     private Empleado empleado;
     private Cliente cli; 
-    private ArrayList<Producto> productos;
+
+    
+    
+    private ArrayList<Cliente> clientes;
     private ControladorClientes cl;
     private ControladorProductos cp;
     private ControladorFacturas cf;
+    private Controlador.ControladorValidaciones cv;
     private String tbc = "cedula";
     private String tbp = "codigoBarras";
     private Producto pro;
     private FacturaCabecera factura;
     private DefaultTableModel detalles;
     private FacturaDetalle facProductoSeleccionado;
-    
+    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+    private Date fecha;
     /**
      * Creates new form InternalVentanaFacturar
      */
-    public InternalVentanaFacturar(Empleado empleado) {
+    public InternalVentanaFacturar(Empleado empleado) throws SQLException {
+        
+        cv = new ControladorValidaciones();
+        
+        fecha= cv.getHora();
+        
         detalles = new DefaultTableModel();
         cl = new ControladorClientes();
         cl.cargarClientes();
+        clientes = cl.getClientes();
+        
         cp = new ControladorProductos();
         cf = new ControladorFacturas();
+        
+        
+        
+        jTextField2.setText(cf.getNumFactura());
         this.empleado = empleado;
         factura = new FacturaCabecera();
         initComponents();
+        
+        nombreEmpleado.setText(this.empleado.getNombre());
+        cedulaEmpleado.setText(this.empleado.getCedula());
+        
+        
+        nombre1.setText(date.format(fecha));
+        
         cargarModeloTabla();
         //cedulaEmpleado.setText(empleado.getCedula());
         //nombreEmpleado.setText(empleado.getNombre());        
@@ -308,7 +336,7 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
         newCliente.setForeground(new java.awt.Color(0, 102, 204));
         newCliente.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         newCliente.setText("¿Desea almacenar un nuevo cliente? click aqui");
-        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        newCliente.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         newCliente.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newClienteMouseClicked(evt);
@@ -969,6 +997,11 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
         jButton6.setForeground(new java.awt.Color(0, 102, 204));
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/impresora.png"))); // NOI18N
         jButton6.setText("Imprimir Factura");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1017,7 +1050,7 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
@@ -1058,8 +1091,15 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_pct_descuentoProActionPerformed
 
     private void direccionEnvioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_direccionEnvioActionPerformed
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(cli);
+        
+        
+        
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(cli,factura);
         ved.setVisible(true);
+        
+        
+        
+        
     }//GEN-LAST:event_direccionEnvioActionPerformed
 
     private void txttotalPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txttotalPagarActionPerformed
@@ -1067,7 +1107,7 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txttotalPagarActionPerformed
 
     private void btnRecetaMedicaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRecetaMedicaActionPerformed
-        VentanaEmergenteRecetas ver = new VentanaEmergenteRecetas();
+        VentanaEmergenteRecetas ver = new VentanaEmergenteRecetas(factura);
         ver.setVisible(true);
     }//GEN-LAST:event_btnRecetaMedicaActionPerformed
 
@@ -1084,14 +1124,26 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tipoBusquedaClienteActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+
+        cl.borrarC();
+        cl.cargarClientes();
+        clientes = cl.getClientes();
+
+
+
+
+
         if (tbc.equalsIgnoreCase("Nombre")== true) {
             cli = cl.buscarClientePorNombre(txtIngresoDatoCliente.getText().trim());
+            
             if (cli != null) {
                nombreCliente.setText(cli.getNombre());
                apellidoCliente.setText(cli.getApellido());
                cedulaCliente.setText(cli.getCedula());
                telefonoCliente.setText(cli.getTlfConvencional());
                celularCliente.setText(cli.getTlfCelular());
+               
+               
             }else{
                 JOptionPane.showMessageDialog(null, "El Cliente no Existe", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
             }
@@ -1212,7 +1264,7 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
         facturaDet.setPrecio(total);
         facturaDet.setSubtotal(subT);
         
-        if (getFactura().getDetalle().size() == 0) {
+        if (getFactura().getDetalle().isEmpty()) {
             getFactura().addDetalle(facturaDet);
             agregarProductoTableDetalle();
             cargarDatosFacturaCabecera();
@@ -1242,6 +1294,9 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
                         getFactura().getDetalle().get(i).setPrecio(totalN);
                         agregarProductoTableDetalle();
                         cargarDatosFacturaCabecera();
+                        
+                        //productos.add(pro);
+                        
                         return;
                     }
                 }
@@ -1300,6 +1355,30 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
     private void rtbnNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rtbnNoMouseClicked
         direccionEnvio.setEnabled(true);
     }//GEN-LAST:event_rtbnNoMouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        
+        factura.setCliente(cli);
+        factura.setEstado('V');
+        factura.setEmpleado(empleado);
+        factura.setFechaVenta(fecha);
+        
+        
+        if(factura.getDetalle().isEmpty() || cli == null ){
+            
+            JOptionPane.showMessageDialog(null, "Faltan Datos por ingresar "); 
+ 
+        }else{
+            
+            
+            cf.guardarFac(factura,jTextField2.getText());
+            JOptionPane.showMessageDialog(null, "Factura registrada "); 
+            dispose();
+        }
+        
+
+        
+    }//GEN-LAST:event_jButton6MouseClicked
 
     private void agregarProductoTableDetalle() {
         eliminarRegistroTabla();

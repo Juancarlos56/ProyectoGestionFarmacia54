@@ -201,21 +201,21 @@ public class VentanaEmergenteDireccionesCliente extends javax.swing.JFrame {
             c.setNombre(Ciudad.getText());
             d.setCiudad(c);
             
-            for (int i = 0; i < direccionest.size(); i++) {
+            for (Direccion direccionest1 : direccionest) {
                 
-                if (direccionest.contains(d)){
+                if (direccionest1.equals(d)){
                     p=false;
                     JOptionPane.showMessageDialog(null, "Direccion ya ingresada "); 
                     
                 }
-                
             }
             
             if (p==true){
 
-                cl.addDirecciones(d);
+                cl.addDirecciones(cl.getCedula(), d);
 
                 direccionest.add(d);
+                dispose();
             }
         }
         

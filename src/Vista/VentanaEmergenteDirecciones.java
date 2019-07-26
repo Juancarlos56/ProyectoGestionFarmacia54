@@ -5,8 +5,7 @@
  */
 package Vista;
 
-
-import Controlador.DireccionesTemp;
+import Modelo.Ciudad;
 import Modelo.Cliente;
 import Modelo.Direccion;
 import Modelo.FacturaCabecera;
@@ -24,6 +23,10 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     private FacturaCabecera fc;
     private Cliente cl;
     private DefaultTableModel direcciones;
+    boolean p;
+    
+    
+    
     /**
      * Creates new form VentanaEmergenteDirecciones
      * @param tipo
@@ -32,44 +35,31 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     int DireccionSelec;
     String dTipo;
     DefaultTableModel tabla;
+    ArrayList<Direccion> direccionesT;
     
 
-    public VentanaEmergenteDirecciones( String tipo) {
+    public VentanaEmergenteDirecciones( Cliente cli,FacturaCabecera factura) {
         initComponents();
         setLocationRelativeTo(null);
         
+        cl=cli;
+        direccionesT = new ArrayList<>();
+        direccionesT = cli.getDirecciones();
+        fc = factura;
+        tabla = (DefaultTableModel) tablaDirecciones.getModel();
         
-    }
-
-    VentanaEmergenteDirecciones(Cliente cli) {
-
         
-    }
-    
-    public void cargarModeloTabla(){
-        
-        ArrayList<Object> columna = new ArrayList<>();
-        columna.add("Ciudad");
-        columna.add("Calle Principal");
-        columna.add("Calle Secundaria");
-        
-        for (Object columna1 : columna) {
-           direcciones.addColumn(columna1);
-        }
-        //tablaDirecciones.setModel(direcciones);
-        ArrayList<Object[]>  dir = new ArrayList<>(); 
-        for (int i = 0; i < cl.getDirecciones().size(); i++) {
-                Object[] d = new Object[]{cl.getDirecciones().get(i).getCiudad().getNombre(),cl.getDirecciones().get(i).getCallePrincipal(),
-                                      cl.getDirecciones().get(i).getCalleSecundaria()};
-                dir.add(d);
+        for (Direccion direccionesT1 : direccionesT) {
             
+                tabla.addRow(new Object[]{ direccionesT1.getCiudad().getNombre(), direccionesT1.getCallePrincipal(), direccionesT1.getCalleSecundaria()});
         }
         
-        for (Object[] det : dir) {
-            direcciones.addRow(det);
-        }
-        //this.tablaDirecciones.setModel(direcciones);
-    } 
+    }
+
+
+
+    
+  
     
 
     /**
@@ -83,12 +73,10 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-
         principal = new javax.swing.JTextField();
         secundaria = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         ciudad = new javax.swing.JTextField();
-
         jLabel7 = new javax.swing.JLabel();
         agregarCliente = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -107,7 +95,6 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Ingresar Calle Principal");
 
-
         principal.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         principal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         principal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -121,16 +108,13 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         secundaria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         secundaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
-
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Ingresar Ciudad ");
 
-
         ciudad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         ciudad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ciudad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -159,11 +143,9 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-
                     .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                     .addComponent(secundaria)
                     .addComponent(ciudad))
-
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -175,22 +157,18 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-
                     .addComponent(principal)
-
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-
                     .addComponent(secundaria, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ciudad, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
-
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -246,7 +224,6 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         btnUtilizarDireccionExistente.setForeground(new java.awt.Color(255, 255, 255));
         btnUtilizarDireccionExistente.setText("Utilizar esta Dirección");
         btnUtilizarDireccionExistente.setBorder(null);
-        btnUtilizarDireccionExistente.setEnabled(false);
         btnUtilizarDireccionExistente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUtilizarDireccionExistenteActionPerformed(evt);
@@ -258,13 +235,13 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
-            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(154, 154, 154)
                 .addComponent(btnUtilizarDireccionExistente)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(161, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 441, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,33 +280,40 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
         
-        switch (dTipo){
-            case "nuevo":
-
-                String callep = principal.getText();
-                String calles = secundaria.getText();
-                String ciudades = ciudad.getText();
-                
-                if ((principal.getText().equals("")) || (secundaria.getText().equals(""))|| (ciudad.getText().equals(""))) {
-                    JOptionPane.showMessageDialog(null,"Existen Campos Vacios");
-                    
-                }else {
-                    
-                    DireccionesTemp.addDirec(callep,calles,ciudades);
-                    
-                    tabla.addRow(new Object[]{ciudad,callep,calles}); 
+        p = true;
+        if(principal.getText().isEmpty() || secundaria.getText().isEmpty() || ciudad.getText().isEmpty() ){
+            
+            JOptionPane.showMessageDialog(null, "Existen campos Vacios "); 
+            
+        }else{
+               
+            Direccion d = new Direccion();
+            d.setCallePrincipal(principal.getText());
+            d.setCalleSecundaria(secundaria.getText());
+            Ciudad c = new Ciudad();
+            c.setNombre(ciudad.getText());
+            d.setCiudad(c);
+            
+            for (Direccion direccionesT1 : direccionesT) {
+                if (direccionesT1.equals(d)){
+                    p=false;
+                    JOptionPane.showMessageDialog(null, "Direccion ya ingresada "); 
                     
                 }
-        
+            }
+            
+            if (p==true){
 
+                cl.addDirecciones(cl.getCedula(), d);
+
+                direccionesT.add(d);
+                
+                tabla.addRow(new Object[]{ d.getCiudad().getNombre(), d.getCallePrincipal(), d.getCalleSecundaria()});
                 
                 
                 
-                
-                
-            break;
-    
-        }   
+            }
+        }
         
         
         
@@ -357,24 +341,39 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void tablaDireccionesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaDireccionesMouseClicked
-//        btnUtilizarDireccionExistente.setEnabled(true);
-//        int seleccion = tablaDirecciones.rowAtPoint(evt.getPoint());
-//        String ciudad = String.valueOf(tablaDirecciones.getValueAt(seleccion, 1));
-//        String callePrincipal = String.valueOf(tablaDirecciones.getValueAt(seleccion, 2));
-//        String calleSecundaria = String.valueOf(tablaDirecciones.getValueAt(seleccion, 3));
-//        
-//        for (int i = 0; i < cl.getDirecciones().size(); i++) {
-//            for (int j = 0; j < cl.getDirecciones().get(i).getCiudades().size(); j++) {
-//                if (cl.getDirecciones().get(i).getCiudades().get(j).getNombre().equalsIgnoreCase(ciudad) == true) {
-//                    Direccion auxD = cl.getDirecciones().get(i);
-//                }
-//            } 
-//        }
-//        
-//        
+
+        int row=tablaDirecciones.getSelectedRow();
+        
+        
+        
+
+            for (Direccion direccionesT1 : direccionesT) {
+
+
+
+                if((direccionesT1.getCiudad().getNombre().equals(tablaDirecciones.getValueAt(row, 0))) && (direccionesT1.getCallePrincipal().equals(tablaDirecciones.getValueAt(row, 1)) &&(direccionesT1.getCalleSecundaria().equals(tablaDirecciones.getValueAt(row, 2))) && (fc !=null) )){
+                    
+                    fc.setDireccion(direccionesT1);
+
+                }else{
+                    System.out.println("No detectado");
+
+                }
+
+            }
+        
+        
+        
+   
     }//GEN-LAST:event_tablaDireccionesMouseClicked
 
     private void btnUtilizarDireccionExistenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUtilizarDireccionExistenteActionPerformed
+        
+        
+        
+        
+        
+        dispose();
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUtilizarDireccionExistenteActionPerformed
 //
@@ -389,19 +388,15 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JButton btnUtilizarDireccionExistente;
-
     private javax.swing.JTextField ciudad;
-
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-
     private javax.swing.JTextField principal;
     private javax.swing.JTextField secundaria;
     private javax.swing.JTable tablaDirecciones;
-
     // End of variables declaration//GEN-END:variables
 }

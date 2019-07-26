@@ -30,6 +30,10 @@ public class VentanaLogin extends javax.swing.JFrame {
     public VentanaLogin() throws IOException {
         validaciones = new ControladorValidaciones();
         empleados = new ControladorEmpleados();
+        
+
+       
+        
         initComponents();
     }
 
@@ -241,7 +245,12 @@ public class VentanaLogin extends javax.swing.JFrame {
         Boolean cedulaValida = validaciones.validarDocumento(passwords);
         
         if (cedulaValida) {
-            Empleado empleado = empleados.buscarEmpleadoLogin(username, passwords);
+            Empleado empleado = null;
+            try {
+                empleado = empleados.buscarEmpleadoLogin(username, passwords);
+            } catch (IOException ex) {
+                Logger.getLogger(VentanaLogin.class.getName()).log(Level.SEVERE, null, ex);
+            }
             //No es diferente
             if (empleado == null) {
                 JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);

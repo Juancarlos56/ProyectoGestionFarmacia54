@@ -349,7 +349,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_agregarClienteActionPerformed
 //HEYASD ASDJASJDAS JLDJLASDJASLDASD AQUI ARREGLAR
     private void btnDirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDirMouseClicked
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(clt);
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(clt,null);
         ved.setVisible(true);
     }//GEN-LAST:event_btnDirMouseClicked
 

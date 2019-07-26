@@ -13,10 +13,12 @@ import Modelo.Cliente;
 import Modelo.Direccion;
 
 import Modelo.Empleado;
+import Modelo.FacturaCabecera;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import Modelo.SubCategoria;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -141,6 +143,7 @@ public class ControladorBaseDeDatos {
     public ArrayList<Cliente> obtenerClientes(){
         
         ArrayList<Cliente> clientes = new ArrayList<>();
+        
         con.conectar();
         if(con.getConexion() !=null){
             clientes = s.cargarClientes(con);
@@ -256,5 +259,66 @@ public class ControladorBaseDeDatos {
     
     
     }
+
+    void agregarFactura(FacturaCabecera factura, String text) {
+        
+
+         con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.addFactura(con,factura,text);
+            
+            con.cerrarConexion();
+        }
     
+    }
+
+    ArrayList<FacturaCabecera> obtenerFacturas() throws IOException {
+        
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            ArrayList<FacturaCabecera> f= s.obtFacts(con);
+            
+            con.cerrarConexion();
+            
+            return f;
+        }else{
+           return null; 
+        }
+        
+    
+    }
+
+    void anular(FacturaCabecera factSelect) throws IOException {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            s.anularF(con,factSelect);
+            
+            con.cerrarConexion();
+            
+        }else{
+
+        }
+    }
+
+    String getnumFac() throws SQLException {
+        con.conectar();
+        
+        if(con.getConexion() !=null){
+            
+            String num = s.anularF(con);
+            
+            con.cerrarConexion();
+            return num;
+        }else{
+            return null;
+        }
+    }
+
+
 }

@@ -191,9 +191,9 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_facturaMouseClicked
 
     private void productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productosMouseClicked
-        /*InternalVentanaProVen ivpv = new InternalVentanaProVen();
+        InternalVentanaProVen ivpv = new InternalVentanaProVen();
         escritorio.add(ivpv);
-        ivpv.show();*/
+        ivpv.show();
     }//GEN-LAST:event_productosMouseClicked
 
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
@@ -207,7 +207,12 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jLabel2MouseClicked
 
     private void anularFacturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_anularFacturaMouseClicked
-        InternalVentanaAnularFactura ivaf = new InternalVentanaAnularFactura();
+        InternalVentanaAnularFactura ivaf = null;
+        try {
+            ivaf = new InternalVentanaAnularFactura();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
         escritorio.add(ivaf);
         ivaf.show();
     }//GEN-LAST:event_anularFacturaMouseClicked

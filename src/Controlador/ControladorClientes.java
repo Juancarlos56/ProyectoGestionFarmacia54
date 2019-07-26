@@ -12,6 +12,7 @@ import java.util.ArrayList;
  *
  * @author Carlos
  */
+
 public class ControladorClientes {
     
     private ControladorDirecciones cd;
@@ -22,8 +23,9 @@ public class ControladorClientes {
         cb = new ControladorBaseDeDatos();
     }
 
-    public ArrayList<Cliente> cargarClientes() {
-        return cb.obtenerClientes();
+    public void cargarClientes() {
+        clientes = cb.obtenerClientes();
+        
     }
     
     public ArrayList<Cliente> getClientes() {
@@ -36,8 +38,8 @@ public class ControladorClientes {
 
     public Cliente buscarClientePorNombre(String nombre) {
         for (int i = 0; i < clientes.size(); i++) {
-            if (nombre.equalsIgnoreCase(getClientes().get(i).getNombre())) {
-                return getClientes().get(i);
+            if (nombre.equalsIgnoreCase(clientes.get(i).getNombre())) {
+               return clientes.get(i);
             }
             
         }
@@ -47,8 +49,8 @@ public class ControladorClientes {
     
     public Cliente buscarClientePorCedula(String cedula) {
         for (int i = 0; i < clientes.size(); i++) {
-            if (cedula.equalsIgnoreCase(getClientes().get(i).getCedula())) {
-                return getClientes().get(i);
+            if (cedula.equalsIgnoreCase(clientes.get(i).getCedula())) {
+                return clientes.get(i);
             }
         }
         return null;
@@ -58,6 +60,10 @@ public class ControladorClientes {
     public Cliente crearNuevoCliente(Cliente cliente) {
         cb.agregarNuevoCliente(cliente);
         return null;
+    }
+
+    public void borrarC() {
+        clientes.clear();
     }
     
     

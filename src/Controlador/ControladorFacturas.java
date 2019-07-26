@@ -8,6 +8,8 @@ package Controlador;
 import Modelo.Empleado;
 import Modelo.FacturaCabecera;
 import Modelo.Producto;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -24,6 +26,11 @@ public class ControladorFacturas {
     private ControladorRecetasMedicas recetas;
     private ArrayList<FacturaCabecera> facturasCabeceras;
 
+    
+    private ControladorBaseDeDatos cb;
+
+    
+    
     public ControladorFacturas() {
         //this.empleados = new ControladorEmpleados();
         this.clientes = new ControladorClientes();
@@ -31,9 +38,16 @@ public class ControladorFacturas {
         this.productos = new ControladorProductos();
         this.recetas = new ControladorRecetasMedicas();
         facturasCabeceras = new ArrayList<>();
+        cb = new ControladorBaseDeDatos();
+        
+        
     }
     
-    public ArrayList<FacturaCabecera> obtenerListaFacturas(){
+    
+    
+    
+    
+    /*public ArrayList<FacturaCabecera> obtenerListaFacturas(){
         
         //Esto es para prueba
         FacturaCabecera fc = new FacturaCabecera();
@@ -61,7 +75,7 @@ public class ControladorFacturas {
         facturasCabeceras.add(fcd);
         
         return facturasCabeceras;
-    }
+    }*/
     
     public FacturaCabecera buscarFacturaCabecera(int codigoFactura){
         for (int i = 0; i < facturasCabeceras.size(); i++) {
@@ -114,5 +128,38 @@ public class ControladorFacturas {
         }
         return total;
     }
+
+    public void guardarFac(FacturaCabecera factura , String text) {
+        
+        cb.agregarFactura(factura, text);
+        
+        
+    }
+
+    public void cargarFacturas() throws IOException {
+        
+        ArrayList<FacturaCabecera> c = cb.obtenerFacturas();
+        facturasCabeceras = c;
+        
+        
+    }
+
+    public ArrayList<FacturaCabecera> getFacturas() {
+        return this.facturasCabeceras;
+    }
+
+    public void anular(FacturaCabecera factSelect) throws IOException {
+        cb.anular(factSelect);
+    }
+
+    public void delFact() {
+        facturasCabeceras.clear();
+    }
+
+    public String getNumFactura() throws SQLException {
+        return cb.getnumFac();
+    }
+
+
     
 }

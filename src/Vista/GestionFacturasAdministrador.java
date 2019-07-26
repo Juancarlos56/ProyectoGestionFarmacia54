@@ -6,6 +6,10 @@
  */
 package Vista;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Carlos
@@ -113,7 +117,12 @@ public class GestionFacturasAdministrador extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_facturaActionPerformed
 
     private void anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularActionPerformed
-        InternalVentanaAnularFactura ivafa = new InternalVentanaAnularFactura();
+        InternalVentanaAnularFactura ivafa = null;
+        try {
+            ivafa = new InternalVentanaAnularFactura();
+        } catch (IOException ex) {
+            Logger.getLogger(GestionFacturasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
         jDesktopPane1.add(ivafa);
         ivafa.show();
     }//GEN-LAST:event_anularActionPerformed

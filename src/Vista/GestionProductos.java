@@ -51,6 +51,7 @@ public class GestionProductos extends javax.swing.JInternalFrame {
             tabla.addRow(new Object[]{Categoria.getId(),Categoria.getNombreCategoria()});
             
         }
+        
     }
 
     /**

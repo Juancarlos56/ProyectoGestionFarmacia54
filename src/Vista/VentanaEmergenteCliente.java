@@ -301,6 +301,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
         c.setTlfCelular(celular.getText());
         c.setTlfConvencional(telefono.getText());
         btnDireccion.setEnabled(true);
+        cl.crearNuevoCliente(c);
         
     }//GEN-LAST:event_agregarClienteActionPerformed
 
@@ -309,10 +310,11 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_nombreActionPerformed
 
     private void btnDireccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDireccionActionPerformed
+        
         VentanaEmergenteDireccionesCliente ved = new VentanaEmergenteDireccionesCliente(c);
         ved.setVisible(true);
         c = ved.getCl();
-        cl.crearNuevoCliente(c);
+        
     }//GEN-LAST:event_btnDireccionActionPerformed
 
 

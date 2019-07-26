@@ -38,39 +38,34 @@ public class ControladorEmpleados {
      * Este metodo retorna el Empleado siempre y cuando la cedula y username
      * sean igual a la de los empleados guardados en la base de datos
      * sino deberia retornar Null 
+     * @param nombre
      * @param username
      * @param cedula
      * @return 
+     * @throws java.io.IOException 
      */
-    public Empleado buscarEmpleadoLogin(String nombre, String cedula){
+    public Empleado buscarEmpleadoLogin(String nombre, String cedula) throws IOException{
         
-        for (int i = 0; i < empleados.size(); i++) {
-            System.out.println(empleados.get(i));
-            
-        }
+        Empleado emp= null;
+        cargarEmpleados();
         
-        for (int i = 0; i < getEmpleados().size(); i++) {
-            if (getEmpleados().get(i).getNombre().equalsIgnoreCase(nombre)== true) {
-                System.out.println("holad");
-                if (getEmpleados().get(i).getCedula().equals(cedula) == true) {
-                    System.out.println("holat");
-                    return getEmpleados().get(i);
-                }else{
-                    return null;
+        
+        for (Empleado empleado : empleados) {
+        
+            if (empleado.getNombre().equals(nombre)) {
+                if (empleado.getCedula().equals(cedula)){
+                    
+                    emp= empleado;
                 }
-            }else{
-                return null;
+                
+                
             }
-            
+        
+        
         }
+        return emp;
         
 
-
-        //Esto es solo para prueba
-        Empleado e = new Empleado();
-        e.setCedula("0106113301");
-        e.setNombre("Carlos");
-        return e;
     }
     
     

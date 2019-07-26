@@ -5,6 +5,15 @@
  */
 package Vista;
 
+import Modelo.Doctor;
+import Modelo.FacturaCabecera;
+import Modelo.RecetaMedica;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Carlos
@@ -14,10 +23,22 @@ public class VentanaEmergenteRecetas extends javax.swing.JFrame {
     /**
      * Creates new form VentanaEmergenteRecetas
      */
-    public VentanaEmergenteRecetas() {
+    RecetaMedica rm;
+    Doctor dc;
+    SimpleDateFormat date;
+    FacturaCabecera fc;
+        SimpleDateFormat hour ;
+    public VentanaEmergenteRecetas(FacturaCabecera factura) {
         initComponents();
         setLocationRelativeTo(null);
+        rm= new RecetaMedica();
+        dc = new Doctor();
+         fc= factura;
+        date = new SimpleDateFormat("yyyy-MM-dd");
+        hour = new SimpleDateFormat("HH:mm:ss");
     }
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -66,7 +87,13 @@ public class VentanaEmergenteRecetas extends javax.swing.JFrame {
 
         cedula1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cedula1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        cedula1.setText("yyyy-MM-dd");
         cedula1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        cedula1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cedula1ActionPerformed(evt);
+            }
+        });
 
         jLabel11.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -174,6 +201,11 @@ public class VentanaEmergenteRecetas extends javax.swing.JFrame {
         agregarCliente.setForeground(new java.awt.Color(0, 102, 204));
         agregarCliente.setText("Guardar Receta");
         agregarCliente.setBorder(null);
+        agregarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                agregarClienteMouseClicked(evt);
+            }
+        });
         agregarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarClienteActionPerformed(evt);
@@ -231,6 +263,39 @@ public class VentanaEmergenteRecetas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre1ActionPerformed
 
+    private void agregarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_agregarClienteMouseClicked
+        
+        
+        rm.setId( Integer.parseInt(nombre1.getText()));
+        Date d = null;
+        try {
+            d = (date.parse(cedula1.getText()));
+            
+            rm.setFecha(d);
+        } catch (ParseException ex) {
+            Logger.getLogger(VentanaEmergenteRecetas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        
+        
+        dc.setNombre(nombre.getText());
+        dc.setApellido(cedula.getText());
+        dc.setDireccion(telefono.getText());
+        
+        rm.setDoctor(dc);
+        
+        fc.setRecetas(rm);
+        
+        dispose();
+        
+        
+        
+    }//GEN-LAST:event_agregarClienteMouseClicked
+
+    private void cedula1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedula1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cedula1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -262,7 +327,7 @@ public class VentanaEmergenteRecetas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaEmergenteRecetas().setVisible(true);
+                new VentanaEmergenteRecetas(null).setVisible(true);
             }
         });
     }

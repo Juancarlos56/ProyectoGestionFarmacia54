@@ -9,7 +9,11 @@ import Controlador.ControladorFacturas;
 import Modelo.Categoria;
 import Modelo.FacturaCabecera;
 import java.awt.Color;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,47 +25,47 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
 
     private DefaultTableModel modeloFacturas;
     private ControladorFacturas facturas;
+    ArrayList<FacturaCabecera> facturasT;
+    private FacturaCabecera factSelect;
+    
     /**
      * Creates new form InternalVentanaAnularFactura
      */
-    public InternalVentanaAnularFactura() {
-        facturas = new ControladorFacturas();
-        modeloFacturas = new DefaultTableModel();
+    /*Date now = GestionBiblioteca.getHora();*/
+    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat hour = new SimpleDateFormat("HH:mm:ss");
+    
+    // Uso : date.format(now)
+    
+    
+    public InternalVentanaAnularFactura() throws IOException {
+        
         initComponents();
-        cargarFacturasTabla();
+        
+        facturas = new ControladorFacturas();
+        modeloFacturas = (DefaultTableModel) tablaFacturas.getModel();
+        
+        
+        facturas.cargarFacturas();
+        facturasT = facturas.getFacturas();
+        
+        int i=1;
+                
+        for (FacturaCabecera facturasT1 : facturasT) {  
+            
+            modeloFacturas.addRow(new Object[]{i, facturasT1.getId(),date.format(facturasT1.getFechaVenta()),facturasT1.getEmpleado().getNombre(),facturasT1.getEstado()});
+            i++;
+        
+        }
+        
+
+
+        
         
         
     }
     
-    private void cargarFacturasTabla() {
-        
-        ArrayList<Object> columna = new ArrayList<>();
-        columna.add("# Factura");
-        columna.add("Codigo de Factura");
-        columna.add("Fecha de Venta");
-        columna.add("Vendedor");
-        columna.add("Estado de Factura");
-        for (Object columna1 : columna) {
-           modeloFacturas.addColumn(columna1);
-        }
-        tablaFacturas.setModel(modeloFacturas);
-        ArrayList<FacturaCabecera> listfacturas = facturas.obtenerListaFacturas();
-        ArrayList<Object[]>  facturaCab = new ArrayList<>();
-        for (int i = 0; i < listfacturas.size(); i++) {
-            Object[] factCab = new Object[]{i+1, listfacturas.get(i).getId(), listfacturas.get(i).getFechaVenta() , 
-                                                listfacturas.get(i).getEmpleado().getNombre(), listfacturas.get(i).getEstado()};
-            facturaCab.add(factCab);
-        }
-        
-        for (Object[] fac : facturaCab) {
-            modeloFacturas.addRow(fac);
-        }
-        this.tablaFacturas.setModel(modeloFacturas);
-        tablaFacturas.setBackground(new Color(0,102,204));
-        tablaFacturas.setForeground(Color.WHITE);
-        
-    }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -106,25 +110,26 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         tablaFacturas.setForeground(new java.awt.Color(255, 255, 255));
         tablaFacturas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "# Factura", "Código de Factura", "Fecha de Venta", "Vendedor", "Estado de Factura"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         tablaFacturas.setRowHeight(25);
+        tablaFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaFacturasMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaFacturas);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -161,6 +166,11 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         btnBuscarFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarFacturaActionPerformed(evt);
+            }
+        });
+        btnBuscarFactura.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnBuscarFacturaKeyPressed(evt);
             }
         });
 
@@ -224,6 +234,11 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         btnAnular.setForeground(new java.awt.Color(0, 102, 204));
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/anularT.png"))); // NOI18N
         btnAnular.setText("Anular");
+        btnAnular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAnularMouseClicked(evt);
+            }
+        });
         btnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnularActionPerformed(evt);
@@ -358,6 +373,8 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAnularActionPerformed
 
     private void btnBuscarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarFacturaActionPerformed
+        
+        modeloFacturas.setRowCount(0);
         int codigo;
         try {
             codigo = Integer.parseInt(txtCodigoFactura.getText().trim());
@@ -375,6 +392,8 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         
         if (fact != null) {
             txtCodFactDatos.setText(String.valueOf(fact.getId()));
+            factSelect = fact;
+            
             if (fact.getEstado() == 'A') {
                 txtEstadoFactura.setText("Anulada");
             }else if (fact.getEstado() == 'V'){
@@ -387,6 +406,135 @@ public class InternalVentanaAnularFactura extends javax.swing.JInternalFrame {
         }
         
     }//GEN-LAST:event_btnBuscarFacturaActionPerformed
+
+    private void tablaFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaFacturasMouseClicked
+        
+        int row= tablaFacturas.getSelectedRow();
+        
+        
+
+            
+            for (FacturaCabecera facturasT1 : facturasT) {
+
+
+
+                if( Integer.toString(facturasT1.getId()).equals((tablaFacturas.getValueAt(row, 1)).toString())){
+                    
+                    
+                   txtCodFactDatos.setText( Integer.toString(facturasT1.getId()));
+                    txtFechaVenta.setText(date.format(facturasT1.getFechaVenta()));
+                    txtNombreVendedor.setText(facturasT1.getEmpleado().getNombre());
+                    txtEstadoFactura.setText(facturasT1.getEstado()+" ");
+                    
+                    factSelect = facturasT1;
+                    
+                } 
+            }
+        
+        
+        
+    }//GEN-LAST:event_tablaFacturasMouseClicked
+
+    private void btnBuscarFacturaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBuscarFacturaKeyPressed
+            
+        
+        
+        
+        if (txtCodigoFactura.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Por favor llenar el cuadro de texto");  
+        }else{
+            
+            modeloFacturas.setRowCount(0);
+            int i=1;
+            for (FacturaCabecera facturasT1 : facturasT) {
+                                                                           
+                if(Integer.toString(facturasT1.getId()).equals(txtCodigoFactura.getText())){
+
+                    
+                    
+                    modeloFacturas.addRow(new Object[]{i, facturasT1.getId(),date.format(facturasT1.getFechaVenta()),facturasT1.getEmpleado().getNombre(),facturasT1.getEstado()});
+                    i++;
+                    
+
+
+
+
+
+                }
+            }
+            
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnBuscarFacturaKeyPressed
+
+    private void btnAnularMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseClicked
+
+        
+        
+        if (factSelect== null ){
+            JOptionPane.showMessageDialog(null, "Por favor seleccionar una Factura");   
+        
+        }else if(factSelect.getEstado()== 'A' ){
+            JOptionPane.showMessageDialog(null, "El producto ya se encuentra Anulada");   
+        }else{
+            int conf;
+            conf = JOptionPane.showConfirmDialog(null,"Confirmar Anulacion ","Confirmar" , JOptionPane.YES_NO_OPTION);     
+            
+            if (conf==JOptionPane.YES_OPTION){
+                
+                
+                try {
+                    modeloFacturas.setRowCount(0);
+                    
+                    facturas.anular(factSelect);
+                } catch (IOException ex) {
+                    Logger.getLogger(InternalVentanaAnularFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                facturas.delFact();
+                
+                try {
+                    facturas.cargarFacturas();
+                } catch (IOException ex) {
+                    Logger.getLogger(InternalVentanaAnularFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                facturasT = facturas.getFacturas();
+
+                int i=1;
+
+                for (FacturaCabecera facturasT1 : facturasT) {  
+
+                    modeloFacturas.addRow(new Object[]{i, facturasT1.getId(),date.format(facturasT1.getFechaVenta()),facturasT1.getEmpleado().getNombre(),facturasT1.getEstado()});
+                    i++;
+
+                }
+                
+                
+                
+                
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnAnularMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

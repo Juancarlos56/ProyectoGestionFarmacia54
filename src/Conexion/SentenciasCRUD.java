@@ -5,22 +5,26 @@
  */
 package Conexion;
 
+import Controlador.ControladorValidaciones;
 import Modelo.Categoria;
 import Modelo.Ciudad;
 import Modelo.Cliente;
 import Modelo.Direccion;
 import Modelo.Empleado;
 import Modelo.FacturaCabecera;
+import Modelo.FacturaDetalle;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import Modelo.SubCategoria;
 import java.io.IOException;
+import java.sql.Date;
 //import static Vista.Principal.Categorias;
 //import static Vista.Principal.Clientes;
 //import static Vista.Principal.Empleados;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -30,10 +34,14 @@ import java.util.ArrayList;
  * @author Carlos
  */
 public class SentenciasCRUD {
+    
     private ResultSet resultado = null;
     private ResultSet resultadobusc = null;
     private PreparedStatement sentencia = null;
     private PreparedStatement busqueda = null;
+    private Controlador.ControladorValidaciones cv = new ControladorValidaciones();
+    
+    SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
     
     ArrayList<Categoria> Categorias= new ArrayList();
     
@@ -45,6 +53,7 @@ public class SentenciasCRUD {
     
     ArrayList<Ciudad> Ciudades= new ArrayList();
     
+    ArrayList<FacturaCabecera> fac = new ArrayList<>();
     
     
     public void cargarProductos(Conexion con) {
@@ -254,9 +263,13 @@ public class SentenciasCRUD {
                 c.setTlfConvencional(resultado.getString("CLI_TELEFONO_CONVENCIONAL"));
                 c.setTlfCelular(resultado.getString("CLI_TELEFONO_CELULAR"));
                 Clientes.add(c);  
-                //cargarCiudades(con);
-                //cargarDirecciones(con);
             }
+            
+            
+            cargarCiudades(con);
+                
+            cargarDirecciones(con);
+            
             
             return Clientes;
         }catch(SQLException e){
@@ -269,20 +282,27 @@ public class SentenciasCRUD {
     private void cargarCiudades(Conexion con) {
         try {
             sentencia = con.getConexion().prepareStatement("select * from PFC_CIUDADES ");
+            
             resultado = sentencia.executeQuery();
+           
             while (resultado.next()) {                
                 Ciudad c = new Ciudad();
                 c.setId(resultado.getInt("CUI_ID"));
                 c.setNombre(resultado.getString("CUI_NOMBRE"));
+               
                 Ciudades.add(c);     
             }
+        
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
     
     private void cargarDirecciones(Conexion con) {
+        
         try {
+            
             sentencia = con.getConexion().prepareStatement("SELECT * FROM PFC_DIRECCIONES ");
             resultado = sentencia.executeQuery();
             while (resultado.next()) { 
@@ -300,7 +320,7 @@ public class SentenciasCRUD {
                 
                 for (int i = 0; i < Clientes.size(); i++) {
                     if (Clientes.get(i).getId() == resultado.getInt("CLI_ID")) {
-                        Clientes.get(i).addDirecciones(d);
+                        Clientes.get(i).addDireccionesP(d);
                     }   
                 }
                 
@@ -309,81 +329,7 @@ public class SentenciasCRUD {
         }
     }
 
-    public void cargarFacturas(Conexion con) {
-        
-        try{                                                    //aqui van las consultas
-            sentencia = con.getConexion().prepareStatement("select * from PFC_FACTURAS_CABECERA");
-            
-            
-            
-            resultado = sentencia.executeQuery();
-            
-            // Se Presenta el resultado
-            
-            while (resultado.next()){
-                
-                FacturaCabecera f = new FacturaCabecera();
-                f.setId(resultado.getInt("FCA_ID"));
-                f.setFechaVenta(resultado.getDate("FCA_FECHA_VENTA"));
-                f.setSubtotal(resultado.getDouble("FCA_SUBTOTAL"));
-                f.setDescuento(resultado.getDouble("FCA_DESCUENTO"));
-                f.setAdicionalEnvio(resultado.getDouble("FCA_ADICIONAL_ENVIO"));
-                f.setValorTotal(resultado.getDouble("FCA_VALOR_TOTAL"));
-                f.setEstado(resultado.getString("FCA_ESTADO").charAt(0));
-                //f.setAvisoEnvio(0);
-                //Sets de objetos 
-                //Cliente
-                
-                for (Cliente Cliente : Clientes) {
-                    if(Cliente.getId() == resultado.getInt("CLI_ID")){
-                        f.setCliente(Cliente);
-                        
-                        
-                        /*for (Direccion direccione : Cliente.getDirecciones()) {
-                            
-                            if(direccione.getId() == resultado.getInt("DIR_ID")){
-                                
-                                f.;
-                                
-                            }
-                            
-                            
-                        }*/  
-                    
-                    }
-                    
-                    
-                }
-                
-                for (Empleado Empleado : Empleados) {
-                    if(Empleado.getId() == resultado.getInt("EMP_ID")){
-                        f.setEmpleado(Empleado);
-                        
-                        
-                        Empleado.addFacturas(f);
-                    }
-                    
-                }
-                
-                
-                
-                
-               
-                
-                
-                
-            }
-            
-            
-            
-            
-            
-        }catch(SQLException e){
-            e.printStackTrace();
-        }   
-        
-        
-    }
+    
 
     public void agregarNuevoClientes(Conexion con, Cliente cliente) {
         
@@ -817,6 +763,291 @@ public class SentenciasCRUD {
 
 
     }
+
+    public void addFactura(Conexion con, FacturaCabecera factura, String text) {
+        
+        int facID = Integer.parseInt(text);
+        
+        try{
+            
+            
+            
+            
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_FACTURAS_CABECERA VALUES( ? , ? , ?, ? , ? , ? , 'V', 'E',  ?, ?, ?)");
+            
+            sentencia.setInt(1, facID);
+            sentencia.setDate(2, factura.getFechaVenta());
+            
+
+            sentencia.setDouble(3, factura.getSubtotal());
+            sentencia.setDouble(4, factura.getDescuento());
+            
+            sentencia.setDouble(5, factura.getAdicionalEnvio());
+            sentencia.setDouble(6, factura.getValorTotal());
+            
+            sentencia.setInt(7, factura.getCliente().getId());
+            sentencia.setInt(8, factura.getEmpleado().getId());
+            sentencia.setInt(9, factura.getCliente().getDirecciones().get(0).getId());
+            
+            
+            sentencia.executeQuery();
+        
+            
+            for (FacturaDetalle detalle : factura.getDetalle()) {
+                
+                String pro =detalle.getProducto().getCodigoBarras();
+                int cant= detalle.getCantidad();  
+            
+
+                
+                
+                sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_FACTURAS_DETALLE VALUES(fde_id_seq.NEXTVAL, ? ,  ? , ? , ? , ? , ? )");
+                
+                sentencia.setInt(1 , cant );
+                sentencia.setDouble(2, detalle.getPrecio());
+                sentencia.setDouble(3 , detalle.getDescuento() );
+                sentencia.setDouble(4, detalle.getSubtotal());
+                sentencia.setInt(5, facID);
+                sentencia.setString(6, pro);
+                
+                sentencia.executeQuery();
+                
+                
+                
+                
+            }
+            
+
+            
+            con.getConexion().commit();
+            
+            
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+
+        }
+    
+    
+    
+    
+    
+    
+    
+    }
+
+    
+    public ArrayList<FacturaCabecera> obtFacts(Conexion con) throws IOException {
+        
+        cargarClientes(con);
+        
+        ArrayList<Empleado> emps =cargarEmpleados(con);
+        
+        Categorias.clear();
+        cargarCategorias(con);
+        
+        
+        
+        try{
+            sentencia= con.getConexion().prepareStatement("select * from PFC_FACTURAS_CABECERA");
+            resultado = sentencia.executeQuery();
+            
+            // Se Presenta el resultado
+            
+            while (resultado.next()){
+                
+                FacturaCabecera c = new FacturaCabecera();
+                
+                c.setId(resultado.getInt("FCA_ID"));
+                c.setFechaVenta(resultado.getDate("FCA_FECHA_VENTA"));
+                c.setSubtotal(resultado.getDouble("FCA_SUBTOTAL"));
+                c.setDescuento(resultado.getDouble("FCA_DESCUENTO"));
+                c.setAdicionalEnvio(resultado.getDouble("FCA_ADICIONAL_ENVIO"));
+                c.setValorTotal(resultado.getDouble("FCA_VALOR_TOTAL"));
+                c.setEstado(resultado.getString("FCA_ESTADO").charAt(0));
+
+                
+                
+                
+                
+                 for (Cliente cli : Clientes) {
+                     
+                    
+                    if ( resultado.getInt("CLI_ID") == cli.getId()){
+                        
+                        
+                        c.setCliente(cli);
+                         for (Direccion direccione : cli.getDirecciones()) {
+                             if ( direccione.getId()== resultado.getInt("DIR_ID")  ) {
+                                 
+                                 c.setDireccion(direccione);
+                             }
+                         }
+                     }
+                     
+                     
+                     
+                 }
+                 
+                 
+                 for (Empleado emp : emps) {
+                     if(emp.getId()== resultado.getInt("EMP_ID") ){
+                         c.setEmpleado(emp);
+                         
+                     }
+                     
+                 }
+                 
+                 
+                 
+                 
+                 
+                 fac.add(c);
+                
+                
+                
+                
+            }
+            //Cargar Detalles
+            
+            
+
+                
+                
+            sentencia= con.getConexion().prepareStatement("select * from PFC_FACTURAS_DETALLE");
+
+            resultado = sentencia.executeQuery();
+
+
+            while (resultado.next()){
+            FacturaDetalle fd = new FacturaDetalle();
+                fd.setId(resultado.getInt("FDE_ID"));
+                fd.setCantidad(resultado.getInt("FDE_CANTIDAD"));
+                fd.setPrecio(resultado.getDouble("FDE_PRECIO"));
+                fd.setDescuento(resultado.getDouble("FDE_DESCUENTO"));
+                fd.setSubtotal(resultado.getDouble("FDE_SUBTOTAL"));
+                
+                
+                for (FacturaCabecera fac1 : fac) {
+                    if ( fac1.getId() ==resultado.getInt("FCA_ID") ) {  
+                        fac1.addDetalle(fd);
+                    
+                    }
+                }
+                
+                for (Categoria Categoria : Categorias) {
+                    
+                    
+                    for (SubCategoria subcategoria : Categoria.getSubcategorias()) {
+                        
+                        for (Producto producto : subcategoria.getProductos()) {
+                        
+                            if (producto.getCodigoBarras().equals(resultado.getString("PRO_CODIGO_BARRAS"))){
+                        
+                                fd.setProducto(producto);
+                            }    
+                        }
+                        
+                        
+                    }   
+                } 
+                
+                
+                
+                
+                
+
+            }
+            
+            
+            return fac; 
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        
+        
+        
+        
+    }
+
+    public void anularF(Conexion con, FacturaCabecera factSelect) throws IOException {
+        
+        fac.clear();
+        obtFacts(con);
+        
+        
+        
+        
+        try{
+            sentencia= con.getConexion().prepareStatement("UPDATE PFC_FACTURAS_CABECERA \n" +
+                                                            "SET FCA_ESTADO = 'A'\n" +
+                                                            "WHERE FCA_ID = ? ");
+            
+            sentencia.setInt(1 , factSelect.getId() );
+            
+            sentencia.executeQuery();
+        
+            System.out.println(factSelect.getDetalle().size());
+            
+            for (FacturaDetalle detalle : factSelect.getDetalle()) {
+                
+               
+                
+                String pro =detalle.getProducto().getCodigoBarras();
+                int cant= detalle.getCantidad();  
+                
+                
+             
+                sentencia= con.getConexion().prepareStatement("UPDATE PFC_PRODUCTOS\n" +
+                                                                "SET PRO_STOCK = PRO_STOCK + ? \n" +
+                                                                "WHERE PRO_CODIGO_BARRAS =   ? ");
+                sentencia.setInt(1 , cant );
+                sentencia.setString(2 , pro );
+                
+                sentencia.executeQuery();
+            
+            }
+            
+            con.getConexion().commit();
+            
+            
+
+            
+            
+        }catch(SQLException e) {
+            e.printStackTrace();
+
+        }
+        
+        
+        
+        
+        
+    }
+
+    public String anularF(Conexion con) throws SQLException {
+        busqueda = con.getConexion().prepareStatement("select fca_id_seq.NEXTVAL" +
+                                                                " from dual");
+            
+            resultadobusc = busqueda.executeQuery();
+            int facID=0;
+            
+            while (resultadobusc.next()){
+                
+                facID = resultadobusc.getInt("NEXTVAL");
+            
+            }
+            
+            return Integer.toString(facID);
+            
+    }
+
+
     
     
     
