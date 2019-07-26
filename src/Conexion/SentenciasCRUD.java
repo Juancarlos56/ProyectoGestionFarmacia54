@@ -232,6 +232,7 @@ public class SentenciasCRUD {
         
     }
     
+
     
     public ArrayList<Cliente> cargarClientes(Conexion con) {
         
@@ -264,6 +265,7 @@ public class SentenciasCRUD {
         } 
     }  
     
+
     private void cargarCiudades(Conexion con) {
         try {
             sentencia = con.getConexion().prepareStatement("select * from PFC_CIUDADES ");
@@ -478,6 +480,7 @@ public class SentenciasCRUD {
     
     
     
+
     }
 
     public void crearProducto(Conexion con, String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
@@ -536,6 +539,7 @@ public class SentenciasCRUD {
         
         
     }
+
 
     public void editarProducto(Conexion con,String eCodigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
         
@@ -758,6 +762,60 @@ public class SentenciasCRUD {
             e.printStackTrace();
         }
     
+
+    }
+
+    
+    public void agregarNuevaDirecc(Conexion con, String cedula, Direccion direcciones) {
+        try{
+            String ciudad =direcciones.getCiudad().getNombre();
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_CIUDADES VALUES(cui_id_seq.NEXTVAL,  ? )");
+            sentencia.setString(1, ciudad);
+            sentencia.executeUpdate();
+            con.getConexion().commit();
+            
+            sentencia= con.getConexion().prepareStatement("select CUI_ID\n" +
+                                                            "from PFC_CIUDADES\n" +
+                                                            "where CUI_NOMBRE = ? ");
+            sentencia.setString(1, ciudad);
+            
+            resultado = sentencia.executeQuery();
+            int ciuID=0;
+            
+            while (resultado.next()){
+                ciuID=resultado.getInt("CUI_ID");
+            }
+            
+            sentencia= con.getConexion().prepareStatement("select CLI_ID\n" +
+                                                            "from PFC_CLIENTES \n" +
+                                                            "where CLI_CEDULA = ? ");
+            sentencia.setString(1, cedula);
+            
+            resultado = sentencia.executeQuery();
+            int cliID=0;
+            
+            while (resultado.next()){
+                cliID=resultado.getInt("CLI_ID");
+            }
+            
+            
+            sentencia= con.getConexion().prepareStatement("INSERT INTO PFC_DIRECCIONES VALUES(dir_id_seq.NEXTVAL, ?, ? , ? , ? ) ");
+            sentencia.setString(1, direcciones.getCallePrincipal());
+            sentencia.setString(2, direcciones.getCalleSecundaria());
+            
+            sentencia.setInt(3 , ciuID );
+            sentencia.setInt(4 , cliID );
+            
+            sentencia.executeQuery();
+
+            con.getConexion().commit();
+        
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+
+
     }
     
     

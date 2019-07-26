@@ -9,6 +9,9 @@ import Conexion.Conexion;
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
 import Modelo.Cliente;
+
+import Modelo.Direccion;
+
 import Modelo.Empleado;
 import Modelo.Producto;
 import Modelo.Proveedor;
@@ -154,6 +157,18 @@ public class ControladorBaseDeDatos {
             con.cerrarConexion();
         }
     }
+
+
+    public void agregarDireccionCliente(String cedula, Direccion direcciones) {
+        con.conectar();
+        if(con.getConexion() !=null){
+            s.agregarNuevaDirecc(con, cedula,direcciones);
+            con.cerrarConexion();
+        }
+    
+    
+    }
+
     
     void crearProducto(String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
         

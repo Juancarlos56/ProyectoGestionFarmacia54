@@ -65,6 +65,7 @@ public class ControladorEmpleados {
         }
         
 
+
         //Esto es solo para prueba
         Empleado e = new Empleado();
         e.setCedula("0106113301");

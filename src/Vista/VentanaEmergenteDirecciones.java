@@ -33,10 +33,16 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     String dTipo;
     DefaultTableModel tabla;
     
-    public VentanaEmergenteDirecciones(Cliente clt) {
+
+    public VentanaEmergenteDirecciones( String tipo) {
         initComponents();
         setLocationRelativeTo(null);
-        //dTipo = tipo;
+        
+        
+    }
+
+    VentanaEmergenteDirecciones(Cliente cli) {
+
         
     }
     
@@ -77,10 +83,12 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
 
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+
         principal = new javax.swing.JTextField();
         secundaria = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         ciudad = new javax.swing.JTextField();
+
         jLabel7 = new javax.swing.JLabel();
         agregarCliente = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
@@ -99,6 +107,7 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Ingresar Calle Principal");
 
+
         principal.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         principal.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         principal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -112,13 +121,16 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         secundaria.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         secundaria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
 
+
         jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Ingresar Ciudad ");
 
+
         ciudad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         ciudad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         ciudad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
 
         jLabel7.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -147,9 +159,11 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+
                     .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
                     .addComponent(secundaria)
                     .addComponent(ciudad))
+
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -161,18 +175,22 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+
                     .addComponent(principal)
+
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 9, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+
                     .addComponent(secundaria, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ciudad, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(agregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -277,14 +295,17 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void principalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_principalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_principalActionPerformed
+
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
         
         switch (dTipo){
             case "nuevo":
+
                 String callep = principal.getText();
                 String calles = secundaria.getText();
                 String ciudades = ciudad.getText();
@@ -300,6 +321,7 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
                     
                 }
         
+
                 
                 
                 
@@ -367,15 +389,19 @@ public class VentanaEmergenteDirecciones extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton agregarCliente;
     private javax.swing.JButton btnUtilizarDireccionExistente;
+
     private javax.swing.JTextField ciudad;
+
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
+
     private javax.swing.JTextField principal;
     private javax.swing.JTextField secundaria;
     private javax.swing.JTable tablaDirecciones;
+
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,7 @@
  */
 package Modelo;
 
+import Controlador.ControladorBaseDeDatos;
 import java.util.ArrayList;
 
 /**
@@ -17,6 +18,7 @@ public class Cliente extends Persona{
     private String tlfConvencional;
     private String tlfCelular;
     private ArrayList<Direccion> direcciones;
+    private ControladorBaseDeDatos cb;
     
     public Cliente() {
         super();
@@ -53,5 +55,7 @@ public class Cliente extends Persona{
 
     public void addDirecciones(Direccion direcciones) {
         this.direcciones.add(direcciones);
+        cb.agregarDireccionCliente(cedula,direcciones);
+        
     }
 }
