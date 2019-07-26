@@ -53,5 +53,4 @@ public class Cliente extends Persona{
     public void addDirecciones(Direccion direcciones) {
         this.direcciones.add(direcciones);
     }
-  
 }

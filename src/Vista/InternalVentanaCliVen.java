@@ -16,7 +16,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
 
     //Esto es solo para una prueba
     ArrayList<Cliente> clts = new ArrayList<>();
-    
+    private Cliente clt;
     
     /**
      * Creates new form VentanaCliAdmi
@@ -337,7 +337,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-        Cliente clt = new Cliente();
+        clt = new Cliente();
         clt.setId(5);
         clt.setApellido(apellido.getText());
         clt.setCedula(cedula.getText());
@@ -350,7 +350,7 @@ public class InternalVentanaCliVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     private void btnDirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDirMouseClicked
-        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones();
+        VentanaEmergenteDirecciones ved = new VentanaEmergenteDirecciones(clt);
         ved.setVisible(true);
     }//GEN-LAST:event_btnDirMouseClicked
 

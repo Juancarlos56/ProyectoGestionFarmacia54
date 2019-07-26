@@ -5,6 +5,8 @@
  */
 package Modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Carlos
@@ -14,8 +16,17 @@ public class Direccion {
     private int id;
     private String callePrincipal;
     private String calleSecundaria;
-    private String ciudadNombre;
+    private Ciudad ciudad;
 
+    public Ciudad getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(Ciudad ciudad) {
+        this.ciudad = ciudad;
+    }
+    
+    
     public int getId() {
         return id;
     }
@@ -40,13 +51,4 @@ public class Direccion {
         this.calleSecundaria = calleSecundaria;
     }
 
-    public String getCiudadNombre() {
-        return ciudadNombre;
-    }
-
-    public void setCiudadNombre(String ciudadNombre) {
-        this.ciudadNombre = ciudadNombre;
-    }
-
-    
 }
