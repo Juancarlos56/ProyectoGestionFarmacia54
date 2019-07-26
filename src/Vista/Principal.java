@@ -19,9 +19,7 @@ public class Principal {
     public static void main(String[] args) throws IOException {
         // TODO code application logic here
         VentanaLogin v = new VentanaLogin();
-        v.setVisible(true);
-
-             
+        v.setVisible(true);             
     }
     
 }
