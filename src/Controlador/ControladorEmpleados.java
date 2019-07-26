@@ -8,6 +8,8 @@ package Controlador;
 import Modelo.Empleado;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,12 +23,6 @@ public class ControladorEmpleados {
     
     public ControladorEmpleados() throws IOException {
         bd = new ControladorBaseDeDatos();
-        
-        //Comentado este cargar empleados por que causa que se duplique la lista dentro del gestion Empleados
-        //Es mejor Poner el metodo Dentro de la clase a usar
-        //Para entender mejor, hacer referencia a GestionEmpleados dentro de la vista
-        //cargarEmpleados();
-    
     }
     
     public void cargarEmpleados() throws IOException{
@@ -54,7 +50,6 @@ public class ControladorEmpleados {
         
             if (empleado.getNombre().equals(nombre)) {
                 if (empleado.getCedula().equals(cedula)){
-                    
                     emp= empleado;
                 }
                 
@@ -67,6 +62,30 @@ public class ControladorEmpleados {
         
 
     }
+    
+    public Empleado buscarEmpleadoLoginAdmi(String nombre, String cedula) throws IOException{
+        Empleado emp= null;
+        cargarEmpleados();
+            
+            
+            for (Empleado empleado : empleados) {
+                
+                if (empleado.getNombre().equals(nombre)) {
+                    if (empleado.getCedula().equals(cedula)){
+                        System.out.println("cargo "+ empleado.getCargo());
+                        if (empleado.getCargo() == 'A') {
+                            emp= empleado;
+                        }
+                    }
+                    
+
+                }
+                
+                
+            }
+            return emp;
+    }
+    
     
     
     public ArrayList<Empleado> getEmpleados() {

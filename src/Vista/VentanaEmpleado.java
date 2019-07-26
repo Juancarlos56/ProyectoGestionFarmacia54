@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -185,9 +186,13 @@ public class VentanaEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void facturaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_facturaMouseClicked
-        InternalVentanaFacturar ivfv = new InternalVentanaFacturar(empleado);
-        escritorio.add(ivfv);
-        ivfv.show();
+        try {
+            InternalVentanaFacturar ivfv = new InternalVentanaFacturar(empleado);
+            escritorio.add(ivfv);
+            ivfv.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_facturaMouseClicked
 
     private void productosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productosMouseClicked

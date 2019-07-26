@@ -6,7 +6,9 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -16,10 +18,12 @@ import java.util.logging.Logger;
  */
 public class GestionFacturasAdministrador extends javax.swing.JInternalFrame {
 
+    private Empleado empleado;
     /**
      * Creates new form GestionFacturasAdministrador
      */
-    public GestionFacturasAdministrador() {
+    public GestionFacturasAdministrador(Empleado empleado) {
+        this.empleado = empleado;
         initComponents();
     }
 
@@ -110,10 +114,13 @@ public class GestionFacturasAdministrador extends javax.swing.JInternalFrame {
 
     private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
         
-        //Esta comentado falta enviar Empleado
-        //InternalVentanaFacturar ivfa = new InternalVentanaFacturar();
-        //jDesktopPane1.add(ivfa);
-        //ivfa.show();
+        try {
+            InternalVentanaFacturar ivfa = new InternalVentanaFacturar(empleado);
+            jDesktopPane1.add(ivfa);
+            ivfa.show();
+        } catch (SQLException ex) {
+            Logger.getLogger(GestionFacturasAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_facturaActionPerformed
 
     private void anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularActionPerformed

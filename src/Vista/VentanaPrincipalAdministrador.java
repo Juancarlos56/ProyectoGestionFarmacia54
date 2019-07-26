@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.Empleado;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
@@ -19,10 +20,12 @@ import javax.swing.ImageIcon;
  */
 public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
 
+    private Empleado empleado;
     /**
      * Creates new form VentanaPrincipalAdministrador
      */
-    public VentanaPrincipalAdministrador() {
+    public VentanaPrincipalAdministrador(Empleado empleado) {
+        this.empleado = empleado;
         initComponents();    
         setLocationRelativeTo(null);
     }
@@ -43,11 +46,11 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        COMPRAR_PRODUCTOS = new javax.swing.JButton();
-        LISTAR_PRODUCTO = new javax.swing.JButton();
-        GestionarVendedores = new javax.swing.JButton();
-        MODIFICAR_sTOCK1 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        gestionFacturas = new javax.swing.JButton();
+        gestionProductos = new javax.swing.JButton();
+        gestionEmpleados = new javax.swing.JButton();
+        compraProductos = new javax.swing.JButton();
+        cerrar = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
@@ -105,72 +108,72 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 212, 0));
         jPanel2.setLayout(new java.awt.GridLayout(5, 0, 1, 0));
 
-        COMPRAR_PRODUCTOS.setBackground(new java.awt.Color(0, 102, 204));
-        COMPRAR_PRODUCTOS.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        COMPRAR_PRODUCTOS.setForeground(new java.awt.Color(255, 255, 255));
-        COMPRAR_PRODUCTOS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/factura.png"))); // NOI18N
-        COMPRAR_PRODUCTOS.setText("Gestión Facturas");
-        COMPRAR_PRODUCTOS.setAlignmentY(0.0F);
-        COMPRAR_PRODUCTOS.setBorder(null);
-        COMPRAR_PRODUCTOS.addActionListener(new java.awt.event.ActionListener() {
+        gestionFacturas.setBackground(new java.awt.Color(0, 102, 204));
+        gestionFacturas.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        gestionFacturas.setForeground(new java.awt.Color(255, 255, 255));
+        gestionFacturas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/factura.png"))); // NOI18N
+        gestionFacturas.setText("Gestión Facturas");
+        gestionFacturas.setAlignmentY(0.0F);
+        gestionFacturas.setBorder(null);
+        gestionFacturas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                COMPRAR_PRODUCTOSActionPerformed(evt);
+                gestionFacturasActionPerformed(evt);
             }
         });
-        jPanel2.add(COMPRAR_PRODUCTOS);
+        jPanel2.add(gestionFacturas);
 
-        LISTAR_PRODUCTO.setBackground(new java.awt.Color(0, 102, 204));
-        LISTAR_PRODUCTO.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        LISTAR_PRODUCTO.setForeground(new java.awt.Color(255, 255, 255));
-        LISTAR_PRODUCTO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prodP.png"))); // NOI18N
-        LISTAR_PRODUCTO.setText("Gestión Productos");
-        LISTAR_PRODUCTO.setAlignmentY(0.0F);
-        LISTAR_PRODUCTO.setBorder(null);
-        LISTAR_PRODUCTO.addActionListener(new java.awt.event.ActionListener() {
+        gestionProductos.setBackground(new java.awt.Color(0, 102, 204));
+        gestionProductos.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        gestionProductos.setForeground(new java.awt.Color(255, 255, 255));
+        gestionProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/prodP.png"))); // NOI18N
+        gestionProductos.setText("Gestión Productos");
+        gestionProductos.setAlignmentY(0.0F);
+        gestionProductos.setBorder(null);
+        gestionProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LISTAR_PRODUCTOActionPerformed(evt);
+                gestionProductosActionPerformed(evt);
             }
         });
-        jPanel2.add(LISTAR_PRODUCTO);
+        jPanel2.add(gestionProductos);
 
-        GestionarVendedores.setBackground(new java.awt.Color(0, 102, 204));
-        GestionarVendedores.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        GestionarVendedores.setForeground(new java.awt.Color(255, 255, 255));
-        GestionarVendedores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/VendedorP.png"))); // NOI18N
-        GestionarVendedores.setText("Gestión Empleados");
-        GestionarVendedores.setAlignmentY(0.0F);
-        GestionarVendedores.setBorder(null);
-        GestionarVendedores.addActionListener(new java.awt.event.ActionListener() {
+        gestionEmpleados.setBackground(new java.awt.Color(0, 102, 204));
+        gestionEmpleados.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        gestionEmpleados.setForeground(new java.awt.Color(255, 255, 255));
+        gestionEmpleados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/VendedorP.png"))); // NOI18N
+        gestionEmpleados.setText("Gestión Empleados");
+        gestionEmpleados.setAlignmentY(0.0F);
+        gestionEmpleados.setBorder(null);
+        gestionEmpleados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GestionarVendedoresActionPerformed(evt);
+                gestionEmpleadosActionPerformed(evt);
             }
         });
-        jPanel2.add(GestionarVendedores);
+        jPanel2.add(gestionEmpleados);
 
-        MODIFICAR_sTOCK1.setBackground(new java.awt.Color(0, 102, 204));
-        MODIFICAR_sTOCK1.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
-        MODIFICAR_sTOCK1.setForeground(new java.awt.Color(255, 255, 255));
-        MODIFICAR_sTOCK1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/compraP.png"))); // NOI18N
-        MODIFICAR_sTOCK1.setText("Compra de Productos");
-        MODIFICAR_sTOCK1.setAlignmentY(0.0F);
-        MODIFICAR_sTOCK1.setBorder(null);
-        MODIFICAR_sTOCK1.addActionListener(new java.awt.event.ActionListener() {
+        compraProductos.setBackground(new java.awt.Color(0, 102, 204));
+        compraProductos.setFont(new java.awt.Font("Calibri", 0, 13)); // NOI18N
+        compraProductos.setForeground(new java.awt.Color(255, 255, 255));
+        compraProductos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/compraP.png"))); // NOI18N
+        compraProductos.setText("Compra de Productos");
+        compraProductos.setAlignmentY(0.0F);
+        compraProductos.setBorder(null);
+        compraProductos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MODIFICAR_sTOCK1ActionPerformed(evt);
+                compraProductosActionPerformed(evt);
             }
         });
-        jPanel2.add(MODIFICAR_sTOCK1);
+        jPanel2.add(compraProductos);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 204));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrarSeccionP.png"))); // NOI18N
-        jButton1.setText("Cerrar Sección");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cerrar.setBackground(new java.awt.Color(0, 102, 204));
+        cerrar.setForeground(new java.awt.Color(255, 255, 255));
+        cerrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cerrarSeccionP.png"))); // NOI18N
+        cerrar.setText("Cerrar Sección");
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cerrarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
+        jPanel2.add(cerrar);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -276,7 +279,7 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void GestionarVendedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GestionarVendedoresActionPerformed
+    private void gestionEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionEmpleadosActionPerformed
         GestionEmpleados ge = null;
         try {
             ge = new GestionEmpleados();
@@ -285,75 +288,40 @@ public class VentanaPrincipalAdministrador extends javax.swing.JFrame {
         }
         escritorioAdmi.add(ge);
         ge.show();
-    }//GEN-LAST:event_GestionarVendedoresActionPerformed
+    }//GEN-LAST:event_gestionEmpleadosActionPerformed
 
-    private void COMPRAR_PRODUCTOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_COMPRAR_PRODUCTOSActionPerformed
-        GestionFacturasAdministrador gfa = new GestionFacturasAdministrador();
+    private void gestionFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionFacturasActionPerformed
+        GestionFacturasAdministrador gfa = new GestionFacturasAdministrador(empleado);
         escritorioAdmi.add(gfa);
         gfa.show();
-    }//GEN-LAST:event_COMPRAR_PRODUCTOSActionPerformed
+    }//GEN-LAST:event_gestionFacturasActionPerformed
 
-    private void MODIFICAR_sTOCK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MODIFICAR_sTOCK1ActionPerformed
+    private void compraProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_compraProductosActionPerformed
         GestionFacturaCompra gfc = new GestionFacturaCompra();
         escritorioAdmi.add(gfc);
         gfc.show();
-    }//GEN-LAST:event_MODIFICAR_sTOCK1ActionPerformed
+    }//GEN-LAST:event_compraProductosActionPerformed
 
-    private void LISTAR_PRODUCTOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LISTAR_PRODUCTOActionPerformed
+    private void gestionProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gestionProductosActionPerformed
         GestionProductos gp = new GestionProductos();
         escritorioAdmi.add(gp);
         gp.show();
-    }//GEN-LAST:event_LISTAR_PRODUCTOActionPerformed
+    }//GEN-LAST:event_gestionProductosActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
         VentanaAdministradorLogin val = new VentanaAdministradorLogin();
         val.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_cerrarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaPrincipalAdministrador.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new VentanaPrincipalAdministrador().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton COMPRAR_PRODUCTOS;
-    private javax.swing.JButton GestionarVendedores;
-    private javax.swing.JButton LISTAR_PRODUCTO;
-    private javax.swing.JButton MODIFICAR_sTOCK1;
+    private javax.swing.JButton cerrar;
+    private javax.swing.JButton compraProductos;
     private javax.swing.JDesktopPane escritorioAdmi;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton gestionEmpleados;
+    private javax.swing.JButton gestionFacturas;
+    private javax.swing.JButton gestionProductos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -222,8 +222,8 @@ public class SentenciasCRUD {
                 e.setNombre(resultado.getString("EMP_NOMBRE"));
                 e.setApellido(resultado.getString("EMP_APELLIDO"));
                 e.setCedula(resultado.getString("EMP_CEDULA"));
+                e.setCargo(resultado.getNString("EMP_CARGO").charAt(0));
                 e.setEstadoEmpleado((resultado.getNString("EMP_ESTADO").charAt(0)));
-                
                 
                 Empleados.add(e);
                 

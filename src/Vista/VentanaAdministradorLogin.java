@@ -5,17 +5,33 @@
  */
 package Vista;
 
+import Controlador.ControladorEmpleados;
+import Controlador.ControladorValidaciones;
+import Modelo.Empleado;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Carlos
  */
 public class VentanaAdministradorLogin extends javax.swing.JFrame {
 
+    private ControladorValidaciones validaciones;
+    private ControladorEmpleados empleados;
     /**
      * Creates new form VentanaLogin
      */
     public VentanaAdministradorLogin() {
-        initComponents();
+        try {
+            validaciones = new ControladorValidaciones();
+            empleados = new ControladorEmpleados();
+            initComponents();
+        } catch (IOException ex) {
+            Logger.getLogger(VentanaAdministradorLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -33,9 +49,9 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        tipoCargo = new javax.swing.JTextField();
+        nombre = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        cedula = new javax.swing.JPasswordField();
         jLabel6 = new javax.swing.JLabel();
         iniciarSeccion = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -99,24 +115,24 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("Welcome");
 
-        tipoCargo.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        tipoCargo.setForeground(new java.awt.Color(51, 51, 51));
-        tipoCargo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        tipoCargo.addActionListener(new java.awt.event.ActionListener() {
+        nombre.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        nombre.setForeground(new java.awt.Color(51, 51, 51));
+        nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                tipoCargoActionPerformed(evt);
+                nombreActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(51, 51, 51));
-        jLabel4.setText("Tipo de Cargo");
+        jLabel4.setText("Nombre");
 
-        jPasswordField1.setForeground(new java.awt.Color(51, 51, 51));
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        cedula.setForeground(new java.awt.Color(51, 51, 51));
+        cedula.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(51, 51, 51)));
+        cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                cedulaActionPerformed(evt);
             }
         });
 
@@ -152,7 +168,7 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel6))
                                         .addGap(42, 42, 42))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -161,7 +177,7 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
                                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tipoCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel4))
                                     .addContainerGap()))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -186,11 +202,11 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(tipoCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(iniciarSeccion, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
@@ -212,22 +228,38 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void iniciarSeccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciarSeccionActionPerformed
-        VentanaPrincipalAdministrador vpa= new VentanaPrincipalAdministrador();
-        vpa.setVisible(true);
-        dispose();
+        String username = nombre.getText().trim();
+        String passwords = String.copyValueOf(cedula.getPassword()).trim();
+        Boolean cedulaValida = validaciones.validarDocumento(passwords);
+        
+        if (cedulaValida) {
+            Empleado empleado = empleados.buscarEmpleadoLoginAdmi(username, passwords);
+            //No es diferente
+            if (empleado == null) {
+                JOptionPane.showMessageDialog(null, "Usuario o Contraseña ingresados no son correctos", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+                nombre.setText("");
+                cedula.setText("");
+            }else{
+                VentanaPrincipalAdministrador vpa= new VentanaPrincipalAdministrador(empleado);
+                vpa.setVisible(true);
+                dispose();
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Cedula Incorrecta", "INFORMACIÓN", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_iniciarSeccionActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void cedulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaActionPerformed
         // TODO add your handling code here:
         String evento = evt.getActionCommand();
         System.out.println("evento joderrrrr "+evento);
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_cedulaActionPerformed
 
-    private void tipoCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoCargoActionPerformed
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         String evento = evt.getActionCommand();
         System.out.println("evento joderrrrr "+evento);
 
-    }//GEN-LAST:event_tipoCargoActionPerformed
+    }//GEN-LAST:event_nombreActionPerformed
 
     private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
         System.exit(0);
@@ -235,6 +267,7 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField cedula;
     private javax.swing.JButton iniciarSeccion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -245,8 +278,7 @@ public class VentanaAdministradorLogin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField tipoCargo;
+    private javax.swing.JTextField nombre;
     // End of variables declaration//GEN-END:variables
 
 }

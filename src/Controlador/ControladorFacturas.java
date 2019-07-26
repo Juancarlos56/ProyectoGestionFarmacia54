@@ -32,15 +32,8 @@ public class ControladorFacturas {
     
     
     public ControladorFacturas() {
-        //this.empleados = new ControladorEmpleados();
-        this.clientes = new ControladorClientes();
-        this.direcciones = new ControladorDirecciones();
-        this.productos = new ControladorProductos();
-        this.recetas = new ControladorRecetasMedicas();
         facturasCabeceras = new ArrayList<>();
-        cb = new ControladorBaseDeDatos();
-        
-        
+        cb = new ControladorBaseDeDatos(); 
     }
     
     

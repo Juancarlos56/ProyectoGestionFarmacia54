@@ -65,22 +65,17 @@ public class InternalVentanaFacturar extends javax.swing.JInternalFrame {
         cp = new ControladorProductos();
         cf = new ControladorFacturas();
         
+        initComponents();
         
         
         jTextField2.setText(cf.getNumFactura());
         this.empleado = empleado;
         factura = new FacturaCabecera();
-        initComponents();
         
         nombreEmpleado.setText(this.empleado.getNombre());
         cedulaEmpleado.setText(this.empleado.getCedula());
-        
-        
         nombre1.setText(date.format(fecha));
-        
-        cargarModeloTabla();
-        //cedulaEmpleado.setText(empleado.getCedula());
-        //nombreEmpleado.setText(empleado.getNombre());        
+        cargarModeloTabla();   
     }
 
     public FacturaCabecera getFactura() {
