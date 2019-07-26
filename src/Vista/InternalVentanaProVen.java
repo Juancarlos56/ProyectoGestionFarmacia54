@@ -58,7 +58,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
            categoriasPro.addColumn(columna1);
         }
         tablaCategorias.setModel(categoriasPro);
-        ArrayList<Categoria> categorias = categoria.obtenerCategorias();
+        ArrayList<Categoria> categorias = categoria.getCategorias();
         ArrayList<Object[]>  cat = new ArrayList<>();
         for (int i = 0; i < categorias.size(); i++) {
             Object[] categoria1 = new Object[]{categorias.get(i).getId(), categorias.get(i).getNombreCategoria()};
@@ -474,7 +474,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tablaCategoriasMouseClicked
    
     private void cargarSubCategoria(int id, String nombreCategoria) {
-        ArrayList<SubCategoria> subcategorias = categoria.obtenerSubCategorias(id, nombreCategoria);
+        /*ArrayList<SubCategoria> subcategorias = categoria.getCategorias(id, nombreCategoria);
         ArrayList<Object[]>  subcat = new ArrayList<>();
         for (int i = 0; i < subcategorias.size(); i++) {
             Object[] categoria1 = new Object[]{subcategorias.get(i).getId(), subcategorias.get(i).getNombreSubCategoria()};
@@ -483,7 +483,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         
         for (Object[] cat1 : subcat) {
             subCategoriasPro.addRow(cat1);
-        }
+        }*/
         this.tablaSubCategoria.setModel(subCategoriasPro);
     }
  
@@ -546,7 +546,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     
     private void cargarProductosSubCat(int id, String nombreSubCategoria) {
-        ArrayList<Producto> listaProductos = null;
+       /* ArrayList<Producto> listaProductos = null;
         Categoria cat = categoria.buscarCategoria(idCategoria);
         for (int i = 0; i < cat.getSubcategorias().size(); i++) {
             if (cat.getSubcategorias().get(i).getId() == id) {
@@ -564,7 +564,7 @@ public class InternalVentanaProVen extends javax.swing.JInternalFrame {
         
         for (Object[] pro1 : prod) {
             modeloProductos.addRow(pro1);
-        }
+        }*/
         this.tablaProductos.setModel(modeloProductos);
     
     }

@@ -5,11 +5,16 @@
  */
 package Controlador;
 
+
 import Conexion.SentenciasCRUD;
 import Modelo.Categoria;
 import Modelo.Producto;
 import Modelo.SubCategoria;
 import java.util.ArrayList;
+
+
+
+
 
 /**
  *
@@ -75,8 +80,6 @@ public class ControladorProductos {
     public void setCategoriasProductos(ArrayList<Categoria> categoriasProductos) {
         this.categoriasProductos = categoriasProductos;
     }
-
-    
 
 
     
