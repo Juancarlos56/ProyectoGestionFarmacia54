@@ -5,8 +5,12 @@
  */
 package Vista;
 
+import Controlador.ControladorValidaciones;
 import Modelo.Cliente;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -15,12 +19,14 @@ import javax.swing.JOptionPane;
 public class VentanaEmergenteCliente extends javax.swing.JFrame {
     private Controlador.ControladorClientes cl;
     private Cliente c;
+    private ControladorValidaciones v;
 
     /**
      * Creates new form VentanaEmergenteCliente
      */
     public VentanaEmergenteCliente(Controlador.ControladorClientes cl) {
         initComponents();
+        v = new ControladorValidaciones();
         setLocationRelativeTo(null);
         this.cl = cl;
     }
@@ -87,6 +93,22 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
 
         nombre.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         nombre.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        //Limitar Cantidad de caracteres en la celda.
+        /*nombre.addKeyListener(new KeyListener(){
+
+            public void keyTyped(KeyEvent e)
+
+            {if (b3.getText().length()== 30)
+
+                e.consume();
+            }
+
+            public void keyPressed(KeyEvent arg0) {
+            }
+
+            public void keyReleased(KeyEvent arg0) {
+            }
+        });*/
         nombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -206,6 +228,40 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
                     .addComponent(btnDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(55, 55, 55))
         );
+
+        cedula.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+        telefono.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
+        celular.addKeyListener(new KeyAdapter(){
+
+            public void keyTyped(KeyEvent e){
+                char caracter = e.getKeyChar();
+
+                // Verificar si la tecla pulsada no es un digito
+                if(((caracter < '0') ||(caracter > '9')) && (caracter != '\b' /*corresponde a BACK_SPACE*/)){
+                    e.consume();  // ignorar el evento de teclado
+                }
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
