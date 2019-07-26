@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,12 +6,12 @@
  */
 package Vista;
 
+
 import Controlador.ControladorValidaciones;
 import Modelo.Cliente;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -20,7 +21,6 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     private Controlador.ControladorClientes cl;
     private Cliente c;
     private ControladorValidaciones v;
-
     /**
      * Creates new form VentanaEmergenteCliente
      */
@@ -294,37 +294,13 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
-        
-        if(apellido.getText().isEmpty() || cedula.getText().isEmpty() || nombre.getText().isEmpty() || celular.getText().isEmpty() || telefono.getText().isEmpty() ){
-            
-            JOptionPane.showMessageDialog(null, "Existen campos Vacios "); 
-            
-            
-        }else{
-            
-            
-            
-            
-            c = new Cliente();
-            c.setApellido(apellido.getText());
-            c.setCedula(cedula.getText());
-            c.setNombre(nombre.getText());
-            c.setTlfCelular(celular.getText());
-            c.setTlfConvencional(telefono.getText());
-            btnDireccion.setEnabled(true);
-            //Para que no se creen dos clientes del mismo
-            agregarCliente.setEnabled(false);
-            JOptionPane.showMessageDialog(null, "Cliente creado "); 
-            
-            cl.crearNuevoCliente(c);
-            
-        }
-        
-        
-        
-        
-        
-        
+        c = new Cliente();
+        c.setApellido(apellido.getText());
+        c.setCedula(cedula.getText());
+        c.setNombre(nombre.getText());
+        c.setTlfCelular(celular.getText());
+        c.setTlfConvencional(telefono.getText());
+        btnDireccion.setEnabled(true);
         
     }//GEN-LAST:event_agregarClienteActionPerformed
 
@@ -336,7 +312,7 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
         VentanaEmergenteDireccionesCliente ved = new VentanaEmergenteDireccionesCliente(c);
         ved.setVisible(true);
         c = ved.getCl();
-        
+        cl.crearNuevoCliente(c);
     }//GEN-LAST:event_btnDireccionActionPerformed
 
 
@@ -360,3 +336,4 @@ public class VentanaEmergenteCliente extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 }
+

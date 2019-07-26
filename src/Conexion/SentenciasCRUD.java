@@ -232,6 +232,7 @@ public class SentenciasCRUD {
         
     }
     
+
     
     public ArrayList<Cliente> cargarClientes(Conexion con) {
         
@@ -264,6 +265,7 @@ public class SentenciasCRUD {
         } 
     }  
     
+
     private void cargarCiudades(Conexion con) {
         try {
             sentencia = con.getConexion().prepareStatement("select * from PFC_CIUDADES ");
@@ -478,6 +480,7 @@ public class SentenciasCRUD {
     
     
     
+
     }
 
     public void crearProducto(Conexion con, String codigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
@@ -536,6 +539,7 @@ public class SentenciasCRUD {
         
         
     }
+
 
     public void editarProducto(Conexion con,String eCodigoBarras, String nombre, String precioUnitario, String unidadCompra, String unidadVenta, String iva, String descuento, String categoria, String subcategoria) {
         
@@ -758,6 +762,7 @@ public class SentenciasCRUD {
             e.printStackTrace();
         }
     
+
     }
 
     
@@ -809,6 +814,7 @@ public class SentenciasCRUD {
         }catch(SQLException e) {
             e.printStackTrace();
         }
+
 
     }
     

@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -106,9 +107,9 @@ public class GestionFacturasAdministrador extends javax.swing.JInternalFrame {
     private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
         
         //Esta comentado falta enviar Empleado
-       // InternalVentanaFacturar ivfa = new InternalVentanaFacturar();
-       // jDesktopPane1.add(ivfa);
-       // ivfa.show();
+        //InternalVentanaFacturar ivfa = new InternalVentanaFacturar();
+        //jDesktopPane1.add(ivfa);
+        //ivfa.show();
     }//GEN-LAST:event_facturaActionPerformed
 
     private void anularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anularActionPerformed
@@ -134,3 +135,4 @@ public class GestionFacturasAdministrador extends javax.swing.JInternalFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
+

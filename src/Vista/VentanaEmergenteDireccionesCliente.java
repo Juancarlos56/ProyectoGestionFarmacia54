@@ -10,7 +10,9 @@ import Modelo.Cliente;
 import Modelo.Direccion;
 import Modelo.FacturaCabecera;
 import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
+
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,14 +25,18 @@ public class VentanaEmergenteDireccionesCliente extends javax.swing.JFrame {
     private FacturaCabecera fc;
     private Cliente cl;
     private DefaultTableModel direcciones; 
+
     private ArrayList<Direccion> direccionest;
     boolean p;
+
     /**
      * Creates new form VentanaEmergenteDireccionesClienete
      */
     public VentanaEmergenteDireccionesCliente(Cliente cl) {
         direcciones = new DefaultTableModel();
+
         direccionest = cl.getDirecciones();
+
         cc = new Controlador.ControladorClientes();
         this.cl = cl;
         this.fc = fc;
@@ -179,6 +185,7 @@ public class VentanaEmergenteDireccionesCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_callePrinActionPerformed
 
     private void agregarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarClienteActionPerformed
+
         
         p=true;
         if(callePrin.getText().isEmpty() || calleSec.getText().isEmpty() || Ciudad.getText().isEmpty() ){
@@ -214,6 +221,7 @@ public class VentanaEmergenteDireccionesCliente extends javax.swing.JFrame {
         
         
         
+
     }//GEN-LAST:event_agregarClienteActionPerformed
 
     public Cliente getCl() {
