@@ -1,6 +1,7 @@
 # ProyectoGestionFarmacia54
 Proyecto fin de ciclo, facturación de una farmacia
 Codigo para colocar imagen de fondo
+
 escritorio = new javax.swing.JDesktopPane(){
     public void paintComponent(Graphics g) {
         ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/wel.jpg"));
